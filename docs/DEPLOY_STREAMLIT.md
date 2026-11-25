@@ -23,20 +23,50 @@ uploads under 25 MiB / 3,000 faces.
 `trimesh`. It intentionally excludes CadQuery, FastAPI, SQLAlchemy, pytest and
 training tooling.
 
-## 2. Deploy
+## 2. Deploy this repository
 
-1. Push the repository to GitHub (no remote is configured in this working copy;
-   add one and push).
-2. Go to https://share.streamlit.io → **New app**.
-3. Select the repository, branch, and main file `streamlit_app.py`.
+The public repository is:
+
+```text
+https://github.com/swadhinbiswas/BRepLens
+```
+
+1. Open https://share.streamlit.io and sign in with GitHub.
+2. Choose **New app**.
+3. Select repository `swadhinbiswas/BRepLens`, branch `main`, and main file
+   `streamlit_app.py`.
 4. Open **Advanced settings**:
-   - Python version: **3.12** (verified) or **3.11**; `pyproject.toml` requires
-     `>=3.11,<3.13`.
+   - Python version: **3.12** (verified with CPython 3.12.16).
    - Secrets: none.
-5. Deploy. The first build installs CPU wheels; it is large and can take a few minutes; the exact
-   environment size and install time are recorded in `results/deploy_benchmark.json`.
-6. Open the app and select a sample. The first recognition loads the GNN and
-   takes longer; subsequent samples are cached.
+5. Choose a subdomain, then click **Deploy**.
+6. Watch the build log. The first build installs the CPU wheels listed in
+   `requirements.txt` and the system packages in `packages.txt`. It is large and
+   takes a few minutes; the exact timings are in `results/deploy_benchmark.json`.
+7. Open the app and load a sample. The first recognition loads the models, so it
+   is slower than later requests.
+
+After the first successful deploy, every push to `main` triggers a rebuild. Use
+the app menu to reboot, clear the cache, or view logs. The app has no database,
+no secrets, and no persistent upload storage.
+
+### What Streamlit Cloud hosts, and what it does not
+
+Streamlit Community Cloud hosts **only the demo process**. It does not host the
+FastAPI service, the worker, Redis, or PostgreSQL. The demo is standalone and
+does not call the API.
+
+For the full stack, run Docker Compose on a VM, VPS, or container platform that
+supports a long running container:
+
+```bash
+git clone https://github.com/swadhinbiswas/BRepLens.git
+cd BRepLens
+docker compose up -d --build
+```
+
+Then put a reverse proxy with HTTPS in front of port 8000, or use the platform's
+managed TLS. Keep the Streamlit demo on Community Cloud and the API on the VM if
+you want the simplest split.
 
 ## 3. Local verification (same dependency set)
 
@@ -54,9 +84,12 @@ file.
 
 ## 4. Hosted constraints and behavior
 
-- **Memory**: target < 1.5 GiB peak; measured peak is recorded in
-  `results/deploy_benchmark.json`. VTK is installed as an OCP dependency but is
-  never imported.
+- **Memory**: the local hosted-equivalent probe peaks below 1 GiB; exact values
+  are in `results/deploy_benchmark.json`. Community Cloud's limits can change, so
+  check the dashboard if the app is killed. VTK is installed as an OCP dependency
+  but is never imported by the app.
+- **Storage**: uploads are written to temporary files and are not persisted
+  across restarts. The sample library and model weights are committed files.
 - **CPU**: rules ~sub-millisecond; GNN/hybrid low single-digit milliseconds on
   the sample parts; tessellation dominates per-part time.
 - **Sleep**: Community Cloud sleeps idle apps; first request after sleep pays

@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  v1.2.0 &nbsp;|&nbsp; Python 3.11+ &nbsp;|&nbsp; MIT &nbsp;|&nbsp; schema 1.0.0
+  v1.2.1 &nbsp;|&nbsp; Python 3.11+ &nbsp;|&nbsp; MIT &nbsp;|&nbsp; schema 1.0.0
 </p>
 
 ---
@@ -374,10 +374,21 @@ The README result tables are rebuilt from the JSON files after those scripts run
 
 ## Deploy the demo
 
-The app is ready for Streamlit Community Cloud. Use `streamlit_app.py` as the
-entry point, Python 3.12 or 3.11, and `requirements.txt` as the dependency file.
-No secrets are needed. The deployment guide covers limits, packages, and the
-memory budget: [docs/DEPLOY_STREAMLIT.md](docs/DEPLOY_STREAMLIT.md).
+The repository is public at
+[github.com/swadhinbiswas/BRepLens](https://github.com/swadhinbiswas/BRepLens).
+
+1. Open https://share.streamlit.io and sign in with GitHub.
+2. Choose **New app**.
+3. Select repository `swadhinbiswas/BRepLens`, branch `main`, and main file
+   `streamlit_app.py`.
+4. In **Advanced settings**, select Python 3.12. No secrets are needed.
+5. Deploy and pick a subdomain.
+
+The free app sleeps when idle. The first request after sleep reloads OCP and the
+models. Streamlit Community Cloud hosts only the demo, not the FastAPI worker or
+Redis. For the full stack, run `docker compose up -d --build` on a VM and place
+HTTPS in front of port 8000. The detailed guide, limits, and troubleshooting are
+in [docs/DEPLOY_STREAMLIT.md](docs/DEPLOY_STREAMLIT.md).
 
 ## Topics
 
