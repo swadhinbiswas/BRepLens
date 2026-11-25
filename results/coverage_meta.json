@@ -1,10 +1,47 @@
 {
- "script": "manual post-run metadata (coverage tool output in results/coverage.json)",
- "commands": [
-  "pytest -q --cov=breplens --cov-report=json:results/coverage.json",
-  "pytest -q --cov=breplens.geometry --cov=breplens.recognition --cov=breplens.schema --cov-report=json:results/coverage_core.json"
- ],
- "python": "3.14.10",
+ "script": "scripts/run_quality_gates.py",
+ "commands": {
+  "coverage_full": "/home/swadhin/BRepLens/.venv/bin/python -m pytest -q --cov=breplens --cov-report=json:results/coverage.json",
+  "coverage_core": "/home/swadhin/BRepLens/.venv/bin/python -m pytest -q --cov=breplens.geometry --cov=breplens.recognition --cov=breplens.schema --cov-report=json:results/coverage_core.json"
+ },
+ "python": "3.11.18",
  "pytest": "9.2.0",
- "generated_utc": "2026-11-24T21:23:02Z"
+ "generated_utc": "2026-11-24T21:25:16Z",
+ "outcomes": {
+  "ruff": {
+   "returncode": 0,
+   "seconds": 0.03,
+   "tail": [
+    "All checks passed!"
+   ]
+  },
+  "mypy": {
+   "returncode": 0,
+   "seconds": 0.21,
+   "tail": [
+    "Success: no issues found in 29 source files"
+   ]
+  },
+  "tests": {
+   "returncode": 0,
+   "seconds": 6.22,
+   "tail": [
+    "83 passed, 1 warning in 4.92s"
+   ]
+  },
+  "coverage_full": {
+   "returncode": 0,
+   "seconds": 8.45,
+   "tail": [
+    "Coverage JSON written to file results/coverage.json"
+   ]
+  },
+  "coverage_core": {
+   "returncode": 0,
+   "seconds": 8.27,
+   "tail": [
+    "Coverage JSON written to file results/coverage_core.json"
+   ]
+  }
+ }
 }
