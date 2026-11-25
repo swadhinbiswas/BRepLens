@@ -46,6 +46,13 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 
 *GCN = baseline without edge attributes; `edge_gnn` = edge-aware message passing. Early stopping on the validation split only.*
 
+| Method | Test accuracy | Macro F1 | Parameters | Train s | CPU ms/part | Model MB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| cnn_multiview | 0.8171 | 0.8119 | 29115 | 6.15 | 0.53 | 0.120 |
+| graph_gnn | 1.0000 | 1.0000 | 124107 | 1.61 | 0.56 | 0.484 |
+
+*Optional Phase 9: six orthographic shaded views (96x96, ±X/±Y/±Z) for the CNN; the graph classifier uses the AAG. Same synthetic parts, split and seed.*
+
 | Method (8 macro classes) | Accuracy | Macro F1 | Faces |
 | --- | ---: | ---: | ---: |
 | rules | 0.4034 | 0.2180 | 10146 |
@@ -114,7 +121,7 @@ GNN mode, status polling and size limits.
 | --- | ---: |
 | Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 7.27 s |
+| Test wall time | 7.32 s |
 | Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 

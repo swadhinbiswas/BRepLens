@@ -400,6 +400,8 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 
 {t["gnn"]}
 
+{t["cnn"]}
+
 {t["mfcad"]}
 
 {t["similarity"]}

@@ -1,7 +1,7 @@
 """Part-family classification: multi-view CNN vs graph classifier.
 
 The comparison uses the same synthetic parts and the same train/val/test split.
-Images are three orthographic shaded views (isometric/top/front); the graph model
+Images are six orthographic shaded views (±X/±Y/±Z); the graph model
 reuses the AAG node/edge features and edge-aware message passing with global
 pooling. No labels leak between splits.
 """

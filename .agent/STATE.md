@@ -1,7 +1,7 @@
 # BRepLens State
 
 ## Current
-- Phase: 9 optional CNN implemented; Phase 10 remains complete; v1.1.0 review pending.
+- Phase: 9 optional CNN implemented and APPROVED; v1.1.0 tagged after this commit.
 - Last completed: rules 1.0 feature F1 (246 synthetic test parts); GNN demo checkpoint (GCN,
   18,635 params, 1.0 face accuracy synthetic); edge-aware MFCAD model 120,336 params,
   0.9986 face accuracy; hybrid 1.0 on synthetic; MFCAD macro: rules 0.218, GNN 0.9983 F1.
@@ -11,7 +11,7 @@
 - Hosted: peak RSS 873.2 MB, cold start 1.825 s, first part 0.119 s, GNN 1.07 ms, hybrid 2.03 ms.
 - Service: both SQLite and RQ/Redis Docker stacks smoke-tested end-to-end; 92 tests pass;
   coverage 71.79% full / 83.04% core; ruff + mypy clean.
-- Next action: Phase 9 review, regenerated docs, tag v1.1.0.
+- Next action: none; v1.1.0 handoff.
 
 ## Environment (audited 2026-11-24)
 - OS: CachyOS Linux (Arch-based), kernel rolling
