@@ -115,7 +115,9 @@ GNN mode, status polling and size limits.
 | Core geometry/recognition/schema coverage | 82.20% |
 
 
-CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%.
+CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%. The GitHub
+Actions workflow was not executed on a remote because this repository has no
+configured remote; the identical commands were run locally on CPU and are green.
 
 ## 6. Known limitations and failure cases
 

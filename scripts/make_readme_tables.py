@@ -76,7 +76,6 @@ def tables() -> dict[str, str]:
         f"{mfcad_manifest.get('split_counts', {}).get('val', 0)}/"
         f"{mfcad_manifest.get('split_counts', {}).get('test', 0)} | "
         "16 face classes (15 features + stock) | MIT |\n"
-        "| MFCAD++ | 59,665 available | official 41,766/8,950/8,949 | 25 classes | CC BY |\n"
     )
 
     methods = comparison.get("methods", {})
@@ -399,7 +398,9 @@ GNN mode, status polling and size limits.
 
 {t["quality"]}
 
-CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%.
+CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%. The GitHub
+Actions workflow was not executed on a remote because this repository has no
+configured remote; the identical commands were run locally on CPU and are green.
 
 ## 6. Known limitations and failure cases
 

@@ -115,9 +115,18 @@ Honest scope of the v1.0.0 implementation. Numbers referenced here live in
   beyond the host's process limits.
 - Streamlit Community Cloud limits are approximate and can change; measure the
   deployed app again after platform updates.
-- `cadquery-ocp` installs VTK as a declared dependency (~2.4 GB environment),
-  even though the app never imports VTK. The measured peak RSS is under the
-  documented target, but install time is significant.
+- `cadquery-ocp` installs VTK as a declared dependency, even though the app never
+  imports VTK. The measured environment size and install time are in
+  `results/deploy_benchmark.json`; peak RSS remains under the documented target.
+
+## Verification gaps
+
+- No git remote is configured, so the GitHub Actions workflow has not actually
+  run on GitHub. The same ruff/mypy/pytest/coverage commands were executed
+  locally and pass; `results/tests.json` and `results/coverage*.json` are the
+  evidence.
+- Live NX validation is impossible here (see above).
+- MFCAD++ was not downloadable in this environment.
 
 ## Not implemented
 
