@@ -1,0 +1,101 @@
+# BRepLens Master Tasks
+
+Status: `todo` | `in-progress` | `done` | `blocked`. Owner = agent role.
+A phase is done only when (1) tests pass, (2) scripts produced real results files,
+(3) reviewer approved, (4) STATE/TASKS updated and committed.
+
+## Phase 0 — Bootstrap (devops)
+- [ ] 0.1 Environment audit (OS, Python, uv, CUDA, disk) -> docs/SETUP.md + results/env_audit.json
+- [ ] 0.2 Repo skeleton (src, tests, docs, scripts, docker, results, .agent, samples)
+- [ ] 0.3 pyproject.toml (Python 3.11+, pinned deps), ruff + mypy config
+- [ ] 0.4 pre-commit config
+- [ ] 0.5 GitHub Actions CI (ruff, mypy, pytest, CPU-only)
+- [ ] 0.6 Agent definitions (.opencode/agents/*.md) + .agent files
+- [ ] 0.7 Baseline commit + tag scaffold
+
+## Phase 1 — Research (researcher)
+- [ ] 1.1 B-Rep -> AAG + convexity classification, classical feature recognition limits
+- [ ] 1.2 Learning approaches: MFCAD/MFCAD++, UV-Net, BRepNet, AAGNet; input/arch/accuracy; what to implement
+- [ ] 1.3 Datasets: verified links, size, license, labels, format
+- [ ] 1.4 NX Open Python API (traversal, queries, hole/pocket/slot creation, journal vs external)
+- [ ] 1.5 pythonocc vs OCP vs CadQuery for pip-only hosting
+- [ ] 1.6 Graph similarity options
+- [ ] 1.7 Decisions section; reviewer gate
+
+## Phase 2 — Architecture (architect)
+- [ ] 2.1 docs/ARCHITECTURE.md with Mermaid + module boundaries
+- [ ] 2.2 CadAdapter ABC + neutral IR
+- [ ] 2.3 Versioned feature JSON schema (Pydantic + exported JSON Schema)
+- [ ] 2.4 Error handling strategy
+- [ ] 2.5 Reviewer gate (consistent with research)
+
+## Phase 3 — Geometry foundation (geometry-engineer, qa-engineer)
+- [ ] 3.1 OccAdapter: load STEP, faces/edges, classification, bbox, tessellation
+- [ ] 3.2 Surface classification (plane/cylinder/cone/torus/sphere/other)
+- [ ] 3.3 Edge convexity (convex/concave/smooth) calibrated on real primitives
+- [ ] 3.4 AAG build + NetworkX + PyG/tensor export
+- [ ] 3.5 Synthetic CadQuery generator with ground truth (features + per-face labels)
+- [ ] 3.6 AAG visualization script
+- [ ] 3.7 Tests (unit + integration), reviewer gate
+
+## Phase 4a — Rule-based recognition (recognizer-engineer)
+- [ ] 4a.1 through/blind hole, counterbore, countersink
+- [ ] 4a.2 pocket, slot, step, boss
+- [ ] 4a.3 fillet, chamfer
+- [ ] 4a.4 Parameter extraction (diameter, depth, radius, axis, position, dims)
+- [ ] 4a.5 Tolerance/unit handling, intersecting features, negative tests
+- [ ] 4a.6 docs/LIMITATIONS.md; measured results -> results/rules_eval.json
+
+## Phase 4b — Dataset + GNN (data-engineer, ml-engineer)
+- [ ] 4b.1 Verify/download MFCAD++ (or fallback synthetic); data card
+- [ ] 4b.2 STEP -> cached graph conversion (multiprocessing, resumable)
+- [ ] 4b.3 Baseline GNN trained + sanity-checked
+- [ ] 4b.4 Stronger model chosen in research
+- [ ] 4b.5 Per-class P/R/F1, confusion matrix, face accuracy, timings -> results/gnn_eval.json
+- [ ] 4b.6 Head-to-head vs rules on same test set + failure analysis
+- [ ] 4b.7 Hybrid strategy + measured results -> results/hybrid_eval.json
+- [ ] 4b.8 Export small CPU weights (models/)
+
+## Phase 4c — NX Open (nx-engineer)
+- [ ] 4c.1 NxOpenAdapter (traversal, surface/edge queries)
+- [ ] 4c.2 Parametric write-back (holes, pockets, slots)
+- [ ] 4c.3 Faithful NXOpen mock + unit tests
+- [ ] 4c.4 Journal entry points + docs/NX_GUIDE.md
+- [ ] 4c.5 "UNTESTED against live NX" labels everywhere
+
+## Phase 5 — Similarity search (similarity-engineer)
+- [ ] 5.1 Signatures (face histograms, dims, WL kernel)
+- [ ] 5.2 Index + search API
+- [ ] 5.3 Retrieval evaluation precision@k -> results/similarity_eval.json
+
+## Phase 6 — Service layer (backend-engineer)
+- [ ] 6.1 FastAPI endpoints (upload, submit, status, features, similarity)
+- [ ] 6.2 Job queue (RQ+Redis) + SQLite fallback worker
+- [ ] 6.3 SQLite default, PostgreSQL option, size limits, structured logging
+- [ ] 6.4 Dockerfile + docker-compose (api, worker, redis)
+- [ ] 6.5 Integration tests + measured latencies
+
+## Phase 7 — Performance (perf-engineer)
+- [ ] 7.1 Profile pipeline (cProfile/py-spy)
+- [ ] 7.2 Optimize hot paths (vectorization/spatial index/cache)
+- [ ] 7.3 Before/after benchmark -> results/perf.json
+
+## Phase 8 — Streamlit app + hosted deployment (frontend-engineer, devops)
+- [ ] 8.1 streamlit_app.py (upload, samples, 3D color, table, JSON, mode toggle, similarity)
+- [ ] 8.2 requirements.txt inference-only pinned; packages.txt only if needed
+- [ ] 8.3 Fresh-venv pip-only install verification
+- [ ] 8.4 Streamlit headless E2E on samples; install size, cold start, latency, peak memory -> results/deploy_benchmark.json
+- [ ] 8.5 docs/DEPLOY_STREAMLIT.md
+- [ ] 8.6 Reviewer gate
+
+## Phase 9 — Optional CNN (only if all else passes)
+- [ ] 9.1 Multi-view render + small CNN part-family classification, fair comparison
+- [ ] 9.2 Or documented as future work
+
+## Phase 10 — Finalization (docs-writer, qa-engineer, reviewer)
+- [ ] 10.1 README (overview, Mermaid, 3-command quickstart, generated results tables, limitations, structure, NX, repro, deploy)
+- [ ] 10.2 docs/CV_SUMMARY.md (truthful measured bullets)
+- [ ] 10.3 docs/LIMITATIONS.md, docs/LICENSES.md
+- [ ] 10.4 Full audit: tests, coverage, CI, results provenance, secrets, licenses
+- [ ] 10.5 docs/FINAL_REPORT.md
+- [ ] 10.6 Tag v1.0.0

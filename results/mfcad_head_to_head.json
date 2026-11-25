@@ -1,0 +1,951 @@
+{
+ "dataset": {
+  "name": "MFCAD",
+  "split": "test",
+  "n_parts": 448,
+  "n_faces": 10146,
+  "classes": [
+   "stock",
+   "slot",
+   "passage",
+   "step",
+   "pocket",
+   "chamfer",
+   "hole",
+   "fillet"
+  ],
+  "mapping": {
+   "rectangular_through_slot": "slot",
+   "triangular_through_slot": "slot",
+   "rectangular_blind_slot": "slot",
+   "rectangular_passage": "passage",
+   "triangular_passage": "passage",
+   "6sides_passage": "passage",
+   "rectangular_through_step": "step",
+   "2sides_through_step": "step",
+   "slanted_through_step": "step",
+   "rectangular_blind_step": "step",
+   "triangular_blind_step": "step",
+   "rectangular_pocket": "pocket",
+   "triangular_pocket": "pocket",
+   "6sides_pocket": "pocket",
+   "chamfer": "chamfer",
+   "stock": "stock"
+  },
+  "license": "MIT",
+  "source": "https://github.com/hducg/MFCAD"
+ },
+ "methods": {
+  "rules": {
+   "accuracy": 0.4034,
+   "macro_f1": 0.218,
+   "per_class": {
+    "stock": {
+     "precision": 0.4619,
+     "recall": 1.0,
+     "f1": 0.6319,
+     "support": 2954,
+     "tp": 2954,
+     "fp": 3441,
+     "fn": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 1191,
+     "tp": 0,
+     "fp": 0,
+     "fn": 1191
+    },
+    "passage": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 1994,
+     "tp": 0,
+     "fp": 0,
+     "fn": 1994
+    },
+    "step": {
+     "precision": 0.62,
+     "recall": 0.3989,
+     "f1": 0.4855,
+     "support": 1800,
+     "tp": 718,
+     "fp": 440,
+     "fn": 1082
+    },
+    "pocket": {
+     "precision": 0.1625,
+     "recall": 0.2302,
+     "f1": 0.1905,
+     "support": 1829,
+     "tp": 421,
+     "fp": 2170,
+     "fn": 1408
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 378,
+     "tp": 0,
+     "fp": 2,
+     "fn": 378
+    },
+    "hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "confusion_matrix": [
+    [
+     2954,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     479,
+     0,
+     0,
+     0,
+     710,
+     2,
+     0,
+     0
+    ],
+    [
+     1237,
+     0,
+     0,
+     258,
+     499,
+     0,
+     0,
+     0
+    ],
+    [
+     454,
+     0,
+     0,
+     718,
+     628,
+     0,
+     0,
+     0
+    ],
+    [
+     1226,
+     0,
+     0,
+     182,
+     421,
+     0,
+     0,
+     0
+    ],
+    [
+     45,
+     0,
+     0,
+     0,
+     333,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "class_names": [
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet"
+   ],
+   "n_samples": 10146,
+   "n_faces": 10146
+  },
+  "gnn": {
+   "accuracy": 0.9992,
+   "macro_f1": 0.9993,
+   "per_class": {
+    "stock": {
+     "precision": 1.0,
+     "recall": 0.9993,
+     "f1": 0.9997,
+     "support": 2954,
+     "tp": 2952,
+     "fp": 0,
+     "fn": 2
+    },
+    "slot": {
+     "precision": 0.9983,
+     "recall": 1.0,
+     "f1": 0.9992,
+     "support": 1191,
+     "tp": 1191,
+     "fp": 2,
+     "fn": 0
+    },
+    "passage": {
+     "precision": 0.997,
+     "recall": 1.0,
+     "f1": 0.9985,
+     "support": 1994,
+     "tp": 1994,
+     "fp": 6,
+     "fn": 0
+    },
+    "step": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1800,
+     "tp": 1800,
+     "fp": 0,
+     "fn": 0
+    },
+    "pocket": {
+     "precision": 1.0,
+     "recall": 0.9967,
+     "f1": 0.9984,
+     "support": 1829,
+     "tp": 1823,
+     "fp": 0,
+     "fn": 6
+    },
+    "chamfer": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 378,
+     "tp": 378,
+     "fp": 0,
+     "fn": 0
+    },
+    "hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "confusion_matrix": [
+    [
+     2952,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1191,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1994,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1800,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     6,
+     0,
+     1823,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     378,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "class_names": [
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet"
+   ],
+   "n_samples": 10146,
+   "n_faces": 10146
+  },
+  "hybrid_rule_priority": {
+   "accuracy": 0.7422,
+   "macro_f1": 0.6366,
+   "per_class": {
+    "stock": {
+     "precision": 1.0,
+     "recall": 0.9993,
+     "f1": 0.9997,
+     "support": 2954,
+     "tp": 2952,
+     "fp": 0,
+     "fn": 2
+    },
+    "slot": {
+     "precision": 0.9958,
+     "recall": 0.4022,
+     "f1": 0.573,
+     "support": 1191,
+     "tp": 479,
+     "fp": 2,
+     "fn": 712
+    },
+    "passage": {
+     "precision": 0.9984,
+     "recall": 0.6204,
+     "f1": 0.7652,
+     "support": 1994,
+     "tp": 1237,
+     "fp": 2,
+     "fn": 757
+    },
+    "step": {
+     "precision": 0.727,
+     "recall": 0.6511,
+     "f1": 0.687,
+     "support": 1800,
+     "tp": 1172,
+     "fp": 440,
+     "fn": 628
+    },
+    "pocket": {
+     "precision": 0.4312,
+     "recall": 0.8994,
+     "f1": 0.5829,
+     "support": 1829,
+     "tp": 1645,
+     "fp": 2170,
+     "fn": 184
+    },
+    "chamfer": {
+     "precision": 0.9574,
+     "recall": 0.119,
+     "f1": 0.2118,
+     "support": 378,
+     "tp": 45,
+     "fp": 2,
+     "fn": 333
+    },
+    "hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "confusion_matrix": [
+    [
+     2952,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     479,
+     0,
+     0,
+     710,
+     2,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1237,
+     258,
+     499,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1172,
+     628,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     2,
+     182,
+     1645,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     333,
+     45,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "class_names": [
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet"
+   ],
+   "n_samples": 10146,
+   "n_faces": 10146
+  },
+  "hybrid_gnn_priority": {
+   "accuracy": 0.9992,
+   "macro_f1": 0.9993,
+   "per_class": {
+    "stock": {
+     "precision": 1.0,
+     "recall": 0.9993,
+     "f1": 0.9997,
+     "support": 2954,
+     "tp": 2952,
+     "fp": 0,
+     "fn": 2
+    },
+    "slot": {
+     "precision": 0.9983,
+     "recall": 1.0,
+     "f1": 0.9992,
+     "support": 1191,
+     "tp": 1191,
+     "fp": 2,
+     "fn": 0
+    },
+    "passage": {
+     "precision": 0.997,
+     "recall": 1.0,
+     "f1": 0.9985,
+     "support": 1994,
+     "tp": 1994,
+     "fp": 6,
+     "fn": 0
+    },
+    "step": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1800,
+     "tp": 1800,
+     "fp": 0,
+     "fn": 0
+    },
+    "pocket": {
+     "precision": 1.0,
+     "recall": 0.9967,
+     "f1": 0.9984,
+     "support": 1829,
+     "tp": 1823,
+     "fp": 0,
+     "fn": 6
+    },
+    "chamfer": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 378,
+     "tp": 378,
+     "fp": 0,
+     "fn": 0
+    },
+    "hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "confusion_matrix": [
+    [
+     2952,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1191,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1994,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1800,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     6,
+     0,
+     1823,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     378,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "class_names": [
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet"
+   ],
+   "n_samples": 10146,
+   "n_faces": 10146
+  },
+  "hybrid_vote": {
+   "accuracy": 0.9992,
+   "macro_f1": 0.9993,
+   "per_class": {
+    "stock": {
+     "precision": 1.0,
+     "recall": 0.9993,
+     "f1": 0.9997,
+     "support": 2954,
+     "tp": 2952,
+     "fp": 0,
+     "fn": 2
+    },
+    "slot": {
+     "precision": 0.9983,
+     "recall": 1.0,
+     "f1": 0.9992,
+     "support": 1191,
+     "tp": 1191,
+     "fp": 2,
+     "fn": 0
+    },
+    "passage": {
+     "precision": 0.997,
+     "recall": 1.0,
+     "f1": 0.9985,
+     "support": 1994,
+     "tp": 1994,
+     "fp": 6,
+     "fn": 0
+    },
+    "step": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1800,
+     "tp": 1800,
+     "fp": 0,
+     "fn": 0
+    },
+    "pocket": {
+     "precision": 1.0,
+     "recall": 0.9967,
+     "f1": 0.9984,
+     "support": 1829,
+     "tp": 1823,
+     "fp": 0,
+     "fn": 6
+    },
+    "chamfer": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 378,
+     "tp": 378,
+     "fp": 0,
+     "fn": 0
+    },
+    "hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "support": 0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0
+    }
+   },
+   "confusion_matrix": [
+    [
+     2952,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     1191,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     1994,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     1800,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     6,
+     0,
+     1823,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     378,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   ],
+   "class_names": [
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet"
+   ],
+   "n_samples": 10146,
+   "n_faces": 10146
+  }
+ },
+ "ranked_by_macro_f1": [
+  {
+   "method": "gnn",
+   "macro_f1": 0.9993,
+   "accuracy": 0.9992
+  },
+  {
+   "method": "hybrid_gnn_priority",
+   "macro_f1": 0.9993,
+   "accuracy": 0.9992
+  },
+  {
+   "method": "hybrid_vote",
+   "macro_f1": 0.9993,
+   "accuracy": 0.9992
+  },
+  {
+   "method": "hybrid_rule_priority",
+   "macro_f1": 0.6366,
+   "accuracy": 0.7422
+  },
+  {
+   "method": "rules",
+   "macro_f1": 0.218,
+   "accuracy": 0.4034
+  }
+ ],
+ "rule_feature_counts": {
+  "pocket": 796,
+  "chamfer": 2,
+  "step": 579
+ },
+ "timing": {
+  "rules_total_seconds": 0.207,
+  "rules_ms_per_part": 0.461,
+  "gnn_total_seconds": 0.456,
+  "gnn_ms_per_part": 1.017
+ },
+ "gnn_full_16_class": {
+  "test_accuracy": 0.9992,
+  "test_macro_f1": 0.999,
+  "selected_architecture": "edge_gnn"
+ },
+ "provenance": {
+  "script": "scripts/evaluate_head_to_head.py",
+  "command": "scripts/evaluate_head_to_head.py",
+  "python": "3.11.18",
+  "torch": "2.11.0+cu128",
+  "gpu": "NVIDIA GeForce RTX 3060 Ti",
+  "generated_utc": "2026-11-24T20:41:10Z"
+ }
+}

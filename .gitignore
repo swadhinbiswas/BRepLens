@@ -1,0 +1,17 @@
+.venv/
+.deploy-venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+data/raw/
+data/synthetic/
+data/mfcad/
+data/sample_artifacts/
+results/scratch/
+.env
+*.log
+.DS_Store

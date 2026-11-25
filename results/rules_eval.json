@@ -1,0 +1,2017 @@
+{
+ "n_parts": 51,
+ "n_gt_features": 142,
+ "n_pred_features": 142,
+ "feature": {
+  "precision": 1.0,
+  "recall": 1.0,
+  "f1": 1.0,
+  "macro_f1": 1.0,
+  "exact_part_rate": 1.0,
+  "tp": 142,
+  "fp": 0,
+  "fn": 0,
+  "per_class": {
+   "base": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 0,
+    "pred_count": 0
+   },
+   "through_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 48,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 48,
+    "pred_count": 48
+   },
+   "blind_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 4,
+    "pred_count": 4
+   },
+   "counterbore": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 4,
+    "pred_count": 4
+   },
+   "countersink": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 5,
+    "pred_count": 5
+   },
+   "pocket": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 6,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 6,
+    "pred_count": 6
+   },
+   "slot": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 4,
+    "pred_count": 4
+   },
+   "step": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 2,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 2,
+    "pred_count": 2
+   },
+   "boss": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 5,
+    "pred_count": 5
+   },
+   "fillet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 40,
+    "pred_count": 40
+   },
+   "chamfer": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 24,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 24,
+    "pred_count": 24
+   }
+  },
+  "confusions": {}
+ },
+ "face": {
+  "accuracy": 1.0,
+  "macro_f1": 1.0,
+  "per_class": {
+   "base": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 306,
+    "tp": 306,
+    "fp": 0,
+    "fn": 0
+   },
+   "through_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 48,
+    "tp": 48,
+    "fp": 0,
+    "fn": 0
+   },
+   "blind_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 8,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+   },
+   "counterbore": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 12,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+   },
+   "countersink": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 10,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0
+   },
+   "pocket": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 30,
+    "tp": 30,
+    "fp": 0,
+    "fn": 0
+   },
+   "slot": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 20,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+   },
+   "step": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 4,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0
+   },
+   "boss": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 10,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0
+   },
+   "fillet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 40,
+    "tp": 40,
+    "fp": 0,
+    "fn": 0
+   },
+   "chamfer": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 24,
+    "tp": 24,
+    "fp": 0,
+    "fn": 0
+   }
+  },
+  "confusion_matrix": [
+   [
+    306,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    48,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    8,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    12,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    10,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    30,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    20,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    4,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    10,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    40,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    24
+   ]
+  ],
+  "class_names": [
+   "base",
+   "through_hole",
+   "blind_hole",
+   "counterbore",
+   "countersink",
+   "pocket",
+   "slot",
+   "step",
+   "boss",
+   "fillet",
+   "chamfer"
+  ],
+  "n_samples": 512
+ },
+ "parameter_errors": {
+  "boss": {
+   "diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   },
+   "height": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   }
+  },
+  "through_hole": {
+   "diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 48
+   },
+   "depth": {
+    "mean_abs": 2.9167,
+    "median_abs": 0.0,
+    "p95_abs": 15.0,
+    "max_abs": 15.0,
+    "n": 48
+   },
+   "is_through": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 48
+   }
+  },
+  "pocket": {
+   "depth": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 6
+   },
+   "footprint_dim_0": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 6
+   },
+   "footprint_dim_1": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 6
+   }
+  },
+  "chamfer": {
+   "angle_deg": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 24
+   },
+   "chamfer_width": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 24
+   }
+  },
+  "counterbore": {
+   "inner_diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "outer_diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "depth": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "is_through": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   }
+  },
+  "countersink": {
+   "inner_diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   },
+   "outer_diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   },
+   "angle_deg": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   },
+   "is_through": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 5
+   }
+  },
+  "fillet": {
+   "radius": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 40
+   }
+  },
+  "blind_hole": {
+   "diameter": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "depth": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "is_through": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   }
+  },
+  "slot": {
+   "depth": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "footprint_dim_0": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   },
+   "footprint_dim_1": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 4
+   }
+  },
+  "step": {
+   "height": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 2
+   },
+   "footprint_dim_0": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 2
+   },
+   "footprint_dim_1": {
+    "mean_abs": 0.0,
+    "median_abs": 0.0,
+    "p95_abs": 0.0,
+    "max_abs": 0.0,
+    "n": 2
+   }
+  }
+ },
+ "latency_ms": {
+  "mean": 2341505.602,
+  "median": 0.244,
+  "p95": 11941679.04
+ },
+ "dataset": {
+  "n_parts": 51,
+  "families": {
+   "boss_plate": 5,
+   "bracket_mixed": 4,
+   "chamfer_block": 2,
+   "counterbore": 4,
+   "countersink": 5,
+   "fillet_block": 10,
+   "plate_blind": 4,
+   "plate_holes": 9,
+   "pocket": 2,
+   "slot": 4,
+   "stepped_block": 2
+  },
+  "faces_total": 512,
+  "faces_mean": 10.04,
+  "features_total": 142,
+  "classes": [
+   "blind_hole",
+   "boss",
+   "chamfer",
+   "counterbore",
+   "countersink",
+   "fillet",
+   "pocket",
+   "slot",
+   "step",
+   "through_hole"
+  ]
+ },
+ "by_family": {
+  "boss_plate": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 5,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 5,
+     "pred_count": 5
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "bracket_mixed": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 32,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 12,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 12,
+     "pred_count": 12
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 4,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 4,
+     "pred_count": 4
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 16,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 16,
+     "pred_count": 16
+    }
+   },
+   "confusions": {}
+  },
+  "chamfer_block": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 8,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 8,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 8,
+     "pred_count": 8
+    }
+   },
+   "confusions": {}
+  },
+  "counterbore": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 4,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 4,
+     "pred_count": 4
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "countersink": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 5,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 5,
+     "pred_count": 5
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "fillet_block": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 40,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 40,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 40,
+     "pred_count": 40
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "plate_blind": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 4,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 4,
+     "pred_count": 4
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "plate_holes": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 36,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 36,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 36,
+     "pred_count": 36
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "pocket": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 2,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 2,
+     "pred_count": 2
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "slot": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 4,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 4,
+     "pred_count": 4
+    },
+    "step": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  },
+  "stepped_block": {
+   "precision": 1.0,
+   "recall": 1.0,
+   "f1": 1.0,
+   "macro_f1": 1.0,
+   "exact_part_rate": 1.0,
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "per_class": {
+    "base": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "through_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "blind_hole": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "counterbore": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "countersink": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "pocket": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "slot": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "step": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "tp": 2,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 2,
+     "pred_count": 2
+    },
+    "boss": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "fillet": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    },
+    "chamfer": {
+     "precision": 0.0,
+     "recall": 0.0,
+     "f1": 0.0,
+     "tp": 0,
+     "fp": 0,
+     "fn": 0,
+     "gt_count": 0,
+     "pred_count": 0
+    }
+   },
+   "confusions": {}
+  }
+ },
+ "timing": {
+  "wall_seconds": 0.037,
+  "recognition_mean_ms": 0.416,
+  "recognition_total_ms": 21.234,
+  "parts": 51
+ },
+ "provenance": {
+  "script": "scripts/evaluate_rules.py",
+  "dataset": "data/synthetic",
+  "split": "test",
+  "seed": 20261124,
+  "python": "3.11.18",
+  "host": "swadhin",
+  "command": "scripts/evaluate_rules.py --split test",
+  "generated_utc": "2026-11-24T20:35:25Z"
+ }
+}
