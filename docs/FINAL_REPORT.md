@@ -121,7 +121,7 @@ GNN mode, status polling and size limits.
 | --- | ---: |
 | Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 7.66 s |
+| Test wall time | 7.39 s |
 | Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 
