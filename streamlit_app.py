@@ -192,54 +192,11 @@ def _styles() -> None:
         """
         <style>
         .block-container {padding-top: 1.4rem; padding-bottom: 3rem; max-width: 1420px;}
-        .hero {
-            background: radial-gradient(circle at 85% 15%, rgba(34,211,238,.18), transparent 32%),
-                        linear-gradient(135deg, #0b1220 0%, #111c2f 55%, #0c2b25 100%);
-            border: 1px solid rgba(148,163,184,.22);
-            border-radius: 22px;
-            padding: 30px 34px 26px 34px;
-            margin-bottom: 18px;
-            box-shadow: 0 20px 50px rgba(0,0,0,.22);
-        }
-        .hero .eyebrow {
-            color: #67e8f9;
-            font-size: .72rem;
-            letter-spacing: .16em;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-        }
-        .hero h1 {
-            color: #f8fafc;
-            font-size: 2.55rem;
-            line-height: 1.05;
-            margin: 0 0 8px 0;
-            letter-spacing: -.03em;
-        }
-        .hero p {
-            color: #cbd5e1;
-            font-size: 1rem;
-            max-width: 760px;
-            margin: 0 0 14px 0;
-        }
-        .badge {
-            display: inline-block;
-            color: #dbeafe;
-            background: rgba(59,130,246,.16);
-            border: 1px solid rgba(96,165,250,.35);
-            border-radius: 999px;
-            padding: 3px 10px;
-            margin-right: 6px;
-            font-size: .74rem;
-            font-weight: 600;
-        }
-        .badge.green {color:#dcfce7; background:rgba(34,197,94,.14); border-color:rgba(74,222,128,.35);}
-        .badge.amber {color:#fef3c7; background:rgba(245,158,11,.14); border-color:rgba(251,191,36,.35);}
         [data-testid="stMetric"] {
-            background: linear-gradient(180deg, rgba(148,163,184,.10), rgba(148,163,184,.04));
-            border: 1px solid rgba(148,163,184,.22);
-            border-radius: 14px;
-            padding: 12px 14px;
+            background: rgba(127,127,127,.055);
+            border: 1px solid rgba(127,127,127,.22);
+            border-radius: 10px;
+            padding: 10px 12px;
         }
         [data-testid="stMetricLabel"] {font-size: .76rem; letter-spacing: .03em;}
         [data-testid="stMetricValue"] {font-size: 1.55rem;}
@@ -257,25 +214,13 @@ def _styles() -> None:
     )
 
 
-def _hero() -> None:
-    st.markdown(
-        """
-        <div class="hero">
-          <div class="eyebrow">CAD-agnostic feature recognition</div>
-          <h1>BRepLens</h1>
-          <p>
-            Turn a STEP file into a measured, validated feature set.
-            Explore the 3D result, compare rules, GNN and hybrid engines,
-            and retrieve similar parts from the library.
-          </p>
-          <span class="badge">Schema v1.0.0</span>
-          <span class="badge green">CPU inference</span>
-          <span class="badge amber">10 feature classes</span>
-          <span class="badge">No NX required for this demo</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
+def _header() -> None:
+    st.title("BRepLens")
+    st.caption("Machining feature recognition and measured parameter extraction for STEP parts.")
+    st.caption(
+        "STEP AP214 / AP242   |   schema 1.0.0   |   CPU inference   |   rules / GNN / hybrid"
     )
+    st.divider()
 
 
 def _mesh_figure(mesh: dict, fs: FeatureSet, *, base_opacity: float = 0.55) -> go.Figure:
@@ -423,40 +368,25 @@ def _select_sample(name: str) -> None:
 
 
 def _landing() -> None:
-    st.markdown("### Start with a sample part")
-    st.caption(
-        "Pick a generated part below, or use the uploader in the sidebar. "
-        "Every sample is redistributable and ships with the repository."
-    )
+    st.subheader("Choose a sample part")
+    st.caption("Pick a generated part below, or upload a STEP file from the sidebar.")
     names = sorted(SAMPLE_LABELS)
     for row_start in (0, 5):
         cols = st.columns(5)
         for col, name in zip(cols, names[row_start : row_start + 5], strict=False):
-            with col, st.container(border=True):
-                st.markdown(f"**{SAMPLE_LABELS[name]}**")
-                st.caption(name.replace(".step", ""))
+            with col:
                 st.button(
-                    "Open sample",
+                    SAMPLE_LABELS[name],
                     key=f"open_{name}",
                     on_click=_select_sample,
                     args=(name,),
                     width="stretch",
                 )
-    st.markdown("### What you get")
-    c1, c2, c3 = st.columns(3)
-    with c1:
-        st.markdown("**Measured, not guessed**")
-        st.caption("Diameter, depth, radius, width, position and axis are measured from the B-Rep.")
-    with c2:
-        st.markdown("**Three engines**")
-        st.caption(
-            "Compare deterministic rules, the learned GNN and a conservative hybrid on one part."
-        )
-    with c3:
-        st.markdown("**Download and search**")
-        st.caption(
-            "Export schema-versioned JSON or CSV, and retrieve similar parts by graph signature."
-        )
+    st.divider()
+    st.markdown("**Workflow**")
+    st.caption(
+        "1. Load a part.  2. Pick an engine.  3. Inspect and compare features.  4. Export JSON or CSV."
+    )
 
 
 def _sidebar() -> tuple[str, object, str, int, float, float, bool]:
@@ -741,12 +671,11 @@ def _render_json(fs: FeatureSet, name: str) -> None:
 def main() -> None:
     st.set_page_config(
         page_title="BRepLens",
-        page_icon="🔍",
         layout="wide",
         initial_sidebar_state="expanded",
     )
     _styles()
-    _hero()
+    _header()
     choice, upload, mode, k, deflection, base_opacity, show_base = _sidebar()
     data, name = _resolve_input(choice, upload)
     if data is None:

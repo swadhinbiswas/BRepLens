@@ -9,78 +9,78 @@
  },
  "n_samples": 10,
  "apptest": {
-  "cold_start_seconds": 1.815,
-  "radio_rerun_seconds": 0.023,
-  "model_load_and_first_part_seconds": 0.148,
+  "cold_start_seconds": 1.795,
+  "radio_rerun_seconds": 0.017,
+  "model_load_and_first_part_seconds": 0.15,
   "e2e_samples": [
    {
     "sample": "sample_00_plate_holes.step",
-    "seconds": 0.042
+    "seconds": 0.04
    },
    {
     "sample": "sample_01_plate_blind.step",
-    "seconds": 0.072
+    "seconds": 0.075
    },
    {
     "sample": "sample_02_counterbore.step",
-    "seconds": 0.081
+    "seconds": 0.091
    },
    {
     "sample": "sample_03_countersink.step",
-    "seconds": 0.066
+    "seconds": 0.089
    },
    {
     "sample": "sample_04_pocket.step",
-    "seconds": 0.07
+    "seconds": 0.074
    },
    {
     "sample": "sample_05_slot.step",
-    "seconds": 0.077
+    "seconds": 0.177
    },
    {
     "sample": "sample_06_stepped_block.step",
-    "seconds": 0.097
+    "seconds": 0.075
    },
    {
     "sample": "sample_07_boss_plate.step",
-    "seconds": 0.082
+    "seconds": 0.068
    },
    {
     "sample": "sample_08_fillet_block.step",
-    "seconds": 0.072
+    "seconds": 0.079
    },
    {
     "sample": "sample_09_bracket_mixed.step",
-    "seconds": 0.095
+    "seconds": 0.109
    }
   ],
-  "peak_rss_apptest_mb": 878.1
+  "peak_rss_apptest_mb": 873.4
  },
  "pipeline": {
-  "model_load_seconds": 0.002,
+  "model_load_seconds": 0.003,
   "latency": {
    "rules": {
-    "mean_ms": 0.17,
-    "median_ms": 0.13,
-    "p95_ms": 0.28,
+    "mean_ms": 0.18,
+    "median_ms": 0.15,
+    "p95_ms": 0.3,
     "n": 10
    },
    "gnn": {
-    "mean_ms": 1.17,
-    "median_ms": 1.14,
-    "p95_ms": 1.52,
+    "mean_ms": 1.4,
+    "median_ms": 1.34,
+    "p95_ms": 1.64,
     "n": 10
    },
    "hybrid": {
-    "mean_ms": 1.7,
-    "median_ms": 1.56,
-    "p95_ms": 2.15,
+    "mean_ms": 1.84,
+    "median_ms": 1.74,
+    "p95_ms": 2.23,
     "n": 10
    },
    "tessellate": {
-    "mean_ms": 7.67,
-    "median_ms": 6.31,
-    "p95_ms": 13.68,
+    "mean_ms": 8.59,
+    "median_ms": 7.55,
+    "p95_ms": 14.38,
     "n": 10
    }
   },
@@ -89,7 +89,7 @@
    "gnn": 23,
    "hybrid": 23
   },
-  "peak_rss_pipeline_mb": 880.3
+  "peak_rss_pipeline_mb": 874.0
  },
  "server": {
   "server_start_seconds": 0.41,
@@ -104,7 +104,7 @@
   "script": "scripts/deploy_probe.py",
   "command": "scripts/deploy_probe.py",
   "venv": ".deploy-venv (Python 3.12.16)",
-  "generated_utc": "2026-11-25T06:32:30Z"
+  "generated_utc": "2026-11-25T06:36:02Z"
  },
- "generated_utc": "2026-11-25T06:32:30Z"
+ "generated_utc": "2026-11-25T06:36:02Z"
 }

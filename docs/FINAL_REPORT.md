@@ -86,20 +86,20 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 | --- | ---: |
 | Environment size | 2413.2 MB |
 | Fresh pip install | 147 s |
-| AppTest cold start | 1.81 s |
+| AppTest cold start | 1.79 s |
 | First part incl. model load | 0.15 s |
-| Peak RSS (app probe) | 878.1 MB |
-| Peak RSS (pipeline probe) | 880.3 MB |
+| Peak RSS (app probe) | 873.4 MB |
+| Peak RSS (pipeline probe) | 874.0 MB |
 | Headless server start | 0.41 s |
-| Rules latency | 0.17 ms |
-| GNN latency | 1.17 ms |
-| Hybrid latency | 1.70 ms |
-| Tessellation latency | 7.67 ms |
+| Rules latency | 0.18 ms |
+| GNN latency | 1.40 ms |
+| Hybrid latency | 1.84 ms |
+| Tessellation latency | 8.59 ms |
 
 *Measured on the inference-only venv, CPU, 10 committed sample parts; raw data in `results/deploy_benchmark.json`.*
 
 The target was < 1.5 GiB peak; measured peak is
-878.1 MB for the app probe.
+873.4 MB for the app probe.
 The environment is large because `cadquery-ocp` declares VTK; VTK is never
 imported by the app.
 
@@ -121,7 +121,7 @@ GNN mode, status polling and size limits.
 | --- | ---: |
 | Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 7.87 s |
+| Test wall time | 11.42 s |
 | Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 

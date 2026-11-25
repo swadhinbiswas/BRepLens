@@ -23,9 +23,9 @@ Truthful bullets, each tied to a generated result file.
   synthetic feature F1, while on MFCAD only GNN-priority/vote matched the GNN.
 - Delivered a FastAPI + queued-worker service with SQLite default storage and an
   optional RQ/Redis mode, plus a Streamlit Community Cloud demo whose measured
-  cold start is 1.81 s, first-part time
+  cold start is 1.79 s, first-part time
   0.15 s, peak RSS
-  878.1 MB, and inference-only install
+  873.4 MB, and inference-only install
   2413 MB.
 - Added a WL/geometry signature index with precision@1 of
   1.000 on synthetic

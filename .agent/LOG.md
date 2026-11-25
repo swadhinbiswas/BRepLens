@@ -16,3 +16,4 @@
 - 2026-11-25 — Phase 9 implemented: six-view software renderer, 29k-param CNN vs 124k-param graph family classifier on identical 1650-part split; CNN 0.8171 acc / 0.8119 F1, graph 1.0; 92 tests; docs/CV generated; v1.1.0 review underway.
 - 2026-11-25 — Phase 9 APPROVED (.agent/REVIEW_phase9.md); fixed docstring/pillow pin; regenerated docs, quality gates green (92 tests, 83.04% core); v1.1.0 tagged.
 - 2026-11-25 06:33 — Streamlit app redesigned: hero, KPI cards, Overview/Features/Compare/Similar/JSON tabs, feature filters, CSV/JSON downloads, sample landing cards, family CNN caption; all 10 samples exercised headlessly; em/en dash count zero; deploy probe 878.1 MB.
+- 2026-11-25 06:37 — Removed AI-styled gradient hero, uppercase eyebrow, pill badges and marketing copy. Replaced with native title/caption header and plain sample buttons. All 10 samples pass headless; zero em/en dashes; deploy 873.4 MB; tag v1.1.2.

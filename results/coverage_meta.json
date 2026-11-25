@@ -6,7 +6,7 @@
  },
  "python": "3.11.18",
  "pytest": "9.2.0",
- "generated_utc": "2026-11-25T06:31:57Z",
+ "generated_utc": "2026-11-25T06:36:13Z",
  "outcomes": {
   "ruff": {
    "returncode": 0,
@@ -17,28 +17,28 @@
   },
   "mypy": {
    "returncode": 0,
-   "seconds": 0.22,
+   "seconds": 0.31,
    "tail": [
     "Success: no issues found in 31 source files"
    ]
   },
   "tests": {
    "returncode": 0,
-   "seconds": 7.87,
+   "seconds": 11.42,
    "tail": [
-    "92 passed, 1 warning in 6.46s"
+    "92 passed, 1 warning in 9.80s"
    ]
   },
   "coverage_full": {
    "returncode": 0,
-   "seconds": 10.66,
+   "seconds": 16.8,
    "tail": [
     "Coverage JSON written to file results/coverage.json"
    ]
   },
   "coverage_core": {
    "returncode": 0,
-   "seconds": 10.17,
+   "seconds": 14.39,
    "tail": [
     "Coverage JSON written to file results/coverage_core.json"
    ]
