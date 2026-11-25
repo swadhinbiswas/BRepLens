@@ -141,7 +141,8 @@ configured remote; the identical commands were run locally on CPU and are green.
 - NX write-back: no live NX session was available. Z-axis holes/bosses,
   subtractive block pockets/slots, candidate cookbook recipes, mocked tests.
   Counterbores/countersinks/fillets/chamfers and non-Z axes are skipped.
-- RQ/Redis and PostgreSQL paths are delivered but were not stress-tested here.
+- RQ/Redis was smoke-tested through Docker Compose; PostgreSQL and multi-worker
+  stress behavior remain untested.
 - No multi-view CNN (optional Phase 9) was implemented.
 
 ## 7. Decisions and fallbacks
