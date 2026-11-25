@@ -106,8 +106,15 @@ ruff check src tests scripts
 mypy src/breplens
 ```
 
-CI (`.github/workflows/ci.yml`) runs the CPU-only path on Python 3.11:
-ruff, mypy, pytest with coverage, and a smoke install of the service.
+There is no CI pipeline by request. Run the local quality gate on the CPU-only
+path:
+
+```bash
+python scripts/run_quality_gates.py
+```
+
+It runs ruff, mypy, pytest with coverage, and a service import smoke test, then
+writes `results/tests.json` and `results/coverage*.json`.
 
 ## 8. Known environment caveats
 

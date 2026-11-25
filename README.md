@@ -1,53 +1,53 @@
-# BRepLens
+<p align="center">
+  <img src="assets/logo.svg" width="92" alt="BRepLens logo">
+</p>
 
-**CAD-agnostic machining feature recognition, parameter extraction and parametric
-rebuild.** Load a STEP file (OpenCascade/OCP) or a Siemens NX part, build an
-Attributed Adjacency Graph, recognize features with deterministic rules, a
-learned GNN or a measured hybrid, extract manufacturing parameters, find similar
-parts, and write features back into NX as parametric features.
+<h1 align="center">BRepLens</h1>
 
-> The hosted demo is CPU-only. **NX write-back is UNTESTED against a live NX
-> session** and is clearly marked throughout; the NX adapter, mock tests and NX
-> guide are complete for desktop validation. See
-> [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+<p align="center"><strong>See the part. Know the features.</strong></p>
 
-## Why
+<p align="center">
+  CAD-agnostic machining feature recognition for STEP parts.<br>
+  Reads a B-Rep, builds an attributed graph, and returns measured features you can inspect, export, and rebuild.
+</p>
 
-- **One neutral IR** for STEP and NX: faces with analytic type, area, normal,
-  axis, radius, bbox, material side; edges with convex/concave/smooth character.
-- **Three recognizers on the same schema**: interpretable rules, an edge-aware
-  message-passing GNN, and a hybrid that never silently deletes rule output.
-- **Measured parameters, not labels only**: diameter, depth, radius, width,
-  length, height, angle, position and axis, validated by a versioned Pydantic
-  schema with exported JSON Schema.
-- **Real evaluation**: held-out synthetic tests, an external MFCAD benchmark,
-  retrieval precision@k, deployment memory/latency, and generated tables from
-  `results/*.json` (no hand-typed numbers).
+<p align="center">
+  v1.2.0 &nbsp;|&nbsp; Python 3.11+ &nbsp;|&nbsp; MIT &nbsp;|&nbsp; schema 1.0.0
+</p>
 
-## Architecture
+---
 
-```mermaid
-flowchart LR
-    STEP[STEP] --> OCC[OccAdapter / OCP]
-    NX[NX .prt] --> NXAD[NxOpenAdapter]
-    NXAD --> OCC
-    OCC --> IR[Neutral AAG<br/>schema v1]
-    IR --> RULES[Rules]
-    IR --> GNN[Edge-aware GNN]
-    RULES --> HYB[Hybrid]
-    GNN --> HYB
-    RULES --> JSON[FeatureSet JSON]
-    GNN --> JSON
-    HYB --> JSON
-    IR --> SIG[Similarity index]
-    JSON --> API[FastAPI + worker/queue]
-    JSON --> UI[Streamlit demo]
-    JSON --> NXWB[NX parametric write-back]
-```
+BRepLens is a working tool, not a mockup. It loads real STEP geometry with
+OpenCascade, classifies faces and edges, recognizes ten machining feature types,
+and measures their parameters. The same neutral graph feeds a rule engine, a
+learned GNN, and a conservative hybrid. A Streamlit demo and a FastAPI service
+ship with the repository.
 
-Details: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+The project is CAD-agnostic by design. STEP is implemented and tested. Siemens
+NX has an adapter and write-back path, but it is explicitly marked **untested
+against a live NX session** because no NX installation was available here.
 
-## 3-command quickstart (hosted demo)
+## What it does
+
+1. **Reads CAD.** STEP AP214 and AP242 through OCP. NX parts through NX Open,
+   with a STEP export fallback for graph construction.
+2. **Builds a neutral B-Rep graph.** Faces carry surface type, area, normal, axis,
+   radius, bounding box, and material side. Edges carry convex, concave, or
+   smooth character.
+3. **Recognizes features.** Through hole, blind hole, counterbore, countersink,
+   pocket, slot, step, boss, fillet, and chamfer.
+4. **Measures parameters.** Diameter, depth, radius, length, width, height,
+   angle, position, and axis, validated by a versioned Pydantic schema.
+5. **Compares engines.** Deterministic rules, an edge-aware GNN, and a hybrid
+   that keeps rule output and adds only non-overlapping GNN findings.
+6. **Finds similar parts.** A graph and geometry signature index with measured
+   precision at k.
+7. **Writes back to NX.** Parametric holes, bosses, and conservative subtractive
+   block cuts for pockets and slots. Mock-tested, not live-tested.
+8. **Ships a demo and a service.** Streamlit for inspection, FastAPI and a
+   worker queue for programmatic use.
+
+## Try the demo
 
 ```bash
 uv venv --python 3.11
@@ -55,122 +55,41 @@ uv pip install -r requirements.txt
 .venv/bin/streamlit run streamlit_app.py
 ```
 
-Open the URL Streamlit prints, pick one of the 10 built-in samples (or upload a
-STEP file), choose `hybrid` / `rules` / `gnn`, inspect the colored 3D view, the
-parameter table, download the JSON and search similar parts.
+Open the local URL, pick one of the ten sample parts, and use the tabs to inspect
+the 3D view, measured features, engine comparison, similar parts, and JSON.
 
-Full development install, tests and training: [docs/SETUP.md](docs/SETUP.md).
+A full development setup, including CUDA training and tests, is in
+[docs/SETUP.md](docs/SETUP.md).
 
-## What the demo does
+## Current status
 
-- Validates uploads (`.step`/`.stp`, ISO-10303-21 magic, size and face limits)
-  before the CAD kernel sees them.
-- Tessellates with OCP and renders with Plotly `Mesh3d` (no VTK/xvfb).
-- Colors faces by recognized feature with a legend; shows base surfaces in gray.
-- Displays measured parameters, confidence, face count and position.
-- Downloads a schema-versioned feature JSON.
-- Searches a 60-part signature library and shows top-k similar parts.
-- Optionally predicts the synthetic part family from six orthographic views
-  (multi-view CNN) and shows it under the 3D view.
-- Caches the recognition model, part-family CNN and sample graphs with
-  `st.cache_resource`/`st.cache_data`.
-- Runs entirely on CPU; measured peak memory and latencies are generated into
-  `results/deploy_benchmark.json` (see the table below).
+This is the honest part.
 
-Deployment steps: [docs/DEPLOY_STREAMLIT.md](docs/DEPLOY_STREAMLIT.md).
+| Area | State |
+| --- | --- |
+| STEP import and neutral graph | Working, tested |
+| Rule-based recognition | Working, evaluated |
+| GNN face classification | Working, evaluated |
+| Hybrid recognition | Working, evaluated |
+| Parameter extraction and schema | Working, validated |
+| Similarity search | Working, evaluated |
+| FastAPI, worker queue, Docker | Working, integration tested |
+| Streamlit demo | Working, fresh-venv tested |
+| NX Open adapter | Complete and mocked, **not live-tested** |
+| MFCAD++ benchmark | Not available: official download blocked |
+| Multi-view CNN part family | Working, but weaker than the graph model |
+| Production hardening | Not done: no auth, quotas, or PostgreSQL load test |
 
-## Recognized features
+The synthetic test set is clean and designed by the same generator used for
+training. High scores there are useful for regression and plumbing, not proof of
+real shop-floor accuracy. The MFCAD benchmark is a better external check. The
+rule engine is weak on MFCAD classes because it was not trained for them. That is
+reported, not hidden.
 
-Through hole, blind hole, counterbore, countersink, pocket, slot, step, boss,
-fillet, chamfer — with measured parameters. Edge convexity uses a documented
-material-side convention (calibrated on box, hole, pocket, blind-hole and fillet
-primitives); see the architecture document.
+## Results
 
-## Project structure
-
-```
-src/breplens/
-  schema.py            versioned IR + FeatureSet (Pydantic)
-  adapters/            CadAdapter, OccAdapter, NxOpenAdapter, NX journal
-  geometry/            AAG, tessellation, synthetic ground-truth generator
-  recognition/         rules, parameter measurement, GNN instances, hybrid
-  ml/                  edge-aware GNN, training, evaluation, MFCAD labels
-  similarity/          signatures + cosine index
-  service/             FastAPI, SQLAlchemy storage, queue/worker, pipeline
-  cli.py               `breplens recognize|schema`
-tests/                 unit, integration, NX mock, adversarial/validation
-scripts/               generation, conversion, training, evaluation, benchmarks
-docs/                  research, architecture, setup, datasets, licenses,
-                       limitations, NX guide, deployment, CV, final report
-samples/               10 generated STEP parts (committed, MIT)
-models/                small CPU checkpoints (committed)
-demo/library.json      60-part similarity index
-docker/                service requirements
-results/               machine-generated result files (source of truth)
-```
-
-## Reproduce the results
-
-```bash
-python scripts/generate_synthetic.py --per-family 150 --workers 16
-python scripts/convert_mfcad.py --limit 3000 --workers 16      # needs raw MFCAD
-python scripts/train_gnn.py --dataset synthetic --epochs 35
-python scripts/train_gnn.py --dataset mfcad --epochs 30
-python scripts/evaluate_rules.py --split test
-python scripts/evaluate_synthetic_three_ways.py
-python scripts/evaluate_head_to_head.py
-python scripts/evaluate_similarity.py
-python scripts/benchmark_perf.py --out results/perf.json
-python scripts/make_readme_tables.py
-```
-
-Tests/lint/types:
-
-```bash
-pytest -q
-ruff check src tests scripts streamlit_app.py
-mypy src/breplens
-```
-
-CI (`.github/workflows/ci.yml`) runs the CPU path: ruff, mypy, pytest with a 70%
-project floor and an 80% core geometry/recognition/schema floor.
-
-## NX Open (desktop, UNTESTED live)
-
-The adapter exports the open NX part to STEP for graph construction and writes
-recognized features back as parametric NX features. Holes and bosses follow
-candidate public NX Open recipes; pockets/slots use parametric subtractive blocks
-because native builder APIs could not be verified. Counterbores/countersinks,
-fillets/chamfers, and non-Z-axis placements are skipped with explicit warnings.
-Mock tests validate the translation logic only.
-
-Read [docs/NX_GUIDE.md](docs/NX_GUIDE.md) before running it, and complete the
-verification checklist.
-
-## Docker service
-
-```bash
-docker compose up --build          # API :8000 + SQLite worker
-docker compose -f docker-compose.rq.yml up --build   # Redis/RQ variant
-```
-
-The API exposes `POST /v1/jobs`, `GET /v1/jobs/{id}`,
-`GET /v1/jobs/{id}/features`, `GET /v1/jobs/{id}/similar`, `/v1/schema`,
-`/health`. Storage defaults to SQLite and supports PostgreSQL via
-`BREPLENS_DATABASE_URL`.
-
-## Documentation
-
-- [Research and source verification](docs/RESEARCH.md)
-- [Architecture and interfaces](docs/ARCHITECTURE.md)
-- [Setup and environment audit](docs/SETUP.md)
-- [Datasets and data cards](docs/DATASETS.md)
-- [Limitations and failure cases](docs/LIMITATIONS.md)
-- [NX guide](docs/NX_GUIDE.md)
-- [Streamlit deployment](docs/DEPLOY_STREAMLIT.md)
-- [Licenses](docs/LICENSES.md)
-- [CV summary](docs/CV_SUMMARY.md)
-- [Final report](docs/FINAL_REPORT.md)
+All tables below are generated from `results/*.json` by
+`python scripts/make_readme_tables.py`. No result number is typed by hand.
 
 <!-- RESULTS:START -->
 ## Results
@@ -201,8 +120,8 @@ All tables are generated by `python scripts/make_readme_tables.py` from
 | Dataset | Architecture | Parameters | Test face acc. | Test macro F1 | Train s | CPU ms/graph |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | synthetic | gcn | 18635 | 1.0000 | 1.0000 | 2.35 | 0.54 |
-| synthetic | edge_gnn | 120011 | 1.0000 | 1.0000 | 1.20 | — |
-| MFCAD | gcn | 18960 | 0.9381 | 0.8909 | 4.90 | — |
+| synthetic | edge_gnn | 120011 | 1.0000 | 1.0000 | 1.20 | - |
+| MFCAD | gcn | 18960 | 0.9381 | 0.8909 | 4.90 | - |
 | MFCAD | edge_gnn | 120336 | 0.9986 | 0.9982 | 4.50 | 0.43 |
 
 *GCN = baseline without edge attributes; `edge_gnn` = edge-aware message passing. Early stopping on the validation split only.*
@@ -242,12 +161,12 @@ All tables are generated by `python scripts/make_readme_tables.py` from
 | Stage | Mean ms (after) | Median ms | Mean ms (before) | Speedup |
 | --- | ---: | ---: | ---: | ---: |
 | graph from step | 11.05 | 6.50 | 12.11 | 1.09 |
-| rules | 0.14 | 0.08 | — | — |
-| gnn | 1.69 | 1.56 | — | — |
-| hybrid | 3.39 | 3.18 | — | — |
-| signature | 0.27 | 0.28 | — | — |
-| tessellate | 3.89 | 3.78 | — | — |
-| end to end step hybrid json | 8.54 | 7.86 | — | — |
+| rules | 0.14 | 0.08 | - | - |
+| gnn | 1.69 | 1.56 | - | - |
+| hybrid | 3.39 | 3.18 | - | - |
+| signature | 0.27 | 0.28 | - | - |
+| tessellate | 3.89 | 3.78 | - | - |
+| end to end step hybrid json | 8.54 | 7.86 | - | - |
 
 *Before/after is reported only for the graph-build optimization measured by the same script; other stages are current observations, not claimed optimizations.*
 
@@ -275,7 +194,7 @@ All tables are generated by `python scripts/make_readme_tables.py` from
 | --- | ---: |
 | Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 11.42 s |
+| Test wall time | 7.66 s |
 | Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 
@@ -298,8 +217,200 @@ All tables are generated by `python scripts/make_readme_tables.py` from
 
 <!-- RESULTS:END -->
 
+## How it works
+
+```mermaid
+flowchart LR
+    STEP[STEP AP214/AP242] --> OCC[OccAdapter / OCP]
+    NX[Siemens NX .prt] --> NXAD[NxOpenAdapter]
+    NXAD --> OCC
+    OCC --> IR[Neutral AAG<br/>schema v1]
+    IR --> RULES[Rule engine]
+    IR --> GNN[Edge-aware GNN]
+    RULES --> HYB[Hybrid]
+    GNN --> HYB
+    RULES --> JSON[FeatureSet JSON]
+    GNN --> JSON
+    HYB --> JSON
+    IR --> SIG[Similarity index]
+    JSON --> API[FastAPI + worker]
+    JSON --> UI[Streamlit demo]
+    JSON --> NXWB[NX write-back]
+```
+
+The full design, including the edge convexity convention and schema contract, is
+in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+## Project layout
+
+```
+src/breplens/
+  schema.py              versioned IR and FeatureSet models
+  adapters/              CadAdapter, OccAdapter, NxOpenAdapter, NX journal
+  geometry/              AAG, tessellation, synthetic ground-truth generator
+  recognition/           rules, measurement helpers, GNN grouping, hybrid
+  ml/                    GNN, family CNN, multi-view renderer, training, evaluation
+  similarity/            signatures and cosine index
+  service/               FastAPI, SQLAlchemy storage, queue worker, pipeline
+  cli.py                 breplens recognize and breplens schema
+tests/                   unit, integration, NX mock, adversarial cases
+scripts/                 data generation, training, evaluation, benchmarks, reports
+docs/                    research, architecture, setup, datasets, limits, NX, deploy
+assets/                  logo and wordmark
+samples/                 ten generated STEP parts
+models/                  small committed CPU checkpoints
+demo/                    similarity library
+results/                 machine-generated results, the source of truth for tables
+streamlit_app.py         hosted demo
+docker/                  service requirements
+```
+
+## Service API
+
+```bash
+docker compose up --build
+```
+
+The API listens on port 8000 and exposes:
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| `GET` | `/health` | Service and model status |
+| `POST` | `/v1/jobs` | Upload a STEP file and queue recognition |
+| `GET` | `/v1/jobs` | Recent jobs |
+| `GET` | `/v1/jobs/{id}` | Job status and timings |
+| `GET` | `/v1/jobs/{id}/features` | Validated FeatureSet JSON |
+| `GET` | `/v1/jobs/{id}/similar` | Similar parts |
+| `GET` | `/v1/schema` | Feature JSON Schema |
+
+SQLite is the default store and queue. PostgreSQL can be selected with
+`BREPLENS_DATABASE_URL`. RQ and Redis are available as an optional queue backend;
+both Docker Compose stacks were smoke-tested.
+
+## NX Open
+
+The NX path exports the open part to STEP for graph construction and creates
+parametric features from a FeatureSet. Holes and bosses follow candidate recipes
+from a public NX Open cookbook. Pockets and slots use parametric subtractive block
+features because native builder APIs could not be verified. Counterbores,
+countersinks, fillets, chamfers, and non-Z axes are skipped with explicit
+warnings.
+
+**No live NX session was available.** The adapter, mock, journal entry points, and
+checklist are complete, but this path needs a pilot validation before production
+use. Read [docs/NX_GUIDE.md](docs/NX_GUIDE.md) first.
+
+## Datasets and training
+
+- **Synthetic primary set:** 1,650 generated parts across 11 families, with
+  construction-derived face labels and feature parameters. Used for the demo
+  model and all feature-level evaluation.
+- **MFCAD external set:** a 3,000-part subset of the MIT-licensed MFCAD dataset,
+  used for the external face-classification benchmark.
+- **MFCAD++:** reported on its official page, but the zip download was blocked by
+  a Cloudflare challenge in this environment. It is listed as future work.
+
+Data cards, licenses, and exact reproduction commands are in
+[docs/DATASETS.md](docs/DATASETS.md).
+
+Training is deterministic and CPU-friendly for inference. The training machine
+used an RTX 3060 Ti with mixed precision where useful. CPU-only paths are
+tested.
+
+## Verification
+
+Run the local gates:
+
+```bash
+pytest -q
+ruff check src tests scripts streamlit_app.py
+mypy src/breplens
+python scripts/run_quality_gates.py
+```
+
+There is no CI pipeline in this repository. The local gate runs the same checks:
+lint, types, tests, coverage, and a service import smoke test. Results are written
+to `results/tests.json` and `results/coverage*.json`.
+
+The Streamlit demo was verified in a fresh pip-only CPU environment, including a
+headless server start and all ten sample parts. Deployment details are in
+[docs/DEPLOY_STREAMLIT.md](docs/DEPLOY_STREAMLIT.md).
+
+## Limitations
+
+The short list:
+
+- Feature vocabulary is fixed. Freeform cavities, passages, assemblies, and mixed
+  units are out of scope.
+- Rule scores on synthetic data are a regression signal, not real-world accuracy.
+- MFCAD is an easy face-classification benchmark and does not cover holes or
+  fillets.
+- The hybrid is conservative and cannot repair a wrong rule feature.
+- Similarity is weak on exact MFCAD macro compositions.
+- The CNN part-family model is weaker than the graph model and is synthetic-only.
+- NX write-back is untested on a live session.
+- The service is not hardened for multi-tenant production.
+
+The detailed failure modes are in [docs/LIMITATIONS.md](docs/LIMITATIONS.md).
+
+## Reproduction
+
+```bash
+python scripts/generate_synthetic.py --per-family 150 --workers 16
+python scripts/convert_mfcad.py --limit 3000 --workers 16
+python scripts/train_gnn.py --dataset synthetic --epochs 35
+python scripts/train_gnn.py --dataset mfcad --epochs 30
+python scripts/evaluate_rules.py --split test
+python scripts/evaluate_synthetic_three_ways.py
+python scripts/evaluate_head_to_head.py
+python scripts/evaluate_similarity.py
+python scripts/render_dataset.py
+python scripts/train_family_models.py
+python scripts/benchmark_perf.py --out results/perf.json
+python scripts/make_readme_tables.py
+```
+
+The README result tables are rebuilt from the JSON files after those scripts run.
+
+## Deploy the demo
+
+The app is ready for Streamlit Community Cloud. Use `streamlit_app.py` as the
+entry point, Python 3.12 or 3.11, and `requirements.txt` as the dependency file.
+No secrets are needed. The deployment guide covers limits, packages, and the
+memory budget: [docs/DEPLOY_STREAMLIT.md](docs/DEPLOY_STREAMLIT.md).
+
+## Topics
+
+If you publish this repository on GitHub, use these topics:
+
+`cad` `step` `brep` `feature-recognition` `machining` `manufacturing`
+`cnc` `opencascade` `ocp` `pytorch` `graph-neural-network` `streamlit`
+`fastapi` `nx-open` `mechanical-engineering` `cadquery`
+
+## Documentation
+
+| Document | What it covers |
+| --- | --- |
+| [Research](docs/RESEARCH.md) | Sources, datasets, kernels, and prior work |
+| [Architecture](docs/ARCHITECTURE.md) | Interfaces, IR, schema, and edge conventions |
+| [Setup](docs/SETUP.md) | Environment audit and exact install commands |
+| [Datasets](docs/DATASETS.md) | Data cards, licenses, and download verification |
+| [Limitations](docs/LIMITATIONS.md) | Failure cases and honest scope |
+| [NX guide](docs/NX_GUIDE.md) | Live validation checklist and write-back limits |
+| [Deployment](docs/DEPLOY_STREAMLIT.md) | Streamlit Community Cloud steps |
+| [CV summary](docs/CV_SUMMARY.md) | Five measured, truthful bullets |
+| [Final report](docs/FINAL_REPORT.md) | Full build and evaluation report |
+
 ## License
 
-MIT (see [LICENSE](LICENSE)). Sample STEP files are generated by this project and
-redistributable under MIT. MFCAD is MIT; MFCAD++ is CC BY but was not downloaded
-(see [docs/DATASETS.md](docs/DATASETS.md)). No secrets are stored in the repo.
+MIT. See [LICENSE](LICENSE).
+
+The sample STEP files were generated by this project and are redistributable
+under MIT. MFCAD is MIT and is downloaded by script, not committed. MFCAD++ is
+CC BY but was not downloaded. See [docs/LICENSES.md](docs/LICENSES.md).
+
+---
+
+<p align="center">
+  <strong>BRepLens</strong> &nbsp;|&nbsp; See the part. Know the features.
+</p>

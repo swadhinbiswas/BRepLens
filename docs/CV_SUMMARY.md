@@ -1,4 +1,4 @@
-# CV Summary — BRepLens
+# CV Summary - BRepLens
 
 Truthful bullets, each tied to a generated result file.
 

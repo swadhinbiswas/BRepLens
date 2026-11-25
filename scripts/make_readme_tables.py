@@ -25,14 +25,14 @@ def _load(name: str, default: Any = None) -> Any:
 
 def _f(x: Any, nd: int = 3) -> str:
     if x is None:
-        return "—"
+        return "-"
     if isinstance(x, float):
         return f"{x:.{nd}f}"
     return str(x)
 
 
 def _pct(x: Any, nd: int = 1) -> str:
-    return "—" if x is None else f"{float(x):.{nd}f}%"
+    return "-" if x is None else f"{float(x):.{nd}f}%"
 
 
 def tables() -> dict[str, str]:
@@ -69,10 +69,10 @@ def tables() -> dict[str, str]:
     out["datasets"] = (
         "| Dataset | Parts | Split (train/val/test) | Labels | License |\n"
         "| --- | ---: | --- | --- | --- |\n"
-        f"| Synthetic (`data/synthetic`) | {synth_manifest.get('n_parts', '—')} | "
+        f"| Synthetic (`data/synthetic`) | {synth_manifest.get('n_parts', '-')} | "
         f"{split_counts.get('train', 0)}/{split_counts.get('val', 0)}/{split_counts.get('test', 0)} | "
         "per-face class + feature params | MIT (generated) |\n"
-        f"| MFCAD subset (`data/mfcad`) | {mfcad_manifest.get('n_converted', '—')} | "
+        f"| MFCAD subset (`data/mfcad`) | {mfcad_manifest.get('n_converted', '-')} | "
         f"{mfcad_manifest.get('split_counts', {}).get('train', 0)}/"
         f"{mfcad_manifest.get('split_counts', {}).get('val', 0)}/"
         f"{mfcad_manifest.get('split_counts', {}).get('test', 0)} | "
@@ -94,7 +94,7 @@ def tables() -> dict[str, str]:
         "| Method | Feature P | Feature R | Feature F1 | Exact part rate | Face acc. | Face macro F1 | ms/part |\n"
         "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |\n"
         + "\n".join(rows)
-        + f"\n\n*{comparison.get('n_parts', '—')} held-out synthetic parts; same split for all methods; "
+        + f"\n\n*{comparison.get('n_parts', '-')} held-out synthetic parts; same split for all methods; "
         "latency is recognition only, CPU.*"
     )
 
@@ -104,10 +104,10 @@ def tables() -> dict[str, str]:
             cpu_ms = (
                 _f(payload.get("cpu_inference_ms_per_graph", {}).get("median"), 2)
                 if arch == payload.get("selected_architecture")
-                else "—"
+                else "-"
             )
             rows.append(
-                f"| {dataset} | {arch} | {run.get('n_parameters', '—')} | "
+                f"| {dataset} | {arch} | {run.get('n_parameters', '-')} | "
                 f"{_f(run['test']['accuracy'], 4)} | {_f(run['test']['macro_f1'], 4)} | "
                 f"{_f(run.get('train_seconds'), 2)} | {cpu_ms} |"
             )
@@ -122,14 +122,14 @@ def tables() -> dict[str, str]:
     hrows = []
     for key, m in h2h.get("methods", {}).items():
         hrows.append(
-            f"| {key} | {_f(m['accuracy'], 4)} | {_f(m['macro_f1'], 4)} | {m.get('n_faces', '—')} |"
+            f"| {key} | {_f(m['accuracy'], 4)} | {_f(m['macro_f1'], 4)} | {m.get('n_faces', '-')} |"
         )
     gnn_full = h2h.get("gnn_full_16_class", {})
     out["mfcad"] = (
         "| Method (8 macro classes) | Accuracy | Macro F1 | Faces |\n"
         "| --- | ---: | ---: | ---: |\n"
         + "\n".join(hrows)
-        + f"\n\n*MFCAD test split: {h2h.get('dataset', {}).get('n_parts', '—')} parts. "
+        + f"\n\n*MFCAD test split: {h2h.get('dataset', {}).get('n_parts', '-')} parts. "
         f"Full 16-class GNN: accuracy {_f(gnn_full.get('test_accuracy'), 4)}, "
         f"macro F1 {_f(gnn_full.get('test_macro_f1'), 4)}. "
         "Rules were designed and tuned on the synthetic families and were not retuned on MFCAD.*"
@@ -139,7 +139,7 @@ def tables() -> dict[str, str]:
     for key, m in cnn.get("methods", {}).items():
         crows.append(
             f"| {key} | {_f(m['test']['accuracy'], 4)} | {_f(m['test']['macro_f1'], 4)} | "
-            f"{m.get('n_parameters', '—')} | {_f(m.get('train_seconds'), 2)} | "
+            f"{m.get('n_parameters', '-')} | {_f(m.get('train_seconds'), 2)} | "
             f"{_f(m.get('cpu_ms_per_part'), 2)} | {_f(m.get('model_mb'), 3)} |"
         )
     out["cnn"] = (
@@ -155,7 +155,7 @@ def tables() -> dict[str, str]:
         m = sim.get(key, {})
         met = m.get("metrics", {})
         srows.append(
-            f"| {name} | {m.get('n_library', '—')} | {m.get('n_queries', '—')} | "
+            f"| {name} | {m.get('n_library', '-')} | {m.get('n_queries', '-')} | "
             f"{_f(met.get('precision@1'))} | {_f(met.get('precision@5'))} | {_f(met.get('precision@10'))} | "
             f"{_f(met.get('precision_jaccard0.5@1'))} | {_f(m.get('timing', {}).get('query_ms_mean'), 2)} |"
         )
@@ -206,8 +206,8 @@ def tables() -> dict[str, str]:
 
     out["quality"] = (
         "| Check | Result |\n| --- | ---: |\n"
-        f"| Tests passed | {tests.get('passed', '—')} |\n"
-        f"| Tests failed | {tests.get('failed', '—')} |\n"
+        f"| Tests passed | {tests.get('passed', '-')} |\n"
+        f"| Tests failed | {tests.get('failed', '-')} |\n"
         f"| Test wall time | {_f(tests.get('wall_seconds'), 2)} s |\n"
         f"| Full line coverage | {_pct(cov.get('totals', {}).get('percent_covered'), 2)} |\n"
         f"| Core geometry/recognition/schema coverage | {_pct(cov_core.get('totals', {}).get('percent_covered'), 2)} |\n"
@@ -216,8 +216,8 @@ def tables() -> dict[str, str]:
     drow = []
     for label, d in (("SQLite worker", docker), ("RQ + Redis worker", docker_rq)):
         drow.append(
-            f"| {label} | {'ok' if d.get('health_ok') else '—'} | {_f(d.get('job_seconds'), 2)} | "
-            f"{d.get('status', '—')} | {d.get('n_features', '—')} | "
+            f"| {label} | {'ok' if d.get('health_ok') else '-'} | {_f(d.get('job_seconds'), 2)} | "
+            f"{d.get('status', '-')} | {d.get('n_features', '-')} | "
             f"{_f((d.get('job_timings') or {}).get('load_ms'), 1)} | "
             f"{_f((d.get('job_timings') or {}).get('recognition_ms'), 2)} |"
         )
@@ -228,12 +228,12 @@ def tables() -> dict[str, str]:
 
     out["timing"] = (
         "| Pipeline step | Wall time | Source |\n| --- | ---: | --- |\n"
-        f"| Synthetic generation ({synth_manifest.get('n_parts', '—')} parts, "
-        f"{synth_manifest.get('workers', '—')} workers) | {_f(synth_manifest.get('generation_wall_seconds'), 2)} s | `data/synthetic/manifest.json` |\n"
-        f"| MFCAD conversion ({mfcad_manifest.get('n_converted', '—')} parts, "
-        f"{mfcad_manifest.get('workers', '—')} workers) | {_f(mfcad_manifest.get('conversion_wall_seconds'), 2)} s | `data/mfcad/manifest.json` |\n"
-        f"| Synthetic GNN training ({gnn.get('selected_architecture', '—')}) | {_f(gnn.get('runs', {}).get(gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/gnn_eval.json` |\n"
-        f"| MFCAD GNN training ({mfcad_gnn.get('selected_architecture', '—')}) | {_f(mfcad_gnn.get('runs', {}).get(mfcad_gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/mfcad_gnn_eval.json` |\n"
+        f"| Synthetic generation ({synth_manifest.get('n_parts', '-')} parts, "
+        f"{synth_manifest.get('workers', '-')} workers) | {_f(synth_manifest.get('generation_wall_seconds'), 2)} s | `data/synthetic/manifest.json` |\n"
+        f"| MFCAD conversion ({mfcad_manifest.get('n_converted', '-')} parts, "
+        f"{mfcad_manifest.get('workers', '-')} workers) | {_f(mfcad_manifest.get('conversion_wall_seconds'), 2)} s | `data/mfcad/manifest.json` |\n"
+        f"| Synthetic GNN training ({gnn.get('selected_architecture', '-')}) | {_f(gnn.get('runs', {}).get(gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/gnn_eval.json` |\n"
+        f"| MFCAD GNN training ({mfcad_gnn.get('selected_architecture', '-')}) | {_f(mfcad_gnn.get('runs', {}).get(mfcad_gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/mfcad_gnn_eval.json` |\n"
     )
     return out
 
@@ -323,7 +323,7 @@ def write_cv(t: dict[str, str]) -> None:
     mnet = mfcad.get("runs", {}).get(mfcad.get("selected_architecture", ""), {})
     mrule = h2h.get("methods", {}).get("rules", {})
     at = deploy.get("apptest", {})
-    text = f"""# CV Summary — BRepLens
+    text = f"""# CV Summary - BRepLens
 
 Truthful bullets, each tied to a generated result file.
 
@@ -331,12 +331,12 @@ Truthful bullets, each tied to a generated result file.
   into an attributed adjacency graph and recognizes 10 machining feature types
   with rule-based, GNN and hybrid modes, extracting measured parameters into a
   versioned Pydantic/JSON schema.
-- Implemented a compact face-classification GNN ({gnn.get("selected_architecture", "—")}:
-  {gnet.get("n_parameters", "—")} parameters, {gnn.get("checkpoint", {}).get("size_mb", "—")} MB)
+- Implemented a compact face-classification GNN ({gnn.get("selected_architecture", "-")}:
+  {gnet.get("n_parameters", "-")} parameters, {gnn.get("checkpoint", {}).get("size_mb", "-")} MB)
   with {_f(gnet.get("test", {}).get("accuracy"), 4)} face accuracy on a
-  {comp.get("n_parts", "—")}-part held-out synthetic test set; a separate
+  {comp.get("n_parts", "-")}-part held-out synthetic test set; a separate
   edge-aware MFCAD model reached {_f(mnet.get("test", {}).get("accuracy"), 4)}
-  accuracy on {mfcad.get("dataset", {}).get("n_test", "—")} held-out MFCAD parts;
+  accuracy on {mfcad.get("dataset", {}).get("n_test", "-")} held-out MFCAD parts;
   a six-view CNN part-family classifier reached
   {_f(cnn.get("methods", {}).get("cnn_multiview", {}).get("test", {}).get("accuracy"), 4)}
   versus {_f(cnn.get("methods", {}).get("graph_gnn", {}).get("test", {}).get("accuracy"), 4)}
@@ -356,7 +356,7 @@ Truthful bullets, each tied to a generated result file.
   {_f(sim.get("synthetic", {}).get("metrics", {}).get("precision@1"), 3)} on synthetic
   families and {_f(sim.get("mfcad", {}).get("metrics", {}).get("precision_jaccard0.5@1"), 3)}
   (Jaccard≥0.5) on MFCAD, an NX Open adapter/write-back path with a faithful mock
-  (explicitly untested live), {tests.get("passed", "—")} passing tests and
+  (explicitly untested live), {tests.get("passed", "-")} passing tests and
   {_pct(cov_core.get("totals", {}).get("percent_covered"), 1)} coverage on core
   geometry/recognition/schema code.
 """
@@ -365,7 +365,7 @@ Truthful bullets, each tied to a generated result file.
 
 def write_final_report(t: dict[str, str]) -> None:
     deploy = _load("deploy_benchmark.json")
-    text = f"""# BRepLens — Final Report
+    text = f"""# BRepLens - Final Report
 
 ## 1. What was built
 
@@ -432,9 +432,9 @@ GNN mode, status polling and size limits.
 
 {t["quality"]}
 
-CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%. The GitHub
-Actions workflow was not executed on a remote because this repository has no
-configured remote; the identical commands were run locally on CPU and are green.
+The local quality gate runs ruff, mypy and pytest on CPU. There is no CI
+pipeline in this repository by design; the commands in `docs/SETUP.md` reproduce
+the same checks on any machine.
 
 ## 6. Known limitations and failure cases
 
@@ -506,7 +506,7 @@ configured remote; the identical commands were run locally on CPU and are green.
 - Samples: `samples/*.step`; demo index: `demo/library.json`
 - Docs: `docs/` (research, architecture, setup, datasets, licenses, limitations,
   NX guide, deployment, CV summary, this report)
-- Tests: `tests/`; CI: `.github/workflows/ci.yml`
+- Tests: `tests/`; local gates: `scripts/run_quality_gates.py`
 - Provenance: stochastic/training/benchmark results record their script, command,
   seed where applicable, software versions and timestamp (see
   `results/gnn_eval.json`, `mfcad_gnn_eval.json`, `rules_eval.json`,

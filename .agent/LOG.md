@@ -17,3 +17,4 @@
 - 2026-11-25 — Phase 9 APPROVED (.agent/REVIEW_phase9.md); fixed docstring/pillow pin; regenerated docs, quality gates green (92 tests, 83.04% core); v1.1.0 tagged.
 - 2026-11-25 06:33 — Streamlit app redesigned: hero, KPI cards, Overview/Features/Compare/Similar/JSON tabs, feature filters, CSV/JSON downloads, sample landing cards, family CNN caption; all 10 samples exercised headlessly; em/en dash count zero; deploy probe 878.1 MB.
 - 2026-11-25 06:37 — Removed AI-styled gradient hero, uppercase eyebrow, pill badges and marketing copy. Replaced with native title/caption header and plain sample buttons. All 10 samples pass headless; zero em/en dashes; deploy 873.4 MB; tag v1.1.2.
+- 2026-11-25 06:45 — Rewrote README with logo, tagline, project topics, honest status and generated result tables. Removed GitHub Actions CI by request; local quality gate remains. Bumped package to 1.2.0; tagging v1.2.0.

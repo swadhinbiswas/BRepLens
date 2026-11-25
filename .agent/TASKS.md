@@ -9,7 +9,7 @@ A phase is done only when (1) tests pass, (2) scripts produced real results file
 - [x] 0.2 Repo skeleton (src, tests, docs, scripts, docker, results, .agent, samples)
 - [x] 0.3 pyproject.toml (Python 3.11+, pinned deps), ruff + mypy config
 - [x] 0.4 pre-commit config
-- [x] 0.5 GitHub Actions CI (ruff, mypy, pytest, CPU-only)
+- [x] 0.5 Local quality gate (ruff, mypy, pytest, CPU-only); GitHub Actions removed by request
 - [x] 0.6 Agent definitions (.opencode/agents/*.md) + .agent files
 - [x] 0.7 Baseline commit + tag scaffold
 
@@ -96,7 +96,7 @@ A phase is done only when (1) tests pass, (2) scripts produced real results file
 - [x] 10.1 README (overview, Mermaid, 3-command quickstart, generated results tables, limitations, structure, NX, repro, deploy)
 - [x] 10.2 docs/CV_SUMMARY.md (truthful measured bullets)
 - [x] 10.3 docs/LIMITATIONS.md, docs/LICENSES.md
-- [x] 10.4 Full audit: tests, coverage, CI, results provenance, secrets, licenses
+- [x] 10.4 Full audit: tests, coverage, local gate, results provenance, secrets, licenses
 - [x] 10.5 docs/FINAL_REPORT.md
 - [x] 10.6 Tag v1.0.0
 

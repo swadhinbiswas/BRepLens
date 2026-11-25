@@ -4,12 +4,25 @@ build-backend = "hatchling.build"
 
 [project]
 name = "breplens"
-version = "1.0.0"
+version = "1.2.0"
 description = "CAD-agnostic manufacturing feature recognition and parametric rebuild"
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
 license = { text = "MIT" }
 authors = [{ name = "BRepLens" }]
+keywords = [
+  "cad", "step", "brep", "feature-recognition", "machining",
+  "manufacturing", "cnc", "opencascade", "ocp", "pytorch",
+  "graph-neural-network", "streamlit", "fastapi", "nx-open",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Manufacturing",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
 dependencies = [
   "cadquery-ocp>=7.8,<7.10",
   "numpy>=1.26,<2.3",

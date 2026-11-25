@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">BRepLens logo</title>
+  <desc id="desc">An isometric CAD part seen through a teal inspection lens with graph nodes.</desc>
+  <rect x="4" y="4" width="248" height="248" rx="56" fill="#0B1220" stroke="#1E293B" stroke-width="2"/>
+  <g opacity=".9">
+    <path d="M54 88 L128 46 L202 88 L202 168 L128 210 L54 168 Z" fill="#111C2E" stroke="#64748B" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M54 88 L128 130 L202 88 M128 130 L128 210" fill="none" stroke="#475569" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M54 168 L128 130 L202 168" fill="none" stroke="#334155" stroke-width="2" stroke-linejoin="round"/>
+  </g>
+  <circle cx="128" cy="128" r="56" fill="#0B1220" stroke="#2DD4BF" stroke-width="4"/>
+  <circle cx="128" cy="128" r="43" fill="#0F2A33"/>
+  <path d="M105 119 L145 108 L139 150 Z" fill="none" stroke="#67E8F9" stroke-width="2.5" stroke-linejoin="round"/>
+  <g fill="#67E8F9">
+    <circle cx="105" cy="119" r="5"/>
+    <circle cx="145" cy="108" r="5"/>
+    <circle cx="139" cy="150" r="5"/>
+  </g>
+  <path d="M91 108 A43 43 0 0 1 150 88" fill="none" stroke="#A5F3FC" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+</svg>

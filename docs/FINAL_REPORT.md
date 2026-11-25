@@ -1,4 +1,4 @@
-# BRepLens — Final Report
+# BRepLens - Final Report
 
 ## 1. What was built
 
@@ -40,8 +40,8 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 | Dataset | Architecture | Parameters | Test face acc. | Test macro F1 | Train s | CPU ms/graph |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | synthetic | gcn | 18635 | 1.0000 | 1.0000 | 2.35 | 0.54 |
-| synthetic | edge_gnn | 120011 | 1.0000 | 1.0000 | 1.20 | — |
-| MFCAD | gcn | 18960 | 0.9381 | 0.8909 | 4.90 | — |
+| synthetic | edge_gnn | 120011 | 1.0000 | 1.0000 | 1.20 | - |
+| MFCAD | gcn | 18960 | 0.9381 | 0.8909 | 4.90 | - |
 | MFCAD | edge_gnn | 120336 | 0.9986 | 0.9982 | 4.50 | 0.43 |
 
 *GCN = baseline without edge attributes; `edge_gnn` = edge-aware message passing. Early stopping on the validation split only.*
@@ -121,14 +121,14 @@ GNN mode, status polling and size limits.
 | --- | ---: |
 | Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 11.42 s |
+| Test wall time | 7.66 s |
 | Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 
 
-CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%. The GitHub
-Actions workflow was not executed on a remote because this repository has no
-configured remote; the identical commands were run locally on CPU and are green.
+The local quality gate runs ruff, mypy and pytest on CPU. There is no CI
+pipeline in this repository by design; the commands in `docs/SETUP.md` reproduce
+the same checks on any machine.
 
 ## 6. Known limitations and failure cases
 
@@ -200,7 +200,7 @@ configured remote; the identical commands were run locally on CPU and are green.
 - Samples: `samples/*.step`; demo index: `demo/library.json`
 - Docs: `docs/` (research, architecture, setup, datasets, licenses, limitations,
   NX guide, deployment, CV summary, this report)
-- Tests: `tests/`; CI: `.github/workflows/ci.yml`
+- Tests: `tests/`; local gates: `scripts/run_quality_gates.py`
 - Provenance: stochastic/training/benchmark results record their script, command,
   seed where applicable, software versions and timestamp (see
   `results/gnn_eval.json`, `mfcad_gnn_eval.json`, `rules_eval.json`,

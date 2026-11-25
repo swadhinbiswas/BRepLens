@@ -121,10 +121,9 @@ Honest scope of the v1.0.0 implementation. Numbers referenced here live in
 
 ## Verification gaps
 
-- No git remote is configured, so the GitHub Actions workflow has not actually
-  run on GitHub. The same ruff/mypy/pytest/coverage commands were executed
-  locally and pass; `results/tests.json` and `results/coverage*.json` are the
-  evidence.
+- No CI pipeline is included by request. The local quality gate was run on CPU:
+  ruff, mypy, pytest and coverage all pass; `results/tests.json` and
+  `results/coverage*.json` are the evidence. There is no remote repository.
 - Live NX validation is impossible here (see above).
 - MFCAD++ was not downloadable in this environment.
 

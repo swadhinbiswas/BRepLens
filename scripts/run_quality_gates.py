@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Run the exact local CI gates and write test/coverage provenance results."""
+"""Run the local quality gates and write test/coverage provenance results."""
 
 from __future__ import annotations
 
