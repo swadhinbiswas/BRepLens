@@ -32,19 +32,34 @@ def main() -> int:
         "mypy": [PY, "-m", "mypy", "src/breplens"],
         "tests": [PY, "-m", "pytest", "-o", "addopts=", "-q"],
         "coverage_full": [
-            PY, "-m", "pytest", "-q", "--cov=breplens",
+            PY,
+            "-m",
+            "pytest",
+            "-q",
+            "--cov=breplens",
             "--cov-report=json:results/coverage.json",
         ],
         "coverage_core": [
-            PY, "-m", "pytest", "-q", "--cov=breplens.geometry",
-            "--cov=breplens.recognition", "--cov=breplens.schema",
+            PY,
+            "-m",
+            "pytest",
+            "-q",
+            "--cov=breplens.geometry",
+            "--cov=breplens.recognition",
+            "--cov=breplens.schema",
             "--cov-report=json:results/coverage_core.json",
         ],
     }
     outputs = {}
     for name, cmd in commands.items():
         t0 = time.perf_counter()
-        log = results / ("coverage.txt" if name == "coverage_full" else "coverage_core.txt" if name == "coverage_core" else f"{name}.txt")
+        log = results / (
+            "coverage.txt"
+            if name == "coverage_full"
+            else "coverage_core.txt"
+            if name == "coverage_core"
+            else f"{name}.txt"
+        )
         r = _run(cmd, log=log)
         outputs[name] = {
             "returncode": r.returncode,
@@ -84,7 +99,15 @@ def main() -> int:
         "outcomes": outputs,
     }
     (results / "coverage_meta.json").write_text(json.dumps(meta, indent=1))
-    print(json.dumps({"tests": tests_payload["passed"], "gates": {k: v["returncode"] for k, v in outputs.items()}}, indent=1))
+    print(
+        json.dumps(
+            {
+                "tests": tests_payload["passed"],
+                "gates": {k: v["returncode"] for k, v in outputs.items()},
+            },
+            indent=1,
+        )
+    )
     return 0
 
 

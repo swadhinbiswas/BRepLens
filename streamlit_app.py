@@ -22,9 +22,11 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from breplens.adapters.base import CadLoadError  # noqa: E402
 from breplens.adapters.occ import OccAdapter  # noqa: E402
+from breplens.ml.family import FAMILY_NAMES, load_cnn  # noqa: E402
+from breplens.ml.views import render_views  # noqa: E402
 from breplens.recognition.gnn_recognizer import recognize_gnn, recognize_hybrid  # noqa: E402
 from breplens.recognition.rules import recognize_rules  # noqa: E402
-from breplens.schema import FeatureSet, PartGraph  # noqa: E402
+from breplens.schema import FeatureSet, MeshData, PartGraph  # noqa: E402
 from breplens.similarity.signature import SignatureIndex, part_signature  # noqa: E402
 
 MAX_UPLOAD_MB = 25
@@ -74,6 +76,17 @@ def get_model():
         return load_for_inference(MODEL_PATH, device="cpu")
     except Exception as exc:  # pragma: no cover - deployment diagnosis
         return None, None, {"error": f"{type(exc).__name__}: {exc}"}
+
+
+@st.cache_resource(show_spinner=False)
+def get_family_model():
+    path = ROOT / "models" / "family_cnn.pt"
+    if not path.exists():
+        return None, None
+    try:
+        return load_cnn(path, device="cpu")
+    except Exception:
+        return None, None
 
 
 @st.cache_resource(show_spinner=False)
@@ -326,6 +339,27 @@ def main() -> None:
         try:
             mesh = tessellate_cached(data, deflection)
             st.plotly_chart(_mesh_figure(mesh, fs, deflection), width="stretch")
+            family_model, family_payload = get_family_model()
+            if family_model is not None and family_payload is not None:
+                import torch
+
+                meta = family_payload.get("metadata", {})
+                norm = meta.get("image_norm", {})
+                mean = torch.tensor(norm.get("mean", [0.5] * 6), dtype=torch.float32).view(
+                    1, -1, 1, 1
+                )
+                std = torch.tensor(norm.get("std", [0.5] * 6), dtype=torch.float32).view(
+                    1, -1, 1, 1
+                )
+                views = render_views(MeshData.model_validate(mesh))
+                x = (torch.from_numpy(views).float().unsqueeze(0) / 255.0 - mean) / std
+                with torch.no_grad():
+                    probs = torch.softmax(family_model(x), dim=-1)[0]
+                idx = int(probs.argmax())
+                st.caption(
+                    f"Part family (multi-view CNN): **{FAMILY_NAMES[idx]}** · "
+                    f"{float(probs[idx]):.0%} confidence"
+                )
         except Exception as exc:
             st.warning(f"3D tessellation unavailable: {type(exc).__name__}: {exc}")
 

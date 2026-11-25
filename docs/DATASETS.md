@@ -32,6 +32,14 @@ rule feature geometry; the parameters and instance count are construction-derive
 Ground truth also shares the generator's idealizations. This is the documented
 fallback dataset; it is not a substitute for MFCAD++.
 
+## 1b. Multi-view render cache (optional Phase 9)
+
+`scripts/render_dataset.py` renders six orthographic shaded views (±X/±Y/±Z) at
+96×96 for the synthetic parts using a Pillow software rasterizer (no display).
+The cache is gitignored; render wall time and counts are in
+`data/renders/manifest.json`. The CNN/graph comparison is in
+`results/cnn_eval.json`.
+
 ## 2. MFCAD (external benchmark)
 
 | Field | Value |

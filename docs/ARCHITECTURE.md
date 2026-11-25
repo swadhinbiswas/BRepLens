@@ -51,7 +51,7 @@ flowchart LR
 | `breplens.adapters.occ` | STEP → PartGraph, tessellation | OCP, schema |
 | `breplens.adapters.nx` | NX traversal, STEP export, write-back | NXOpen (lazy), OCP adapter |
 | `breplens.recognition` | rules, parameters, GNN feature grouping, hybrid | schema, geometry, numpy |
-| `breplens.ml` | GNN model, training, evaluation, inference | torch, PyG, schema |
+| `breplens.ml` | GNN/CNN models, multi-view rendering, training, evaluation, inference | torch, PyG, Pillow, schema |
 | `breplens.similarity` | signatures and cosine index | schema, numpy |
 | `breplens.service` | API, worker, storage, pipeline | FastAPI, SQLAlchemy, core |
 | `streamlit_app.py` | hosted demo | core, OCP, streamlit, plotly |
@@ -175,6 +175,15 @@ the smaller GCN is retained for the demo while the edge-aware model is selected
 on MFCAD. Checkpoints are self-describing (config, class names, feature names,
 metadata); checkpoint sizes are recorded in `results/gnn_eval.json` and
 `results/mfcad_gnn_eval.json`.
+
+## 6b. Optional Part-family CNN
+
+`ml/views.py` renders six deterministic orthographic shaded views (±X/±Y/±Z)
+with a Pillow painter's algorithm; no VTK/OpenGL/display is required. The views
+are stacked as channels for a small CNN (`ml/family.py`, ~29k parameters), and the
+same parts/split are classified by an edge-aware graph network with global
+pooling. Results and the fair-comparison table are in `results/cnn_eval.json`;
+the demo displays the CNN family prediction as optional context.
 
 ## 7. Errors
 

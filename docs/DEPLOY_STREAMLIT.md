@@ -12,7 +12,7 @@ uploads under 25 MiB / 3,000 faces.
   - `requirements.txt` (inference-only, CPU torch)
   - `packages.txt` (system libraries for OCP)
   - `samples/*.step` (10 generated sample parts)
-  - `models/gnn_synthetic.pt` (small committed checkpoint)
+  - `models/gnn_synthetic.pt` and `models/family_cnn.pt` (small committed checkpoints)
   - `demo/library.json` (60-part signature library)
   - `src/breplens/` (the package; the app adds `src` to `sys.path`)
 - No secrets or `.env` are needed.

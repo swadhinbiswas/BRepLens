@@ -89,8 +89,8 @@ A phase is done only when (1) tests pass, (2) scripts produced real results file
 - [x] 8.6 Reviewer gate
 
 ## Phase 9 — Optional CNN (only if all else passes)
-- [ ] 9.1 Multi-view render + small CNN part-family classification, fair comparison
-- [x] 9.2 Or documented as future work
+- [x] 9.1 Multi-view render + small CNN part-family classification, fair comparison
+- [x] 9.2 Implemented (six-view CNN vs graph family classifier; results/cnn_eval.json)
 
 ## Phase 10 — Finalization (docs-writer, qa-engineer, reviewer)
 - [x] 10.1 README (overview, Mermaid, 3-command quickstart, generated results tables, limitations, structure, NX, repro, deploy)
@@ -102,7 +102,7 @@ A phase is done only when (1) tests pass, (2) scripts produced real results file
 
 
 ## Notes
-- Phase 9 (optional CNN): not implemented; documented as future work in LIMITATIONS/FINAL_REPORT.
+- Phase 9 (optional CNN): implemented; six-view CNN (92 tests now), graph family classifier wins; see results/cnn_eval.json.
 - Phase 10.4 full audit: reviewer round 2 pending.
 - Phase 10.6 tag: after round 2 approval.
 

@@ -1,0 +1,42 @@
+{
+ "dataset": "breplens_synthetic",
+ "view_names": [
+  "right",
+  "left",
+  "front",
+  "back",
+  "top",
+  "bottom"
+ ],
+ "size": 96,
+ "deflection": 0.3,
+ "workers": 16,
+ "n_parts": 1650,
+ "n_rendered": 1650,
+ "n_failed": 0,
+ "split_counts": {
+  "train": 1156,
+  "val": 248,
+  "test": 246
+ },
+ "families": {
+  "boss_plate": 150,
+  "bracket_mixed": 150,
+  "chamfer_block": 150,
+  "counterbore": 150,
+  "countersink": 150,
+  "fillet_block": 150,
+  "plate_blind": 150,
+  "plate_holes": 150,
+  "pocket": 150,
+  "slot": 150,
+  "stepped_block": 150
+ },
+ "failures": [],
+ "render_wall_seconds": 3.02,
+ "provenance": {
+  "script": "scripts/render_dataset.py",
+  "command": "scripts/render_dataset.py --workers 16",
+  "generated_utc": "2026-11-25T06:14:57Z"
+ }
+}

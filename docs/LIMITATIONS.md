@@ -128,11 +128,19 @@ Honest scope of the v1.0.0 implementation. Numbers referenced here live in
 - Live NX validation is impossible here (see above).
 - MFCAD++ was not downloadable in this environment.
 
+## Optional multi-view CNN
+
+- The CNN sees six flat-shaded orthographic views (±X/±Y/±Z, 96×96); it has no
+  depth buffer, edges or topology. It is materially weaker than the graph family
+  classifier on the same synthetic split (exact numbers in the generated tables).
+- It is trained/evaluated on synthetic families only; MFCAD has no part-family
+  labels. The six-view rendering is orthographic and CAD-idealized, so appearance
+  changes in real drawings/photos are untested.
+- The demo shows the CNN prediction for interest; it does not drive recognition.
+
 ## Not implemented
 
-- Phase 9 multi-view CNN part-family classification: listed as future work; the
-  graph approach already meets the project gates and the optional phase was not
-  required after review.
+- Depth/edge-channel fusion or learned multi-view aggregation for the CNN.
 - MFCAD++ training/evaluation (download blocked).
 - UV-Net/BRepNet/AAGNet-scale architectures; only a compact edge-aware GNN and a
   GCN baseline are implemented.

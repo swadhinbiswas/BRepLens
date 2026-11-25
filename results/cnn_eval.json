@@ -1,0 +1,895 @@
+{
+ "dataset": {
+  "name": "breplens_synthetic",
+  "n_train": 1156,
+  "n_val": 248,
+  "n_test": 246,
+  "classes": [
+   "plate_holes",
+   "plate_blind",
+   "counterbore",
+   "countersink",
+   "pocket",
+   "slot",
+   "stepped_block",
+   "boss_plate",
+   "fillet_block",
+   "chamfer_block",
+   "bracket_mixed"
+  ],
+  "rendering": {
+   "dataset": "breplens_synthetic",
+   "view_names": [
+    "right",
+    "left",
+    "front",
+    "back",
+    "top",
+    "bottom"
+   ],
+   "size": 96,
+   "deflection": 0.3,
+   "workers": 16,
+   "n_parts": 1650,
+   "n_rendered": 1650,
+   "n_failed": 0,
+   "split_counts": {
+    "train": 1156,
+    "val": 248,
+    "test": 246
+   },
+   "families": {
+    "boss_plate": 150,
+    "bracket_mixed": 150,
+    "chamfer_block": 150,
+    "counterbore": 150,
+    "countersink": 150,
+    "fillet_block": 150,
+    "plate_blind": 150,
+    "plate_holes": 150,
+    "pocket": 150,
+    "slot": 150,
+    "stepped_block": 150
+   },
+   "failures": [],
+   "render_wall_seconds": 3.02,
+   "provenance": {
+    "script": "scripts/render_dataset.py",
+    "command": "scripts/render_dataset.py --workers 16",
+    "generated_utc": "2026-11-25T06:14:57Z"
+   }
+  }
+ },
+ "methods": {
+  "cnn_multiview": {
+   "best_epoch": 23,
+   "best_val_macro_f1": 0.8387,
+   "train_seconds": 6.15,
+   "history": [
+    {
+     "epoch": 1,
+     "loss": 2.27469,
+     "val_acc": 0.3669,
+     "val_macro_f1": 0.324
+    },
+    {
+     "epoch": 2,
+     "loss": 1.91921,
+     "val_acc": 0.3871,
+     "val_macro_f1": 0.3124
+    },
+    {
+     "epoch": 3,
+     "loss": 1.56128,
+     "val_acc": 0.496,
+     "val_macro_f1": 0.4605
+    },
+    {
+     "epoch": 4,
+     "loss": 1.27551,
+     "val_acc": 0.5726,
+     "val_macro_f1": 0.5421
+    },
+    {
+     "epoch": 5,
+     "loss": 1.08627,
+     "val_acc": 0.6855,
+     "val_macro_f1": 0.6722
+    },
+    {
+     "epoch": 6,
+     "loss": 0.95256,
+     "val_acc": 0.746,
+     "val_macro_f1": 0.718
+    },
+    {
+     "epoch": 7,
+     "loss": 0.82307,
+     "val_acc": 0.7863,
+     "val_macro_f1": 0.7884
+    },
+    {
+     "epoch": 8,
+     "loss": 0.72616,
+     "val_acc": 0.7903,
+     "val_macro_f1": 0.7672
+    },
+    {
+     "epoch": 9,
+     "loss": 0.68527,
+     "val_acc": 0.5766,
+     "val_macro_f1": 0.5293
+    },
+    {
+     "epoch": 10,
+     "loss": 0.69565,
+     "val_acc": 0.8145,
+     "val_macro_f1": 0.775
+    },
+    {
+     "epoch": 11,
+     "loss": 0.57531,
+     "val_acc": 0.7782,
+     "val_macro_f1": 0.7615
+    },
+    {
+     "epoch": 12,
+     "loss": 0.53512,
+     "val_acc": 0.8226,
+     "val_macro_f1": 0.8041
+    },
+    {
+     "epoch": 13,
+     "loss": 0.48509,
+     "val_acc": 0.8065,
+     "val_macro_f1": 0.8034
+    },
+    {
+     "epoch": 14,
+     "loss": 0.46968,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.8054
+    },
+    {
+     "epoch": 15,
+     "loss": 0.4625,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.8001
+    },
+    {
+     "epoch": 16,
+     "loss": 0.46717,
+     "val_acc": 0.8185,
+     "val_macro_f1": 0.7795
+    },
+    {
+     "epoch": 17,
+     "loss": 0.42915,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.8025
+    },
+    {
+     "epoch": 18,
+     "loss": 0.38264,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.8005
+    },
+    {
+     "epoch": 19,
+     "loss": 0.37547,
+     "val_acc": 0.7984,
+     "val_macro_f1": 0.8108
+    },
+    {
+     "epoch": 20,
+     "loss": 0.38161,
+     "val_acc": 0.8065,
+     "val_macro_f1": 0.8074
+    },
+    {
+     "epoch": 21,
+     "loss": 0.36694,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.7946
+    },
+    {
+     "epoch": 22,
+     "loss": 0.36274,
+     "val_acc": 0.7984,
+     "val_macro_f1": 0.8011
+    },
+    {
+     "epoch": 23,
+     "loss": 0.36215,
+     "val_acc": 0.8387,
+     "val_macro_f1": 0.8387
+    },
+    {
+     "epoch": 24,
+     "loss": 0.34107,
+     "val_acc": 0.7903,
+     "val_macro_f1": 0.7898
+    },
+    {
+     "epoch": 25,
+     "loss": 0.33699,
+     "val_acc": 0.8065,
+     "val_macro_f1": 0.8084
+    },
+    {
+     "epoch": 26,
+     "loss": 0.34506,
+     "val_acc": 0.8024,
+     "val_macro_f1": 0.8012
+    },
+    {
+     "epoch": 27,
+     "loss": 0.33466,
+     "val_acc": 0.8226,
+     "val_macro_f1": 0.8102
+    },
+    {
+     "epoch": 28,
+     "loss": 0.33207,
+     "val_acc": 0.7903,
+     "val_macro_f1": 0.7843
+    },
+    {
+     "epoch": 29,
+     "loss": 0.36374,
+     "val_acc": 0.8065,
+     "val_macro_f1": 0.8227
+    },
+    {
+     "epoch": 30,
+     "loss": 0.37422,
+     "val_acc": 0.8065,
+     "val_macro_f1": 0.8073
+    },
+    {
+     "epoch": 31,
+     "loss": 0.3406,
+     "val_acc": 0.8185,
+     "val_macro_f1": 0.827
+    }
+   ],
+   "test": {
+    "accuracy": 0.8171,
+    "macro_f1": 0.8119,
+    "per_class": {
+     "plate_holes": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 0
+     },
+     "plate_blind": {
+      "precision": 0.3462,
+      "recall": 0.3913,
+      "f1": 0.3673,
+      "support": 23,
+      "tp": 9,
+      "fp": 17,
+      "fn": 14
+     },
+     "counterbore": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 20,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+     },
+     "countersink": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 24,
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+     },
+     "pocket": {
+      "precision": 0.2778,
+      "recall": 0.5,
+      "f1": 0.3571,
+      "support": 20,
+      "tp": 10,
+      "fp": 26,
+      "fn": 10
+     },
+     "slot": {
+      "precision": 0.6,
+      "recall": 0.125,
+      "f1": 0.2069,
+      "support": 24,
+      "tp": 3,
+      "fp": 2,
+      "fn": 21
+     },
+     "stepped_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 14,
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+     },
+     "boss_plate": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 24,
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+     },
+     "fillet_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 30,
+      "tp": 30,
+      "fp": 0,
+      "fn": 0
+     },
+     "chamfer_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 20,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+     },
+     "bracket_mixed": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 21,
+      "tp": 21,
+      "fp": 0,
+      "fn": 0
+     }
+    },
+    "confusion_matrix": [
+     [
+      26,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      9,
+      0,
+      0,
+      12,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      20,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      10,
+      0,
+      0,
+      10,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      7,
+      0,
+      0,
+      14,
+      3,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      14,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      30,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      20,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      21
+     ]
+    ],
+    "class_names": [
+     "plate_holes",
+     "plate_blind",
+     "counterbore",
+     "countersink",
+     "pocket",
+     "slot",
+     "stepped_block",
+     "boss_plate",
+     "fillet_block",
+     "chamfer_block",
+     "bracket_mixed"
+    ],
+    "n_samples": 246
+   },
+   "n_parameters": 29115,
+   "model_mb": 0.1204,
+   "cpu_ms_per_part": 0.534,
+   "views": [
+    "right",
+    "left",
+    "front",
+    "back",
+    "top",
+    "bottom"
+   ]
+  },
+  "graph_gnn": {
+   "best_epoch": 2,
+   "best_val_macro_f1": 1.0,
+   "train_seconds": 1.615,
+   "history": [
+    {
+     "epoch": 1,
+     "loss": 1.57006,
+     "val_acc": 0.9153,
+     "val_macro_f1": 0.877
+    },
+    {
+     "epoch": 2,
+     "loss": 0.2319,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 3,
+     "loss": 0.03038,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 4,
+     "loss": 0.00387,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 5,
+     "loss": 0.00208,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 6,
+     "loss": 0.00163,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 7,
+     "loss": 0.00141,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 8,
+     "loss": 0.00128,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 9,
+     "loss": 0.00092,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    },
+    {
+     "epoch": 10,
+     "loss": 0.02405,
+     "val_acc": 1.0,
+     "val_macro_f1": 1.0
+    }
+   ],
+   "test": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "per_class": {
+     "plate_holes": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 26,
+      "tp": 26,
+      "fp": 0,
+      "fn": 0
+     },
+     "plate_blind": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 23,
+      "tp": 23,
+      "fp": 0,
+      "fn": 0
+     },
+     "counterbore": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 20,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+     },
+     "countersink": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 24,
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+     },
+     "pocket": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 20,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+     },
+     "slot": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 24,
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+     },
+     "stepped_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 14,
+      "tp": 14,
+      "fp": 0,
+      "fn": 0
+     },
+     "boss_plate": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 24,
+      "tp": 24,
+      "fp": 0,
+      "fn": 0
+     },
+     "fillet_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 30,
+      "tp": 30,
+      "fp": 0,
+      "fn": 0
+     },
+     "chamfer_block": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 20,
+      "tp": 20,
+      "fp": 0,
+      "fn": 0
+     },
+     "bracket_mixed": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "support": 21,
+      "tp": 21,
+      "fp": 0,
+      "fn": 0
+     }
+    },
+    "confusion_matrix": [
+     [
+      26,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      23,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      20,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      20,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      14,
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      24,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      30,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      20,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      21
+     ]
+    ],
+    "class_names": [
+     "plate_holes",
+     "plate_blind",
+     "counterbore",
+     "countersink",
+     "pocket",
+     "slot",
+     "stepped_block",
+     "boss_plate",
+     "fillet_block",
+     "chamfer_block",
+     "bracket_mixed"
+    ],
+    "n_samples": 246
+   },
+   "n_parameters": 124107,
+   "model_mb": 0.4845,
+   "cpu_ms_per_part": 0.565
+  }
+ },
+ "comparison": {
+  "ranked": [
+   {
+    "method": "graph_gnn",
+    "accuracy": 1.0,
+    "macro_f1": 1.0
+   },
+   {
+    "method": "cnn_multiview",
+    "accuracy": 0.8171,
+    "macro_f1": 0.8119
+   }
+  ],
+  "winner": "graph_gnn",
+  "note": "Same parts, split and seed; graph method uses no images."
+ },
+ "total_training_seconds": 7.888,
+ "provenance": {
+  "script": "scripts/train_family_models.py",
+  "command": "scripts/train_family_models.py",
+  "seed": 42,
+  "python": "3.11.18",
+  "torch": "2.11.0+cu128",
+  "torch_geometric": "2.8.1",
+  "gpu": "NVIDIA GeForce RTX 3060 Ti",
+  "host": "swadhin",
+  "generated_utc": "2026-11-25T06:15:07Z"
+ }
+}

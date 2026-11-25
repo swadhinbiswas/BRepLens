@@ -21,7 +21,11 @@ BRepLens is a CAD-agnostic feature-recognition system with:
   storage (SQLite default, PostgreSQL option), SQLite worker default and optional
   RQ/Redis deployment, Docker images and compose files.
 - **Hosted demo**: `streamlit_app.py` with 10 samples, colored plotly 3D mesh,
-  parameter table, JSON download, rules/GNN/hybrid toggle and similarity search.
+  parameter table, JSON download, rules/GNN/hybrid toggle, similarity search and
+  an optional six-view CNN part-family prediction.
+- **Optional Phase 9**: a dependency-light orthographic renderer, a small
+  multi-view CNN and an edge-aware graph family classifier, compared on identical
+  splits.
 
 ## 2. Measured results
 
@@ -75,20 +79,20 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 | --- | ---: |
 | Environment size | 2413.2 MB |
 | Fresh pip install | 147 s |
-| AppTest cold start | 0.53 s |
-| First part incl. model load | 1.32 s |
-| Peak RSS (app probe) | 854.8 MB |
-| Peak RSS (pipeline probe) | 856.6 MB |
+| AppTest cold start | 1.82 s |
+| First part incl. model load | 0.12 s |
+| Peak RSS (app probe) | 873.2 MB |
+| Peak RSS (pipeline probe) | 875.3 MB |
 | Headless server start | 0.41 s |
-| Rules latency | 0.17 ms |
-| GNN latency | 1.24 ms |
-| Hybrid latency | 1.62 ms |
-| Tessellation latency | 7.07 ms |
+| Rules latency | 0.16 ms |
+| GNN latency | 1.07 ms |
+| Hybrid latency | 2.03 ms |
+| Tessellation latency | 8.95 ms |
 
 *Measured on the inference-only venv, CPU, 10 committed sample parts; raw data in `results/deploy_benchmark.json`.*
 
 The target was < 1.5 GiB peak; measured peak is
-854.8 MB for the app probe.
+873.2 MB for the app probe.
 The environment is large because `cadquery-ocp` declares VTK; VTK is never
 imported by the app.
 
@@ -108,10 +112,10 @@ GNN mode, status polling and size limits.
 
 | Check | Result |
 | --- | ---: |
-| Tests passed | 83 |
+| Tests passed | 92 |
 | Tests failed | 0 |
-| Test wall time | 6.22 s |
-| Full line coverage | 74.38% |
+| Test wall time | 7.27 s |
+| Full line coverage | 71.79% |
 | Core geometry/recognition/schema coverage | 83.04% |
 
 
@@ -143,7 +147,11 @@ configured remote; the identical commands were run locally on CPU and are green.
   Counterbores/countersinks/fillets/chamfers and non-Z axes are skipped.
 - RQ/Redis was smoke-tested through Docker Compose; PostgreSQL and multi-worker
   stress behavior remain untested.
-- No multi-view CNN (optional Phase 9) was implemented.
+- The optional multi-view CNN is weaker than the graph classifier on the
+  synthetic part-family task; it sees only six flat-shaded orthographic views and
+  loses depth/topology cues. Exact accuracy is in the generated CNN table.
+- The CNN is trained/evaluated on synthetic families only; no MFCAD part-family
+  labels exist.
 
 ## 7. Decisions and fallbacks
 
@@ -171,7 +179,8 @@ configured remote; the identical commands were run locally on CPU and are green.
    an ANN index; evaluate on MFCAD++.
 4. Add uncertainty calibration/abstention for the GNN and instance-level
    segmentation (e.g., boundary-aware losses).
-5. Optional Phase 9: multi-view CNN part-family classifier with a fair comparison.
+5. Extend the CNN with depth/edge channels or learned multi-view fusion and test
+   it on MFCAD++/real part families.
 6. Harden the service: PostgreSQL/RQ stress tests, multi-worker queue tests,
    authentication/quotas, request timeouts, and a storage backend for large CAD
    files.
