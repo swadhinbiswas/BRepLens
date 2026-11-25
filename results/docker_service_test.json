@@ -1,21 +1,23 @@
 {
  "health_ok": true,
- "submit_seconds": 0.052,
- "job_seconds": 1.898,
+ "submit_seconds": 0.054,
+ "job_seconds": 2.105,
  "status": "succeeded",
  "error": null,
  "mode": "hybrid",
+ "queue_backend": "sqlite",
+ "compose_file": "docker-compose.yml",
  "job_timings": {
-  "load_ms": 31.804223999643,
-  "total_ms": 1204.4446379986766,
-  "recognition_ms": 4.349326000010478
+  "load_ms": 21.385472000474692,
+  "total_ms": 1202.9327580003155,
+  "recognition_ms": 4.532133001703187
  },
  "provenance": {
   "script": "scripts/docker_smoke_test.py",
-  "command": "scripts/docker_smoke_test.py",
+  "command": "scripts/docker_smoke_test.py --queue-backend sqlite --compose-file docker-compose.yml",
   "base_url": "http://127.0.0.1:8000",
   "part": "samples/sample_09_bracket_mixed.step",
-  "generated_utc": "2026-11-24T21:09:09Z"
+  "generated_utc": "2026-11-24T21:21:01Z"
  },
  "n_features": 8,
  "features": [

@@ -86,6 +86,7 @@ def main() -> int:
         "per_family": args.per_family,
         "families": list(FAMILIES),
         "n_parts": len(results),
+        "workers": args.workers,
         "generation_wall_seconds": round(time.perf_counter() - t0, 2),
         "parts": [
             {

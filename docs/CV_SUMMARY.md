@@ -27,6 +27,6 @@ Truthful bullets, each tied to a generated result file.
   1.000 on synthetic
   families and 0.746
   (Jaccard≥0.5) on MFCAD, an NX Open adapter/write-back path with a faithful mock
-  (explicitly untested live), 80 passing tests and
-  82.2% coverage on core
+  (explicitly untested live), 83 passing tests and
+  83.0% coverage on core
   geometry/recognition/schema code.

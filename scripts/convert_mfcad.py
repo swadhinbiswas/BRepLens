@@ -130,6 +130,7 @@ def main() -> int:
         "n_selected": len(steps),
         "n_converted": len(ok),
         "n_failed": len(failures),
+        "workers": args.workers,
         "split_counts": split_counts,
         "face_label_counts": label_counts,
         "class_names": list(MFCAD_CLASSES),

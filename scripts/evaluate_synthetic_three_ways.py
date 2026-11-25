@@ -126,6 +126,16 @@ def main() -> int:
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(payload, indent=1))
+    hybrid_only = {
+        "dataset": payload["dataset"],
+        "split": payload["split"],
+        "n_parts": payload["n_parts"],
+        "method": "hybrid",
+        "metrics": results["hybrid"],
+        "model": payload["model"],
+        "provenance": payload["provenance"],
+    }
+    (out.parent / "hybrid_eval.json").write_text(json.dumps(hybrid_only, indent=1))
     for method, m in results.items():
         print(
             method,

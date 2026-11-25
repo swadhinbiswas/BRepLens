@@ -120,3 +120,21 @@ def test_missing_job_and_bounds(service) -> None:
     assert client.get("/v1/jobs/nope").status_code == 404
     assert client.get("/v1/jobs/nope/features").status_code == 404
     assert client.get("/v1/jobs/nope/similar").status_code == 404
+
+
+def test_face_limit_enforced(tmp_path: Path, root: Path, samples_dir: Path) -> None:
+    settings = Settings(
+        data_dir=tmp_path,
+        database_url="",
+        similarity_index=root / "demo" / "library.json",
+        max_faces=5,
+    )
+    storage = Storage(settings.resolved_database_url)
+    app = create_app(settings, storage=storage)
+    with TestClient(app) as client:
+        r = _upload(client, samples_dir / "sample_04_pocket.step")
+        job = r.json()
+        assert worker.run_once(storage, settings)
+        status = client.get(f"/v1/jobs/{job['job_id']}").json()
+        assert status["status"] == "failed"
+        assert "limit" in (status["error"] or "").lower()

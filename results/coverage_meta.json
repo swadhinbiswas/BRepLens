@@ -1,0 +1,10 @@
+{
+ "script": "manual post-run metadata (coverage tool output in results/coverage.json)",
+ "commands": [
+  "pytest -q --cov=breplens --cov-report=json:results/coverage.json",
+  "pytest -q --cov=breplens.geometry --cov=breplens.recognition --cov=breplens.schema --cov-report=json:results/coverage_core.json"
+ ],
+ "python": "3.14.10",
+ "pytest": "9.2.0",
+ "generated_utc": "2026-11-24T21:23:02Z"
+}

@@ -40,6 +40,8 @@ def main() -> int:
     ap.add_argument("--base-url", default="http://127.0.0.1:8000")
     ap.add_argument("--part", default=str(ROOT / "samples" / "sample_09_bracket_mixed.step"))
     ap.add_argument("--mode", default="hybrid")
+    ap.add_argument("--queue-backend", default="sqlite")
+    ap.add_argument("--compose-file", default="docker-compose.yml")
     ap.add_argument("--out", default=str(ROOT / "results" / "docker_service_test.json"))
     args = ap.parse_args()
     health = json.load(urllib.request.urlopen(args.base_url + "/health", timeout=20))
@@ -63,6 +65,8 @@ def main() -> int:
         "status": status.get("status"),
         "error": status.get("error"),
         "mode": args.mode,
+        "queue_backend": args.queue_backend,
+        "compose_file": args.compose_file,
         "job_timings": status.get("timings", {}),
         "provenance": {
             "script": "scripts/docker_smoke_test.py",

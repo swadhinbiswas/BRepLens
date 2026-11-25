@@ -91,6 +91,8 @@ def process_job(
     adapter = adapter or OccAdapter()
     t0 = time.perf_counter()
     graph = adapter.load_graph(part["path"], name=Path(part["filename"]).stem)
+    if len(graph.faces) > settings.max_faces:
+        raise RuntimeError(f"part has {len(graph.faces)} faces; limit is {settings.max_faces}")
     graph_ms = (time.perf_counter() - t0) * 1000.0
     storage.set_part_faces(part["id"], len(graph.faces))
     fs = recognize(graph, mode=job["mode"], settings=settings, registry=registry)

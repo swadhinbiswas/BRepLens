@@ -598,12 +598,12 @@
     }
    },
    "latency_ms": {
-    "mean": 1719306.816,
-    "median": 0.113,
-    "p95": 14098326.574
+    "mean": 0.153,
+    "median": 0.112,
+    "p95": 0.312
    },
    "seconds_total": 0.044,
-   "ms_per_part": 0.181,
+   "ms_per_part": 0.18,
    "by_family": {
     "boss_plate": {
      "precision": 1.0,
@@ -2542,9 +2542,9 @@
     }
    },
    "latency_ms": {
-    "mean": 1.597,
-    "median": 1.077,
-    "p95": 1.348
+    "mean": 1.599,
+    "median": 1.114,
+    "p95": 1.383
    },
    "face_direct": {
     "accuracy": 1.0,
@@ -2810,8 +2810,8 @@
     ],
     "n_samples": 2482
    },
-   "seconds_total": 0.4,
-   "ms_per_part": 1.627,
+   "seconds_total": 0.401,
+   "ms_per_part": 1.63,
    "by_family": {
     "boss_plate": {
      "precision": 1.0,
@@ -4750,9 +4750,9 @@
     }
    },
    "latency_ms": {
-    "mean": 2.568,
-    "median": 2.139,
-    "p95": 2.732
+    "mean": 2.616,
+    "median": 2.198,
+    "p95": 2.777
    },
    "face_direct": {
     "accuracy": 1.0,
@@ -5018,8 +5018,8 @@
     ],
     "n_samples": 2482
    },
-   "seconds_total": 0.641,
-   "ms_per_part": 2.604,
+   "seconds_total": 0.653,
+   "ms_per_part": 2.653,
    "by_family": {
     "boss_plate": {
      "precision": 1.0,
@@ -6407,7 +6407,7 @@
   "python": "3.11.18",
   "torch": "2.11.0+cu128",
   "gpu": "NVIDIA GeForce RTX 3060 Ti",
-  "generated_utc": "2026-11-24T21:11:22Z",
-  "wall_seconds": 1.5
+  "generated_utc": "2026-11-24T21:22:02Z",
+  "wall_seconds": 1.53
  }
 }

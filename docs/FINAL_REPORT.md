@@ -29,7 +29,7 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | rules | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 0.18 |
 | gnn | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.63 |
-| hybrid | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 2.60 |
+| hybrid | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 | 2.65 |
 
 *246 held-out synthetic parts; same split for all methods; latency is recognition only, CPU.*
 
@@ -54,8 +54,8 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 
 | Dataset | Library | Queries | P@1 | P@5 | P@10 | P@1 (Jaccard≥0.5) | Query ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Synthetic | 1404 | 246 | 1.000 | 1.000 | 1.000 | 1.000 | 0.33 |
-| MFCAD | 2552 | 448 | 0.150 | 0.133 | 0.118 | 0.746 | 0.85 |
+| Synthetic | 1404 | 246 | 1.000 | 1.000 | 1.000 | 1.000 | 0.34 |
+| MFCAD | 2552 | 448 | 0.150 | 0.133 | 0.118 | 0.746 | 0.86 |
 
 *Relevance = same family label; MFCAD families are coarse macro compositions. The Jaccard column treats compositions sharing at least half their feature set as relevant.*
 
@@ -63,8 +63,8 @@ BRepLens is a CAD-agnostic feature-recognition system with:
 
 | Pipeline step | Wall time | Source |
 | --- | ---: | --- |
-| Synthetic generation (1,650 parts, 16 workers) | 5.48 s | `data/synthetic/manifest.json` |
-| MFCAD conversion (3,000 parts, 16 workers) | 10.39 s | `data/mfcad/manifest.json` |
+| Synthetic generation (1650 parts, 16 workers) | 5.56 s | `data/synthetic/manifest.json` |
+| MFCAD conversion (3000 parts, 16 workers) | 10.22 s | `data/mfcad/manifest.json` |
 | Synthetic GNN training (gcn) | 2.35 s | `results/gnn_eval.json` |
 | MFCAD GNN training (edge_gnn) | 4.50 s | `results/mfcad_gnn_eval.json` |
 
@@ -96,8 +96,8 @@ imported by the app.
 
 | Queue | API health | End-to-end s | Job | Features | Load ms | Recognition ms |
 | --- | --- | ---: | --- | ---: | ---: | ---: |
-| SQLite worker | ok | 1.90 | succeeded | 8 | 31.8 | 4.35 |
-| RQ + Redis worker | ok | 2.04 | succeeded | 8 | 20.7 | 5.30 |
+| SQLite worker | ok | 2.10 | succeeded | 8 | 21.4 | 4.53 |
+| RQ + Redis worker | ok | 2.06 | succeeded | 8 | 20.5 | 4.13 |
 
 The default stack was built and started with `docker compose up --build`; API
 health, hybrid recognition through the worker, feature retrieval and similarity
@@ -108,11 +108,11 @@ GNN mode, status polling and size limits.
 
 | Check | Result |
 | --- | ---: |
-| Tests passed | 80 |
+| Tests passed | 83 |
 | Tests failed | 0 |
-| Test wall time | 6.21 s |
-| Full line coverage | 74.01% |
-| Core geometry/recognition/schema coverage | 82.20% |
+| Test wall time | 6.24 s |
+| Full line coverage | 74.38% |
+| Core geometry/recognition/schema coverage | 83.04% |
 
 
 CI runs ruff, mypy and pytest on CPU; the core coverage gate is 80%. The GitHub
@@ -156,7 +156,7 @@ configured remote; the identical commands were run locally on CPU and are green.
   external-benchmark model.
 - SQLite queue default (no external services); RQ/Redis optional.
 - NX graph via STEP export to avoid unverified per-face geometry calls; write-back
-  via verified public recipes and conservative block cuts.
+  via candidate public-cookbook recipes (not verified live here) and conservative block cuts.
 - Detailed decisions: `.agent/DECISIONS.md`. Blockers: `.agent/BLOCKERS.md`.
 
 ## 8. Recommended next steps
@@ -184,6 +184,9 @@ configured remote; the identical commands were run locally on CPU and are green.
 - Docs: `docs/` (research, architecture, setup, datasets, licenses, limitations,
   NX guide, deployment, CV summary, this report)
 - Tests: `tests/`; CI: `.github/workflows/ci.yml`
-- Provenance: every results JSON records its command, seed, versions and
-  timestamp; `results/tests.json`, `results/coverage*.json`,
-  `results/docker_service_test.json`.
+- Provenance: stochastic/training/benchmark results record their script, command,
+  seed where applicable, software versions and timestamp (see
+  `results/gnn_eval.json`, `mfcad_gnn_eval.json`, `rules_eval.json`,
+  `perf.json`, `deploy_benchmark.json`). Test and Docker artifacts record their
+  command and outcome; coverage metadata is in `results/coverage_meta.json` and
+  `results/coverage*.txt`.

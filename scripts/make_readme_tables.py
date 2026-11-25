@@ -212,8 +212,10 @@ def tables() -> dict[str, str]:
 
     out["timing"] = (
         "| Pipeline step | Wall time | Source |\n| --- | ---: | --- |\n"
-        f"| Synthetic generation (1,650 parts, 16 workers) | {_f(synth_manifest.get('generation_wall_seconds'), 2)} s | `data/synthetic/manifest.json` |\n"
-        f"| MFCAD conversion (3,000 parts, 16 workers) | {_f(mfcad_manifest.get('conversion_wall_seconds'), 2)} s | `data/mfcad/manifest.json` |\n"
+        f"| Synthetic generation ({synth_manifest.get('n_parts', '—')} parts, "
+        f"{synth_manifest.get('workers', '—')} workers) | {_f(synth_manifest.get('generation_wall_seconds'), 2)} s | `data/synthetic/manifest.json` |\n"
+        f"| MFCAD conversion ({mfcad_manifest.get('n_converted', '—')} parts, "
+        f"{mfcad_manifest.get('workers', '—')} workers) | {_f(mfcad_manifest.get('conversion_wall_seconds'), 2)} s | `data/mfcad/manifest.json` |\n"
         f"| Synthetic GNN training ({gnn.get('selected_architecture', '—')}) | {_f(gnn.get('runs', {}).get(gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/gnn_eval.json` |\n"
         f"| MFCAD GNN training ({mfcad_gnn.get('selected_architecture', '—')}) | {_f(mfcad_gnn.get('runs', {}).get(mfcad_gnn.get('selected_architecture', ''), {}).get('train_seconds'), 2)} s | `results/mfcad_gnn_eval.json` |\n"
     )
@@ -439,7 +441,7 @@ configured remote; the identical commands were run locally on CPU and are green.
   external-benchmark model.
 - SQLite queue default (no external services); RQ/Redis optional.
 - NX graph via STEP export to avoid unverified per-face geometry calls; write-back
-  via verified public recipes and conservative block cuts.
+  via candidate public-cookbook recipes (not verified live here) and conservative block cuts.
 - Detailed decisions: `.agent/DECISIONS.md`. Blockers: `.agent/BLOCKERS.md`.
 
 ## 8. Recommended next steps
@@ -467,9 +469,12 @@ configured remote; the identical commands were run locally on CPU and are green.
 - Docs: `docs/` (research, architecture, setup, datasets, licenses, limitations,
   NX guide, deployment, CV summary, this report)
 - Tests: `tests/`; CI: `.github/workflows/ci.yml`
-- Provenance: every results JSON records its command, seed, versions and
-  timestamp; `results/tests.json`, `results/coverage*.json`,
-  `results/docker_service_test.json`.
+- Provenance: stochastic/training/benchmark results record their script, command,
+  seed where applicable, software versions and timestamp (see
+  `results/gnn_eval.json`, `mfcad_gnn_eval.json`, `rules_eval.json`,
+  `perf.json`, `deploy_benchmark.json`). Test and Docker artifacts record their
+  command and outcome; coverage metadata is in `results/coverage_meta.json` and
+  `results/coverage*.txt`.
 """
     (ROOT / "docs" / "FINAL_REPORT.md").write_text(text)
 

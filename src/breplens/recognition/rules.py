@@ -482,19 +482,19 @@ def recognize_rules(graph: PartGraph, config: RuleConfig | None = None) -> Featu
         if radius is None or radius < 0.2:
             continue
         if f.axis_direction is not None and f.axis_origin is not None:
-            t0, t1 = axis_interval(f)
+            ta, tb = axis_interval(f)
             position = _point_on_axis(
                 _Segment(
                     faces=[f.id],
                     radius=radius,
                     axis_origin=f.axis_origin,
                     axis_dir=f.axis_direction,
-                    tmin=t0,
-                    tmax=t1,
+                    tmin=ta,
+                    tmax=tb,
                 ),
-                0.5 * (t0 + t1),
+                0.5 * (ta + tb),
             )
-            length = t1 - t0
+            length = tb - ta
         else:
             position = f.centroid
             length = (f.bbox_max - f.bbox_min).norm()

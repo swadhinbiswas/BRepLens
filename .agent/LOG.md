@@ -10,3 +10,5 @@
 - 2026-11-24 21:15 — Phase 1-8 complete; Docker SQLite and RQ/Redis stacks smoke-tested; deploy benchmark recorded; reviewer round 1 rejected with concrete defects.
 - 2026-11-24 21:30 — Fixed all round-1 blockers (ruff, CLI, bracket GT depth, NX wording, zero-depth stub, is_outer/smooth threshold, generated docs); 80 tests pass, ruff/mypy clean, core coverage 82.2%.
 - 2026-11-24 21:35 — Round-2 audit requested.
+- 2026-11-24 21:22 — Round-2 review found stale generated docs, a remaining NX wording regression, a false provenance claim, a rules latency timer bug (fillet t0 shadowing), and missing env_audit/hybrid_eval files.
+- 2026-11-24 21:30 — Fixed timer bug (rules latency now ~0.17 ms mean), GNN recess now returns None (tested), regenerated final docs, added env_audit.json/hybrid_eval.json/coverage_meta.json, regenerated datasets with full-run timings, synchronized state. 83 tests pass; ruff/mypy clean.

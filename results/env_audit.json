@@ -1,0 +1,34 @@
+{
+ "os": "Linux-6.18.60-3-cachyos-lts-x86_64-with-glibc2.44",
+ "platform": "linux",
+ "kernel": "6.18.60-3-cachyos-lts",
+ "machine": "x86_64",
+ "python": "3.11.18",
+ "python_executable": "/home/swadhin/BRepLens/.venv/bin/python",
+ "cpu": "",
+ "cpu_count": 20,
+ "memory_gb": 31.1,
+ "gpu": "NVIDIA GeForce RTX 3060 Ti, 8192 MiB, 620.73.04",
+ "disk_free_gb": 182.91,
+ "disk_total_gb": 472.94,
+ "packages": {
+  "cadquery-ocp": "7.9.3.1.1",
+  "cadquery": "2.8.0",
+  "torch": "2.11.0+cu128",
+  "torch-geometric": "2.8.1",
+  "numpy": "2.2.6",
+  "networkx": "3.6.1",
+  "pydantic": "2.14.4",
+  "streamlit": "1.67.0",
+  "plotly": "7.1.0",
+  "fastapi": "0.165.0",
+  "sqlalchemy": "2.1.9",
+  "rq": "3.0.0",
+  "redis": "8.2.0"
+ },
+ "provenance": {
+  "script": "scripts/env_audit.py",
+  "command": "scripts/env_audit.py",
+  "generated_utc": "2026-11-24T21:20:02Z"
+ }
+}

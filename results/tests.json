@@ -1,9 +1,12 @@
 {
- "passed": 80,
+ "passed": 83,
  "skipped": 0,
  "failed": 0,
- "wall_seconds": 6.21,
+ "wall_seconds": 6.24,
  "command": "pytest -o addopts='' -q",
  "exit_code": 0,
- "raw_tail": "80 passed, 1 warning in 4.91s"
+ "raw_tail": "83 passed, 1 warning in 4.96s",
+ "python": "3.14.10",
+ "pytest": "9.2.0",
+ "generated_utc": "2026-11-24T21:23:02Z"
 }

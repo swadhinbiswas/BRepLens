@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     data_dir: Path = ROOT / "data" / "service"
     database_url: str = ""
     max_upload_mb: int = 25
+    max_faces: int = 3000
     queue_backend: str = "sqlite"  # sqlite | rq
     redis_url: str = "redis://localhost:6379/0"
     model_path: Path = ROOT / "models" / "gnn_synthetic.pt"

@@ -98,13 +98,6 @@ def adjacency(graph: PartGraph) -> dict[int, list[tuple[int, int]]]:
     return adj
 
 
-def edge_of(graph: PartGraph, a: int, b: int) -> int | None:
-    for e in graph.edges:
-        if (e.face_a == a and e.face_b == b) or (e.face_a == b and e.face_b == a):
-            return e.id
-    return None
-
-
 def concave_neighbors(graph: PartGraph, face_id: int) -> list[int]:
     out: list[int] = []
     for e in graph.edges:
@@ -261,7 +254,6 @@ __all__ = [
     "bbox_corners",
     "concave_neighbors",
     "dihedral_between",
-    "edge_of",
     "face_center",
     "footprint_dims",
     "grow_concave_region",

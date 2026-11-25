@@ -208,7 +208,7 @@ def _measure_recess(
     opening = opening_level(graph, floor, walls, claimed=set(), normal=n)
     depth = max(0.0, opening - floor_t)
     if depth < cfg.min_depth:
-        depth = (floor.bbox_max - floor.bbox_min).norm() * 0.0
+        return None
     length, width = footprint_dims(floor, n)
     position = face_center(floor) + n * depth
     if ftype == FeatureType.STEP:
@@ -393,12 +393,6 @@ def _face_set(fs: FeatureSet) -> set[int]:
     for f in fs.features:
         out.update(f.face_ids)
     return out
-
-
-def _overlap_ratio(a: set[int], b: set[int]) -> float:
-    if not a or not b:
-        return 0.0
-    return len(a & b) / len(a)
 
 
 def _same_feature(a: Feature, b: Feature) -> bool:

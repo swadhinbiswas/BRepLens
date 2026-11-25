@@ -82,3 +82,37 @@ def test_hybrid_superset(occ_adapter, samples_dir: Path, checkpoint: Path) -> No
 def test_config_validation() -> None:
     with pytest.raises(ValueError):
         FaceGNN(3, GNNConfig(architecture="unknown"))
+
+
+def test_unmeasurable_recess_returns_none() -> None:
+    import numpy as np
+
+    from breplens.recognition.gnn_recognizer import _measure_recess
+    from breplens.schema import FaceRecord, PartGraph, PartMetadata, SurfaceType, Vec3
+
+    graph = PartGraph(
+        metadata=PartMetadata(name="flat", bbox_min=Vec3(), bbox_max=Vec3(x=10, y=10, z=0)),
+        faces=[
+            FaceRecord(
+                id=0,
+                surface_type=SurfaceType.PLANE,
+                area=100.0,
+                centroid=Vec3(x=5, y=5, z=0),
+                bbox_min=Vec3(x=0, y=0, z=0),
+                bbox_max=Vec3(x=10, y=10, z=0),
+                normal=Vec3(x=0, y=0, z=1),
+            )
+        ],
+    )
+    probs = np.ones((1, 1), dtype=np.float32)
+    assert (
+        _measure_recess(
+            graph,
+            [0],
+            FeatureType.POCKET,
+            probs,
+            0,
+            __import__("breplens.recognition.params", fromlist=["RuleConfig"]).RuleConfig(),
+        )
+        is None
+    )

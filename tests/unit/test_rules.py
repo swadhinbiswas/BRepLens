@@ -140,3 +140,8 @@ def test_determinism(occ_adapter, samples_dir: Path) -> None:
     assert a.model_dump(exclude={"timings", "created_utc"}) == b.model_dump(
         exclude={"timings", "created_utc"}
     )
+
+
+def test_latency_is_sane(results) -> None:
+    for fs in results.values():
+        assert 0.0 <= fs.timings.recognition_ms < 5000.0
