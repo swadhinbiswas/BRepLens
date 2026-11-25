@@ -13,14 +13,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import torch  # noqa: E402
+import torch
 
-from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES  # noqa: E402
-from breplens.ml.evaluation import evaluate_feature_sets, predicted_face_labels  # noqa: E402
-from breplens.ml.inference import load_for_inference, predict_probs  # noqa: E402
-from breplens.recognition.gnn_recognizer import recognize_gnn, recognize_hybrid  # noqa: E402
-from breplens.recognition.rules import recognize_rules  # noqa: E402
-from breplens.schema import PartGraph  # noqa: E402
+from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES
+from breplens.ml.evaluation import evaluate_feature_sets, predicted_face_labels
+from breplens.ml.inference import load_for_inference, predict_probs
+from breplens.recognition.gnn_recognizer import recognize_gnn, recognize_hybrid
+from breplens.recognition.rules import recognize_rules
+from breplens.schema import PartGraph
 
 
 def main() -> int:
@@ -30,7 +30,7 @@ def main() -> int:
     ap.add_argument("--out", default=str(ROOT / "results" / "recognition_comparison.json"))
     args = ap.parse_args()
     data = Path(args.data)
-    manifest = json.loads((data / "manifest.json").read_text())
+    json.loads((data / "manifest.json").read_text())
     split = json.loads((data / "splits.json").read_text())["assignments"]
     names = [n for n, s in sorted(split.items()) if s == "test"]
     device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -108,7 +108,11 @@ def main() -> int:
         "n_parts": len(names),
         "class_names": SYNTHETIC_CLASSES,
         "methods": results,
-        "model": {"checkpoint": str(Path(args.model).relative_to(ROOT)), "metadata": meta, "class_names": class_names},
+        "model": {
+            "checkpoint": str(Path(args.model).relative_to(ROOT)),
+            "metadata": meta,
+            "class_names": class_names,
+        },
         "provenance": {
             "script": "scripts/evaluate_synthetic_three_ways.py",
             "command": " ".join(sys.argv),

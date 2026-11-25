@@ -1,0 +1,43 @@
+# Optional Redis/RQ deployment. Use instead of docker-compose.yml:
+#   docker compose -f docker-compose.rq.yml up --build
+services:
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      BREPLENS_DATA_DIR: /data
+      BREPLENS_DATABASE_URL: sqlite:////data/breplens.db
+      BREPLENS_QUEUE_BACKEND: rq
+      BREPLENS_REDIS_URL: redis://redis:6379/0
+      BREPLENS_MODEL_PATH: /app/models/gnn_synthetic.pt
+      BREPLENS_SIMILARITY_INDEX: /app/demo/library.json
+    volumes:
+      - breplens_data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+  worker-rq:
+    build: .
+    command: ["rq", "worker", "--url", "redis://redis:6379/0"]
+    environment:
+      BREPLENS_DATA_DIR: /data
+      BREPLENS_DATABASE_URL: sqlite:////data/breplens.db
+      BREPLENS_QUEUE_BACKEND: rq
+      BREPLENS_REDIS_URL: redis://redis:6379/0
+      BREPLENS_MODEL_PATH: /app/models/gnn_synthetic.pt
+    volumes:
+      - breplens_data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+
+volumes:
+  breplens_data:

@@ -1,0 +1,104 @@
+{
+ "python": "3.12.16",
+ "host": "swadhin",
+ "install": {
+  "venv_bytes": 2530460263,
+  "venv_mb": 2413.2,
+  "install_seconds": 147,
+  "install_command": ".deploy-venv/bin/pip install -r requirements.txt"
+ },
+ "n_samples": 10,
+ "apptest": {
+  "cold_start_seconds": 0.596,
+  "radio_rerun_seconds": 0.045,
+  "model_load_and_first_part_seconds": 1.529,
+  "e2e_samples": [
+   {
+    "sample": "sample_00_plate_holes.step",
+    "seconds": 0.017
+   },
+   {
+    "sample": "sample_01_plate_blind.step",
+    "seconds": 0.042
+   },
+   {
+    "sample": "sample_02_counterbore.step",
+    "seconds": 0.042
+   },
+   {
+    "sample": "sample_03_countersink.step",
+    "seconds": 0.048
+   },
+   {
+    "sample": "sample_04_pocket.step",
+    "seconds": 0.049
+   },
+   {
+    "sample": "sample_05_slot.step",
+    "seconds": 0.05
+   },
+   {
+    "sample": "sample_06_stepped_block.step",
+    "seconds": 0.043
+   },
+   {
+    "sample": "sample_07_boss_plate.step",
+    "seconds": 0.06
+   },
+   {
+    "sample": "sample_08_fillet_block.step",
+    "seconds": 0.045
+   },
+   {
+    "sample": "sample_09_bracket_mixed.step",
+    "seconds": 0.061
+   }
+  ],
+  "peak_rss_apptest_mb": 854.4
+ },
+ "pipeline": {
+  "model_load_seconds": 0.002,
+  "latency": {
+   "rules": {
+    "mean_ms": 0.16,
+    "median_ms": 0.13,
+    "p95_ms": 0.27,
+    "n": 10
+   },
+   "gnn": {
+    "mean_ms": 1.07,
+    "median_ms": 1.03,
+    "p95_ms": 1.32,
+    "n": 10
+   },
+   "hybrid": {
+    "mean_ms": 1.72,
+    "median_ms": 1.58,
+    "p95_ms": 2.57,
+    "n": 10
+   },
+   "tessellate": {
+    "mean_ms": 7.26,
+    "median_ms": 6.16,
+    "p95_ms": 11.83,
+    "n": 10
+   }
+  },
+  "features_total_over_samples": {
+   "rules": 23,
+   "gnn": 23,
+   "hybrid": 23
+  },
+  "peak_rss_pipeline_mb": 856.3
+ },
+ "server": {
+  "server_start_seconds": 0.41,
+  "idle_rss_mb": 71.4,
+  "healthy": true
+ },
+ "limits": {
+  "target_peak_mb": 1500,
+  "streamlit_community_cloud_approx": "2 vCPU / 2.7 GB RAM"
+ },
+ "generated_utc": "2026-11-24T21:08:17Z"
+}

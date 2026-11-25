@@ -90,8 +90,9 @@ a point on the edge and unit tangent `t` along the edge:
    unstable (very short edges, seam edges, degenerate slivers).
 
 This is the standard dihedral-sign test; the orientation convention must be validated
-on primitives (cube → all convex; cylindrical hole through a block → concave at the
-hole/block intersection; fillet → smooth). The project’s Phase 3.3 test plan already
+on primitives (cube → all convex; a rectangular pocket's floor/wall edges → concave;
+a through-hole/block rim → convex under the material-side convention used here;
+fillet → smooth). The project’s Phase 3.3 test plan already
 requires exactly that calibration. OCC exposes the required queries; the following
 imports were confirmed **[LOCAL]**:
 

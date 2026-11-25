@@ -5,9 +5,10 @@ from __future__ import annotations
 import json
 import random
 import time
+from collections.abc import Sequence
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Sequence
+from typing import Any
 
 import numpy as np
 import torch
@@ -66,7 +67,9 @@ def load_dataset(
     if limit is not None:
         names = names[:limit]
     class_ids = {name: i for i, name in enumerate(class_names)}
-    bundle = DatasetBundle([], [], [], list(class_names), class_ids, {"train": [], "val": [], "test": []})
+    bundle = DatasetBundle(
+        [], [], [], list(class_names), class_ids, {"train": [], "val": [], "test": []}
+    )
     for name in names:
         graph_path = data / "graphs" / f"{name}.json"
         if not graph_path.exists():
@@ -87,12 +90,12 @@ def load_dataset(
 
 
 def class_weights(dataset: Sequence[Any], num_classes: int) -> torch.Tensor:
-    counts = np.zeros(num_classes, dtype=np.float64)
+    counts: np.ndarray = np.zeros(num_classes, dtype=np.float64)
     for data in dataset:
         for y in data.y.tolist():
             if 0 <= y < num_classes:
                 counts[y] += 1
-    counts = np.maximum(counts, 1.0)
+    counts = np.asarray(np.maximum(counts, 1.0), dtype=np.float64)
     weights = 1.0 / np.sqrt(counts)
     weights = weights / weights.mean()
     return torch.tensor(weights, dtype=torch.float32)
@@ -105,11 +108,11 @@ def evaluate_model(
     device: torch.device,
     num_classes: int,
     class_names: Sequence[str] | None = None,
-) -> tuple[dict[str, float], list[int], list[int], list[int]]:
+) -> tuple[dict[str, Any], list[int], list[int], list[int]]:
     model.eval()
     y_true: list[int] = []
     y_pred: list[int] = []
-    y_prob: list[float] = []
+    y_prob: list[int] = []
     losses = []
     crit = nn.CrossEntropyLoss()
     for batch in loader:
@@ -215,9 +218,7 @@ def train_model(
     train_seconds = time.perf_counter() - t0
     if best_state is not None:
         model.load_state_dict(best_state)
-    val_metrics, _, _, _ = evaluate_model(
-        model, val_loader, dev, num_classes, bundle.class_names
-    )
+    val_metrics, _, _, _ = evaluate_model(model, val_loader, dev, num_classes, bundle.class_names)
     test_metrics, y_true, y_pred, _ = evaluate_model(
         model, test_loader, dev, num_classes, bundle.class_names
     )

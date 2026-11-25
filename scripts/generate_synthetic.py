@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from breplens.geometry.synthetic import FAMILIES, build_part, make_spec  # noqa: E402
+from breplens.geometry.synthetic import FAMILIES, build_part, make_spec
 
 
 def _split_for(family: str, index: int) -> str:
@@ -113,7 +113,15 @@ def main() -> int:
             indent=1,
         )
     )
-    print(json.dumps({"n_parts": len(results), "split_counts": by_split, "seconds": manifest["generation_wall_seconds"]}))
+    print(
+        json.dumps(
+            {
+                "n_parts": len(results),
+                "split_counts": by_split,
+                "seconds": manifest["generation_wall_seconds"],
+            }
+        )
+    )
     return 0
 
 

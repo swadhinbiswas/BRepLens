@@ -17,7 +17,7 @@ from __future__ import annotations
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import torch
 from torch import nn
@@ -52,15 +52,17 @@ class EdgeAwareLayer(MessagePassing):
         self.norm = nn.LayerNorm(hidden)
         self.drop = nn.Dropout(0.0)
 
-    def forward(self, x: torch.Tensor, edge_index: torch.Tensor, edge_attr: torch.Tensor) -> torch.Tensor:
+    def forward(
+        self, x: torch.Tensor, edge_index: torch.Tensor, edge_attr: torch.Tensor
+    ) -> torch.Tensor:
         m = self.propagate(edge_index, x=x, edge_attr=edge_attr)
         h = self.gru(m, x)
-        return self.norm(x + self.drop(h))
+        return cast(torch.Tensor, self.norm(x + self.drop(h)))
 
     def message(
         self, x_i: torch.Tensor, x_j: torch.Tensor, edge_attr: torch.Tensor
     ) -> torch.Tensor:
-        return self.msg(torch.cat([x_i, x_j, edge_attr], dim=-1))
+        return cast(torch.Tensor, self.msg(torch.cat([x_i, x_j, edge_attr], dim=-1)))
 
 
 class FaceGNN(nn.Module):
@@ -74,10 +76,7 @@ class FaceGNN(nn.Module):
         self.input = nn.Linear(len(FEATURE_NAMES), cfg.hidden)
         if cfg.architecture == "gcn":
             self.layers = nn.ModuleList(
-                [
-                    GCNConv(cfg.hidden if i else cfg.hidden, cfg.hidden)
-                    for i in range(cfg.layers)
-                ]
+                [GCNConv(cfg.hidden, cfg.hidden) for i in range(cfg.layers)]
             )
         elif cfg.architecture == "edge_gnn":
             self.layers = nn.ModuleList(
@@ -103,7 +102,7 @@ class FaceGNN(nn.Module):
             x = x + self.drop(torch.relu(h))
             if i == 0:
                 x = torch.relu(x)
-        return self.head(x)
+        return cast(torch.Tensor, self.head(x))
 
     @property
     def n_parameters(self) -> int:
@@ -132,7 +131,9 @@ def save_checkpoint(
     return out
 
 
-def load_checkpoint(path: str | Path, *, device: str | torch.device = "cpu") -> tuple[FaceGNN, dict[str, Any]]:
+def load_checkpoint(
+    path: str | Path, *, device: str | torch.device = "cpu"
+) -> tuple[FaceGNN, dict[str, Any]]:
     payload = torch.load(Path(path), map_location=device, weights_only=False)
     cfg = GNNConfig(**payload["config"])
     model = FaceGNN(len(payload["class_names"]), cfg)
@@ -148,7 +149,9 @@ def load_metadata(path: str | Path) -> dict[str, Any]:
         "config": payload["config"],
         "class_names": payload["class_names"],
         "metadata": payload.get("metadata", {}),
-        "n_parameters": sum(v.numel() for v in payload["state_dict"].values() if v.dtype.is_floating_point),
+        "n_parameters": sum(
+            v.numel() for v in payload["state_dict"].values() if v.dtype.is_floating_point
+        ),
     }
 
 

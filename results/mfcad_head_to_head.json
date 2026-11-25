@@ -209,8 +209,8 @@
    "n_faces": 10146
   },
   "gnn": {
-   "accuracy": 0.9992,
-   "macro_f1": 0.9993,
+   "accuracy": 0.9989,
+   "macro_f1": 0.9983,
    "per_class": {
     "stock": {
      "precision": 1.0,
@@ -232,12 +232,12 @@
     },
     "passage": {
      "precision": 0.997,
-     "recall": 1.0,
-     "f1": 0.9985,
+     "recall": 0.9995,
+     "f1": 0.9982,
      "support": 1994,
-     "tp": 1994,
+     "tp": 1993,
      "fp": 6,
-     "fn": 0
+     "fn": 1
     },
     "step": {
      "precision": 1.0,
@@ -249,22 +249,22 @@
      "fn": 0
     },
     "pocket": {
-     "precision": 1.0,
+     "precision": 0.9995,
      "recall": 0.9967,
-     "f1": 0.9984,
+     "f1": 0.9981,
      "support": 1829,
      "tp": 1823,
-     "fp": 0,
+     "fp": 1,
      "fn": 6
     },
     "chamfer": {
-     "precision": 1.0,
-     "recall": 1.0,
-     "f1": 1.0,
+     "precision": 0.9947,
+     "recall": 0.9947,
+     "f1": 0.9947,
      "support": 378,
-     "tp": 378,
-     "fp": 0,
-     "fn": 0
+     "tp": 376,
+     "fp": 2,
+     "fn": 2
     },
     "hole": {
      "precision": 0.0,
@@ -309,9 +309,9 @@
     [
      0,
      0,
-     1994,
+     1993,
      0,
-     0,
+     1,
      0,
      0,
      0
@@ -329,20 +329,20 @@
     [
      0,
      0,
-     6,
+     4,
      0,
      1823,
-     0,
+     2,
      0,
      0
     ],
     [
      0,
      0,
+     2,
      0,
      0,
-     0,
-     378,
+     376,
      0,
      0
     ],
@@ -553,8 +553,8 @@
    "n_faces": 10146
   },
   "hybrid_gnn_priority": {
-   "accuracy": 0.9992,
-   "macro_f1": 0.9993,
+   "accuracy": 0.9989,
+   "macro_f1": 0.9983,
    "per_class": {
     "stock": {
      "precision": 1.0,
@@ -576,12 +576,12 @@
     },
     "passage": {
      "precision": 0.997,
-     "recall": 1.0,
-     "f1": 0.9985,
+     "recall": 0.9995,
+     "f1": 0.9982,
      "support": 1994,
-     "tp": 1994,
+     "tp": 1993,
      "fp": 6,
-     "fn": 0
+     "fn": 1
     },
     "step": {
      "precision": 1.0,
@@ -593,22 +593,22 @@
      "fn": 0
     },
     "pocket": {
-     "precision": 1.0,
+     "precision": 0.9995,
      "recall": 0.9967,
-     "f1": 0.9984,
+     "f1": 0.9981,
      "support": 1829,
      "tp": 1823,
-     "fp": 0,
+     "fp": 1,
      "fn": 6
     },
     "chamfer": {
-     "precision": 1.0,
-     "recall": 1.0,
-     "f1": 1.0,
+     "precision": 0.9947,
+     "recall": 0.9947,
+     "f1": 0.9947,
      "support": 378,
-     "tp": 378,
-     "fp": 0,
-     "fn": 0
+     "tp": 376,
+     "fp": 2,
+     "fn": 2
     },
     "hole": {
      "precision": 0.0,
@@ -653,9 +653,9 @@
     [
      0,
      0,
-     1994,
+     1993,
      0,
-     0,
+     1,
      0,
      0,
      0
@@ -673,20 +673,20 @@
     [
      0,
      0,
-     6,
+     4,
      0,
      1823,
-     0,
+     2,
      0,
      0
     ],
     [
      0,
      0,
+     2,
      0,
      0,
-     0,
-     378,
+     376,
      0,
      0
     ],
@@ -725,8 +725,8 @@
    "n_faces": 10146
   },
   "hybrid_vote": {
-   "accuracy": 0.9992,
-   "macro_f1": 0.9993,
+   "accuracy": 0.9989,
+   "macro_f1": 0.9983,
    "per_class": {
     "stock": {
      "precision": 1.0,
@@ -748,12 +748,12 @@
     },
     "passage": {
      "precision": 0.997,
-     "recall": 1.0,
-     "f1": 0.9985,
+     "recall": 0.9995,
+     "f1": 0.9982,
      "support": 1994,
-     "tp": 1994,
+     "tp": 1993,
      "fp": 6,
-     "fn": 0
+     "fn": 1
     },
     "step": {
      "precision": 1.0,
@@ -765,22 +765,22 @@
      "fn": 0
     },
     "pocket": {
-     "precision": 1.0,
+     "precision": 0.9995,
      "recall": 0.9967,
-     "f1": 0.9984,
+     "f1": 0.9981,
      "support": 1829,
      "tp": 1823,
-     "fp": 0,
+     "fp": 1,
      "fn": 6
     },
     "chamfer": {
-     "precision": 1.0,
-     "recall": 1.0,
-     "f1": 1.0,
+     "precision": 0.9947,
+     "recall": 0.9947,
+     "f1": 0.9947,
      "support": 378,
-     "tp": 378,
-     "fp": 0,
-     "fn": 0
+     "tp": 376,
+     "fp": 2,
+     "fn": 2
     },
     "hole": {
      "precision": 0.0,
@@ -825,9 +825,9 @@
     [
      0,
      0,
-     1994,
+     1993,
      0,
-     0,
+     1,
      0,
      0,
      0
@@ -845,20 +845,20 @@
     [
      0,
      0,
-     6,
+     4,
      0,
      1823,
-     0,
+     2,
      0,
      0
     ],
     [
      0,
      0,
+     2,
      0,
      0,
-     0,
-     378,
+     376,
      0,
      0
     ],
@@ -900,18 +900,18 @@
  "ranked_by_macro_f1": [
   {
    "method": "gnn",
-   "macro_f1": 0.9993,
-   "accuracy": 0.9992
+   "macro_f1": 0.9983,
+   "accuracy": 0.9989
   },
   {
    "method": "hybrid_gnn_priority",
-   "macro_f1": 0.9993,
-   "accuracy": 0.9992
+   "macro_f1": 0.9983,
+   "accuracy": 0.9989
   },
   {
    "method": "hybrid_vote",
-   "macro_f1": 0.9993,
-   "accuracy": 0.9992
+   "macro_f1": 0.9983,
+   "accuracy": 0.9989
   },
   {
    "method": "hybrid_rule_priority",
@@ -930,14 +930,14 @@
   "step": 579
  },
  "timing": {
-  "rules_total_seconds": 0.207,
-  "rules_ms_per_part": 0.461,
-  "gnn_total_seconds": 0.456,
-  "gnn_ms_per_part": 1.017
+  "rules_total_seconds": 0.209,
+  "rules_ms_per_part": 0.467,
+  "gnn_total_seconds": 0.442,
+  "gnn_ms_per_part": 0.987
  },
  "gnn_full_16_class": {
-  "test_accuracy": 0.9992,
-  "test_macro_f1": 0.999,
+  "test_accuracy": 0.9986,
+  "test_macro_f1": 0.9982,
   "selected_architecture": "edge_gnn"
  },
  "provenance": {
@@ -946,6 +946,6 @@
   "python": "3.11.18",
   "torch": "2.11.0+cu128",
   "gpu": "NVIDIA GeForce RTX 3060 Ti",
-  "generated_utc": "2026-11-24T20:41:10Z"
+  "generated_utc": "2026-11-24T21:07:48Z"
  }
 }

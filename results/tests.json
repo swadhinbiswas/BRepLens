@@ -1,0 +1,9 @@
+{
+ "passed": 80,
+ "skipped": 0,
+ "failed": 0,
+ "wall_seconds": 6.21,
+ "command": "pytest -o addopts='' -q",
+ "exit_code": 0,
+ "raw_tail": "80 passed, 1 warning in 4.91s"
+}

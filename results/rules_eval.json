@@ -1,14 +1,14 @@
 {
- "n_parts": 51,
- "n_gt_features": 142,
- "n_pred_features": 142,
+ "n_parts": 246,
+ "n_gt_features": 621,
+ "n_pred_features": 621,
  "feature": {
   "precision": 1.0,
   "recall": 1.0,
   "f1": 1.0,
   "macro_f1": 1.0,
   "exact_part_rate": 1.0,
-  "tp": 142,
+  "tp": 621,
   "fp": 0,
   "fn": 0,
   "per_class": {
@@ -26,93 +26,33 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "tp": 48,
+    "tp": 167,
     "fp": 0,
     "fn": 0,
-    "gt_count": 48,
-    "pred_count": 48
+    "gt_count": 167,
+    "pred_count": 167
    },
    "blind_hole": {
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "tp": 4,
+    "tp": 23,
     "fp": 0,
     "fn": 0,
-    "gt_count": 4,
-    "pred_count": 4
+    "gt_count": 23,
+    "pred_count": 23
    },
    "counterbore": {
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "tp": 4,
+    "tp": 20,
     "fp": 0,
     "fn": 0,
-    "gt_count": 4,
-    "pred_count": 4
+    "gt_count": 20,
+    "pred_count": 20
    },
    "countersink": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 5,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 5,
-    "pred_count": 5
-   },
-   "pocket": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 6,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 6,
-    "pred_count": 6
-   },
-   "slot": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 4,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 4,
-    "pred_count": 4
-   },
-   "step": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 2,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 2,
-    "pred_count": 2
-   },
-   "boss": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 5,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 5,
-    "pred_count": 5
-   },
-   "fillet": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 40,
-    "fp": 0,
-    "fn": 0,
-    "gt_count": 40,
-    "pred_count": 40
-   },
-   "chamfer": {
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
@@ -121,6 +61,66 @@
     "fn": 0,
     "gt_count": 24,
     "pred_count": 24
+   },
+   "pocket": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 41,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 41,
+    "pred_count": 41
+   },
+   "slot": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 24,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 24,
+    "pred_count": 24
+   },
+   "step": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 14,
+    "pred_count": 14
+   },
+   "boss": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 24,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 24,
+    "pred_count": 24
+   },
+   "fillet": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 120,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 120,
+    "pred_count": 120
+   },
+   "chamfer": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 164,
+    "fp": 0,
+    "fn": 0,
+    "gt_count": 164,
+    "pred_count": 164
    }
   },
   "confusions": {}
@@ -133,12 +133,39 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 306,
-    "tp": 306,
+    "support": 1476,
+    "tp": 1476,
     "fp": 0,
     "fn": 0
    },
    "through_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 167,
+    "tp": 167,
+    "fp": 0,
+    "fn": 0
+   },
+   "blind_hole": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 46,
+    "tp": 46,
+    "fp": 0,
+    "fn": 0
+   },
+   "counterbore": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "support": 60,
+    "tp": 60,
+    "fp": 0,
+    "fn": 0
+   },
+   "countersink": {
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
@@ -147,39 +174,12 @@
     "fp": 0,
     "fn": 0
    },
-   "blind_hole": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "support": 8,
-    "tp": 8,
-    "fp": 0,
-    "fn": 0
-   },
-   "counterbore": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "support": 12,
-    "tp": 12,
-    "fp": 0,
-    "fn": 0
-   },
-   "countersink": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "support": 10,
-    "tp": 10,
-    "fp": 0,
-    "fn": 0
-   },
    "pocket": {
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 30,
-    "tp": 30,
+    "support": 205,
+    "tp": 205,
     "fp": 0,
     "fn": 0
    },
@@ -187,8 +187,8 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 20,
-    "tp": 20,
+    "support": 120,
+    "tp": 120,
     "fp": 0,
     "fn": 0
    },
@@ -196,8 +196,8 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 4,
-    "tp": 4,
+    "support": 28,
+    "tp": 28,
     "fp": 0,
     "fn": 0
    },
@@ -205,8 +205,8 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 10,
-    "tp": 10,
+    "support": 48,
+    "tp": 48,
     "fp": 0,
     "fn": 0
    },
@@ -214,8 +214,8 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 40,
-    "tp": 40,
+    "support": 120,
+    "tp": 120,
     "fp": 0,
     "fn": 0
    },
@@ -223,15 +223,15 @@
     "precision": 1.0,
     "recall": 1.0,
     "f1": 1.0,
-    "support": 24,
-    "tp": 24,
+    "support": 164,
+    "tp": 164,
     "fp": 0,
     "fn": 0
    }
   },
   "confusion_matrix": [
    [
-    306,
+    1476,
     0,
     0,
     0,
@@ -244,6 +244,48 @@
     0
    ],
    [
+    0,
+    167,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    46,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
+    60,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    0,
     0,
     48,
     0,
@@ -251,48 +293,6 @@
     0,
     0,
     0,
-    0,
-    0,
-    0,
-    0
-   ],
-   [
-    0,
-    0,
-    8,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-   ],
-   [
-    0,
-    0,
-    0,
-    12,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
-   ],
-   [
-    0,
-    0,
-    0,
-    0,
-    10,
-    0,
-    0,
-    0,
-    0,
-    0,
     0
    ],
    [
@@ -301,7 +301,7 @@
     0,
     0,
     0,
-    30,
+    205,
     0,
     0,
     0,
@@ -315,7 +315,7 @@
     0,
     0,
     0,
-    20,
+    120,
     0,
     0,
     0,
@@ -329,7 +329,7 @@
     0,
     0,
     0,
-    4,
+    28,
     0,
     0,
     0
@@ -343,7 +343,7 @@
     0,
     0,
     0,
-    10,
+    48,
     0,
     0
    ],
@@ -357,7 +357,7 @@
     0,
     0,
     0,
-    40,
+    120,
     0
    ],
    [
@@ -371,7 +371,7 @@
     0,
     0,
     0,
-    24
+    164
    ]
   ],
   "class_names": [
@@ -387,7 +387,7 @@
    "fillet",
    "chamfer"
   ],
-  "n_samples": 512
+  "n_samples": 2482
  },
  "parameter_errors": {
   "boss": {
@@ -396,14 +396,14 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 5
+    "n": 24
    },
    "height": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 5
+    "n": 24
    }
   },
   "through_hole": {
@@ -412,21 +412,14 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 48
+    "n": 167
    },
    "depth": {
-    "mean_abs": 2.9167,
-    "median_abs": 0.0,
-    "p95_abs": 15.0,
-    "max_abs": 15.0,
-    "n": 48
-   },
-   "is_through": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 48
+    "n": 167
    }
   },
   "pocket": {
@@ -435,21 +428,21 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 6
+    "n": 41
    },
    "footprint_dim_0": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 6
+    "n": 41
    },
    "footprint_dim_1": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 6
+    "n": 41
    }
   },
   "chamfer": {
@@ -458,14 +451,14 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 24
+    "n": 164
    },
    "chamfer_width": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 24
+    "n": 164
    }
   },
   "counterbore": {
@@ -474,28 +467,21 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 20
    },
    "outer_diameter": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 20
    },
    "depth": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
-   },
-   "is_through": {
-    "mean_abs": 0.0,
-    "median_abs": 0.0,
-    "p95_abs": 0.0,
-    "max_abs": 0.0,
-    "n": 4
+    "n": 20
    }
   },
   "countersink": {
@@ -504,28 +490,21 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 5
+    "n": 24
    },
    "outer_diameter": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 5
+    "n": 24
    },
    "angle_deg": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 5
-   },
-   "is_through": {
-    "mean_abs": 0.0,
-    "median_abs": 0.0,
-    "p95_abs": 0.0,
-    "max_abs": 0.0,
-    "n": 5
+    "n": 24
    }
   },
   "fillet": {
@@ -534,7 +513,7 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 40
+    "n": 120
    }
   },
   "blind_hole": {
@@ -543,21 +522,14 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 23
    },
    "depth": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
-   },
-   "is_through": {
-    "mean_abs": 0.0,
-    "median_abs": 0.0,
-    "p95_abs": 0.0,
-    "max_abs": 0.0,
-    "n": 4
+    "n": 23
    }
   },
   "slot": {
@@ -566,21 +538,21 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 24
    },
    "footprint_dim_0": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 24
    },
    "footprint_dim_1": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 4
+    "n": 24
    }
   },
   "step": {
@@ -589,47 +561,47 @@
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 2
+    "n": 14
    },
    "footprint_dim_0": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 2
+    "n": 14
    },
    "footprint_dim_1": {
     "mean_abs": 0.0,
     "median_abs": 0.0,
     "p95_abs": 0.0,
     "max_abs": 0.0,
-    "n": 2
+    "n": 14
    }
   }
  },
  "latency_ms": {
-  "mean": 2341505.602,
-  "median": 0.244,
-  "p95": 11941679.04
+  "mean": 1718999.514,
+  "median": 0.1,
+  "p95": 14095795.963
  },
  "dataset": {
-  "n_parts": 51,
+  "n_parts": 246,
   "families": {
-   "boss_plate": 5,
-   "bracket_mixed": 4,
-   "chamfer_block": 2,
-   "counterbore": 4,
-   "countersink": 5,
-   "fillet_block": 10,
-   "plate_blind": 4,
-   "plate_holes": 9,
-   "pocket": 2,
-   "slot": 4,
-   "stepped_block": 2
+   "boss_plate": 24,
+   "bracket_mixed": 21,
+   "chamfer_block": 20,
+   "counterbore": 20,
+   "countersink": 24,
+   "fillet_block": 30,
+   "plate_blind": 23,
+   "plate_holes": 26,
+   "pocket": 20,
+   "slot": 24,
+   "stepped_block": 14
   },
-  "faces_total": 512,
-  "faces_mean": 10.04,
-  "features_total": 142,
+  "faces_total": 2482,
+  "faces_mean": 10.09,
+  "features_total": 621,
   "classes": [
    "blind_hole",
    "boss",
@@ -650,7 +622,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 5,
+   "tp": 24,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -738,11 +710,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 5,
+     "tp": 24,
      "fp": 0,
      "fn": 0,
-     "gt_count": 5,
-     "pred_count": 5
+     "gt_count": 24,
+     "pred_count": 24
     },
     "fillet": {
      "precision": 0.0,
@@ -773,7 +745,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 32,
+   "tp": 168,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -791,11 +763,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 12,
+     "tp": 63,
      "fp": 0,
      "fn": 0,
-     "gt_count": 12,
-     "pred_count": 12
+     "gt_count": 63,
+     "pred_count": 63
     },
     "blind_hole": {
      "precision": 0.0,
@@ -831,11 +803,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 4,
+     "tp": 21,
      "fp": 0,
      "fn": 0,
-     "gt_count": 4,
-     "pred_count": 4
+     "gt_count": 21,
+     "pred_count": 21
     },
     "slot": {
      "precision": 0.0,
@@ -881,11 +853,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 16,
+     "tp": 84,
      "fp": 0,
      "fn": 0,
-     "gt_count": 16,
-     "pred_count": 16
+     "gt_count": 84,
+     "pred_count": 84
     }
    },
    "confusions": {}
@@ -896,7 +868,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 8,
+   "tp": 80,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1004,11 +976,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 8,
+     "tp": 80,
      "fp": 0,
      "fn": 0,
-     "gt_count": 8,
-     "pred_count": 8
+     "gt_count": 80,
+     "pred_count": 80
     }
    },
    "confusions": {}
@@ -1019,7 +991,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 4,
+   "tp": 20,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1057,11 +1029,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 4,
+     "tp": 20,
      "fp": 0,
      "fn": 0,
-     "gt_count": 4,
-     "pred_count": 4
+     "gt_count": 20,
+     "pred_count": 20
     },
     "countersink": {
      "precision": 0.0,
@@ -1142,7 +1114,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 5,
+   "tp": 24,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1190,11 +1162,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 5,
+     "tp": 24,
      "fp": 0,
      "fn": 0,
-     "gt_count": 5,
-     "pred_count": 5
+     "gt_count": 24,
+     "pred_count": 24
     },
     "pocket": {
      "precision": 0.0,
@@ -1265,7 +1237,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 40,
+   "tp": 120,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1363,11 +1335,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 40,
+     "tp": 120,
      "fp": 0,
      "fn": 0,
-     "gt_count": 40,
-     "pred_count": 40
+     "gt_count": 120,
+     "pred_count": 120
     },
     "chamfer": {
      "precision": 0.0,
@@ -1388,7 +1360,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 4,
+   "tp": 23,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1416,11 +1388,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 4,
+     "tp": 23,
      "fp": 0,
      "fn": 0,
-     "gt_count": 4,
-     "pred_count": 4
+     "gt_count": 23,
+     "pred_count": 23
     },
     "counterbore": {
      "precision": 0.0,
@@ -1511,7 +1483,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 36,
+   "tp": 104,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1529,11 +1501,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 36,
+     "tp": 104,
      "fp": 0,
      "fn": 0,
-     "gt_count": 36,
-     "pred_count": 36
+     "gt_count": 104,
+     "pred_count": 104
     },
     "blind_hole": {
      "precision": 0.0,
@@ -1634,7 +1606,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 2,
+   "tp": 20,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1692,11 +1664,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 2,
+     "tp": 20,
      "fp": 0,
      "fn": 0,
-     "gt_count": 2,
-     "pred_count": 2
+     "gt_count": 20,
+     "pred_count": 20
     },
     "slot": {
      "precision": 0.0,
@@ -1757,7 +1729,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 4,
+   "tp": 24,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1825,11 +1797,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 4,
+     "tp": 24,
      "fp": 0,
      "fn": 0,
-     "gt_count": 4,
-     "pred_count": 4
+     "gt_count": 24,
+     "pred_count": 24
     },
     "step": {
      "precision": 0.0,
@@ -1880,7 +1852,7 @@
    "f1": 1.0,
    "macro_f1": 1.0,
    "exact_part_rate": 1.0,
-   "tp": 2,
+   "tp": 14,
    "fp": 0,
    "fn": 0,
    "per_class": {
@@ -1958,11 +1930,11 @@
      "precision": 1.0,
      "recall": 1.0,
      "f1": 1.0,
-     "tp": 2,
+     "tp": 14,
      "fp": 0,
      "fn": 0,
-     "gt_count": 2,
-     "pred_count": 2
+     "gt_count": 14,
+     "pred_count": 14
     },
     "boss": {
      "precision": 0.0,
@@ -1999,10 +1971,10 @@
   }
  },
  "timing": {
-  "wall_seconds": 0.037,
-  "recognition_mean_ms": 0.416,
-  "recognition_total_ms": 21.234,
-  "parts": 51
+  "wall_seconds": 0.098,
+  "recognition_mean_ms": 0.195,
+  "recognition_total_ms": 48.016,
+  "parts": 246
  },
  "provenance": {
   "script": "scripts/evaluate_rules.py",
@@ -2012,6 +1984,6 @@
   "python": "3.11.18",
   "host": "swadhin",
   "command": "scripts/evaluate_rules.py --split test",
-  "generated_utc": "2026-11-24T20:35:25Z"
+  "generated_utc": "2026-11-24T21:11:19Z"
  }
 }

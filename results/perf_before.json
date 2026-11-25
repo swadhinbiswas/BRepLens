@@ -1,0 +1,64 @@
+{
+ "environment": {
+  "python": "3.11.18",
+  "host": "swadhin",
+  "cpu": "",
+  "torch_threads": 14
+ },
+ "n_parts": 80,
+ "stages_ms": {
+  "graph_from_step": {
+   "mean": 12.105,
+   "median": 6.969,
+   "n": 40
+  },
+  "rules": {
+   "mean": 0.139,
+   "median": 0.081,
+   "n": 80
+  },
+  "gnn": {
+   "mean": 0.811,
+   "median": 0.699,
+   "n": 80
+  },
+  "hybrid": {
+   "mean": 1.521,
+   "median": 1.407,
+   "n": 80
+  },
+  "signature": {
+   "mean": 0.19,
+   "median": 0.177,
+   "n": 80
+  },
+  "tessellate": {
+   "mean": 3.933,
+   "median": 3.866,
+   "n": 15
+  },
+  "end_to_end_step_hybrid_json": {
+   "mean": 8.844,
+   "median": 8.778,
+   "n": 10
+  }
+ },
+ "profile_rules_top": [
+  "List reduced from 85 to 12 due to restriction <12>",
+  "ncalls  tottime  percall  cumtime  percall filename:lineno(function)",
+  "80    0.003    0.000    0.021    0.000 /home/swadhin/BRepLens/src/breplens/recognition/rules.py:185(recognize_rules)",
+  "5706    0.001    0.000    0.004    0.000 /home/swadhin/BRepLens/.venv/lib/python3.11/site-packages/pydantic/main.py:270(__init__)",
+  "141    0.000    0.000    0.003    0.000 /home/swadhin/BRepLens/src/breplens/recognition/params.py:51(axis_interval)",
+  "80    0.000    0.000    0.003    0.000 /home/swadhin/BRepLens/src/breplens/recognition/rules.py:73(_merge_segments)",
+  "5706    0.002    0.000    0.003    0.000 {method 'validate_python' of 'pydantic_core._pydantic_core.SchemaValidator' objects}",
+  "1739    0.000    0.000    0.002    0.000 {built-in method builtins.sorted}",
+  "80    0.000    0.000    0.002    0.000 /home/swadhin/BRepLens/src/breplens/recognition/params.py:232(summarize_part)",
+  "185    0.000    0.000    0.002    0.000 /home/swadhin/BRepLens/src/breplens/recognition/rules.py:388(<genexpr>)",
+  "884    0.001    0.000    0.002    0.000 {built-in method builtins.sum}",
+  "770    0.002    0.000    0.002    0.000 /home/swadhin/BRepLens/src/breplens/recognition/params.py:108(concave_neighbors)",
+  "87    0.000    0.000    0.002    0.000 /home/swadhin/BRepLens/src/breplens/recognition/rules.py:133(_cap_plane)",
+  "1835    0.001    0.000    0.002    0.000 /home/swadhin/BRepLens/src/breplens/schema.py:36(__sub__)"
+ ],
+ "command": "scripts/benchmark_perf.py --out results/perf_before.json",
+ "generated_utc": "2026-11-24T20:58:28Z"
+}

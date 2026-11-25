@@ -15,3 +15,15 @@
 - Problem: OCP 7.9 has no `TopTools_ListIteratorOfListOfShape`.
 - Fix: iterate `TopTools_ListOfShape` directly (it implements `__iter__`), verified locally.
 - Status: resolved.
+
+
+## B004 — Reviewer round 1 defects (resolved)
+- CI ruff failure in benchmark script: fixed unused noqa/unpacked vars; ruff clean.
+- Missing `breplens.cli` entry point: added `src/breplens/cli.py` with recognize/schema commands and a subprocess test.
+- Synthetic bracket GT depth bug (outside holes depth 0, pocket hole 5): fixed to entry-to-exit depth; regenerated data; all parameter MAE now 0 on the synthetic test.
+- NX "verified recipe" wording contradicted research: relabeled as candidate public-cookbook recipes, unverified live; docs/code now consistently UNTESTED.
+- GNN zero-depth stub: recess measurement now returns None (warning) if depth < min_depth.
+- Missing README/report generators and RESULTS_TABLES: added `scripts/make_readme_tables.py`, generated all docs from results.
+- `is_outer` constant feature and unused smooth threshold: removed is_outer; smooth threshold now used by the classifier.
+- Stale .agent files: synchronized.
+- Status: resolved; reviewer round 2 requested.

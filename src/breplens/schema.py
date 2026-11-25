@@ -12,8 +12,8 @@ Schema is exported by ``scripts/export_schema.py``.
 from __future__ import annotations
 
 import math
-from datetime import datetime, timezone
-from enum import Enum
+from datetime import UTC, datetime
+from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -72,7 +72,7 @@ class Vec3(BaseModel):
         return cls(x=float(values[0]), y=float(values[1]), z=float(values[2]))
 
 
-class SurfaceType(str, Enum):
+class SurfaceType(StrEnum):
     """Analytic surface classes tracked by the neutral IR."""
 
     PLANE = "plane"
@@ -84,7 +84,7 @@ class SurfaceType(str, Enum):
     OTHER = "other"
 
 
-class EdgeConvexity(str, Enum):
+class EdgeConvexity(StrEnum):
     """Local dihedral character of an edge between two faces."""
 
     CONVEX = "convex"
@@ -93,7 +93,7 @@ class EdgeConvexity(str, Enum):
     UNKNOWN = "unknown"
 
 
-class CurveType(str, Enum):
+class CurveType(StrEnum):
     """Analytic curve classes tracked for edges."""
 
     LINE = "line"
@@ -120,7 +120,6 @@ class FaceRecord(BaseModel):
     radius: float | None = None
     secondary_radius: float | None = None
     semi_angle_deg: float | None = None
-    is_outer: bool = True
     face_orientation: int = 0
     material_side: str | None = None
     step_face_id: int | None = None
@@ -143,9 +142,7 @@ class FaceRecord(BaseModel):
 
     @model_validator(mode="after")
     def _bbox_ordered(self) -> FaceRecord:
-        for lo, hi in zip(
-            self.bbox_min.as_tuple(), self.bbox_max.as_tuple(), strict=True
-        ):
+        for lo, hi in zip(self.bbox_min.as_tuple(), self.bbox_max.as_tuple(), strict=True):
             if lo > hi + 1e-9:
                 raise ValueError("bbox_min must not exceed bbox_max")
         return self
@@ -233,7 +230,7 @@ class PartGraph(BaseModel):
         return None
 
 
-class FeatureType(str, Enum):
+class FeatureType(StrEnum):
     """Machining feature classes recognized by BRepLens."""
 
     THROUGH_HOLE = "through_hole"
@@ -344,9 +341,7 @@ class FeatureSet(BaseModel):
     schema_version: str = SCHEMA_VERSION
     part: str = ""
     mode: str = "rules"
-    created_utc: str = Field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
-    )
+    created_utc: str = Field(default_factory=lambda: datetime.now(UTC).isoformat())
     features: list[Feature] = Field(default_factory=list)
     summary: PartSummary = Field(default_factory=PartSummary)
     timings: TimingBreakdown = Field(default_factory=TimingBreakdown)

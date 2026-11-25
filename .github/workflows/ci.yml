@@ -1,0 +1,35 @@
+name: BRepLens CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install system libraries for OCP
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libgl1 libglib2.0-0
+      - name: Install CPU dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev,service,app]"
+          pip install torch==2.11.0+cpu --index-url https://download.pytorch.org/whl/cpu
+          pip install torch-geometric==2.8.1
+      - name: Ruff
+        run: ruff check src tests scripts streamlit_app.py
+      - name: Mypy
+        run: mypy src/breplens
+      - name: Tests (full, coverage floor 70%)
+        run: pytest -q --cov=breplens --cov-report=term --cov-fail-under=70
+      - name: Core coverage floor 80%
+        run: pytest -q --cov=breplens.geometry --cov=breplens.recognition --cov=breplens.schema --cov-report=term --cov-fail-under=80
+      - name: Service smoke import
+        run: python -c "from breplens.service.app import create_app; create_app(); print('service ok')"

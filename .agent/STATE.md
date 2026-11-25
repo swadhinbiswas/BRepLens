@@ -1,29 +1,31 @@
 # BRepLens State
 
 ## Current
-- Phase: 4b GNN/evaluation complete; Phase 2 architecture, 4c NX, 5 similarity, 6 service, 7 perf, 8 deploy pending.
-- Last completed: synthetic (1650 parts) + MFCAD (3000 parts) conversion; rules/GNN/hybrid evaluated.
-  - rules synthetic test: feature F1 0.9968, face acc 0.9984
-  - GNN synthetic test: feature F1 1.0, face acc 1.0
-  - hybrid synthetic test: feature F1 1.0 (recovers rule misses)
-  - MFCAD external macro face: rules 0.403 acc / 0.218 F1; GNN 0.9992 / 0.9993
-- Next action: commit; write architecture docs; implement similarity + service + app + NX; tests and reviewer gates.
-- Session rule: re-read TASKS.md/STATE.md at session start; keep them current.
+- Phase: 8 complete; Phase 10 finalization in progress (round-2 review pending, tag pending).
+- Last completed: rules 1.0 feature F1 (246 synthetic test parts); GNN demo checkpoint (GCN,
+  18,635 params, 0.08 MB) 1.0 face accuracy synthetic; edge-aware MFCAD model 120,336 params,
+  0.9986 face accuracy; hybrid 1.0 on synthetic; MFCAD macro: rules 0.218, GNN 0.9983 F1.
+- Similarity: synthetic P@1 1.000; MFCAD exact P@1 0.150, Jaccard≥0.5 P@1 0.746.
+- Hosted: peak RSS 854.4 MB, cold start 0.596 s, first part 1.529 s, GNN 1.07 ms, hybrid 1.72 ms.
+- Service: both SQLite and RQ/Redis Docker stacks smoke-tested end-to-end; 80 tests pass;
+  coverage 74.0% full / 82.2% core; ruff + mypy clean.
+- Next action: reviewer round 2, then tag v1.0.0 and final report check.
 
 ## Environment (audited 2026-11-24)
 - OS: CachyOS Linux (Arch-based), kernel rolling
 - CPU: Intel i5-13600K, 20 threads; RAM 32 GiB; disk 195 GiB free on /home
 - GPU: NVIDIA RTX 3060 Ti 8 GiB, driver 620.73.04, CUDA UMD 13.5
-- Python: system 3.14.10; project venv uses uv-managed CPython 3.11.18
-- Tooling: uv 0.13.9, git, docker, gcc present; conda/mamba absent
-- Project venv: .venv (Python 3.11)
+- Python: dev venv 3.11.18; deployment venv 3.12.16 (pip-only)
+- Tooling: uv 0.13.9, git, Docker, gcc; conda/mamba absent
+- PyTorch 2.11.0+cu128 (dev) / 2.11.0+cpu (deploy); PyG 2.8.1; OCP 7.9.3.1.1
 
 ## Background jobs
-- (none running)
+- (none)
 
 ## Results files (source of truth for docs)
-- results/rules_eval.json — rules on synthetic test (51 parts); regenerated for 246 later
-- results/gnn_eval.json — synthetic GNN training/eval
-- results/mfcad_gnn_eval.json — MFCAD external GNN
-- results/mfcad_head_to_head.json — rules/GNN/hybrid macro face comparison
-- results/recognition_comparison.json — rules/GNN/hybrid on synthetic test (246 parts)
+- results/rules_eval.json, recognition_comparison.json
+- results/gnn_eval.json, mfcad_gnn_eval.json, mfcad_head_to_head.json
+- results/similarity_eval.json, perf.json, deploy_benchmark.json
+- results/tests.json, coverage.json, coverage_core.json
+- results/docker_service_test.json, docker_service_test_rq.json
+- data/synthetic/manifest.json, data/mfcad/manifest.json

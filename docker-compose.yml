@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      BREPLENS_DATA_DIR: /data
+      BREPLENS_DATABASE_URL: sqlite:////data/breplens.db
+      BREPLENS_QUEUE_BACKEND: sqlite
+      BREPLENS_MODEL_PATH: /app/models/gnn_synthetic.pt
+      BREPLENS_SIMILARITY_INDEX: /app/demo/library.json
+    volumes:
+      - breplens_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 10
+  worker:
+    build: .
+    command: ["python", "-m", "breplens.service.worker", "--recover-stale"]
+    environment:
+      BREPLENS_DATA_DIR: /data
+      BREPLENS_DATABASE_URL: sqlite:////data/breplens.db
+      BREPLENS_QUEUE_BACKEND: sqlite
+      BREPLENS_MODEL_PATH: /app/models/gnn_synthetic.pt
+      BREPLENS_SIMILARITY_INDEX: /app/demo/library.json
+    volumes:
+      - breplens_data:/data
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  breplens_data:

@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import math
 import time
-from collections import defaultdict
 from dataclasses import dataclass, field
 
 from breplens.recognition.params import (
@@ -38,7 +37,6 @@ from breplens.recognition.params import (
     summarize_part,
 )
 from breplens.schema import (
-    CurveType,
     EdgeConvexity,
     FaceRecord,
     Feature,
@@ -116,9 +114,10 @@ def _axis_clusters(segs: list[_Segment], cfg: RuleConfig) -> list[list[_Segment]
     clusters: list[list[_Segment]] = []
     for s in segs:
         for c in clusters:
-            if parallel(c[0].axis_dir, s.axis_dir, cfg.parallel_dot) and line_distance(
-                c[0].axis_origin, c[0].axis_dir, s.axis_origin
-            ) <= cfg.axis_tol:
+            if (
+                parallel(c[0].axis_dir, s.axis_dir, cfg.parallel_dot)
+                and line_distance(c[0].axis_origin, c[0].axis_dir, s.axis_origin) <= cfg.axis_tol
+            ):
                 origin = c[0].axis_origin
                 offset = (s.axis_origin - origin).dot(c[0].axis_dir)
                 s.tmin += offset
@@ -183,9 +182,7 @@ def _make_feature(
     )
 
 
-def recognize_rules(
-    graph: PartGraph, config: RuleConfig | None = None
-) -> FeatureSet:
+def recognize_rules(graph: PartGraph, config: RuleConfig | None = None) -> FeatureSet:
     """Recognize features on *graph* with geometric rules."""
     cfg = config or RuleConfig()
     t0 = time.perf_counter()
@@ -268,7 +265,9 @@ def recognize_rules(
                     and f.normal is not None
                     and parallel(f.normal, axis_dir, 0.99)
                     and cand not in claimed
-                    and min(outer.tmin, inner.tmin) - 0.5 <= t_cand <= max(outer.tmax, inner.tmax) + 0.5
+                    and min(outer.tmin, inner.tmin) - 0.5
+                    <= t_cand
+                    <= max(outer.tmax, inner.tmax) + 0.5
                 ):
                     shoulder = f
                     break
@@ -434,9 +433,13 @@ def recognize_rules(
             continue
         length, width = footprint_dims(floor, n)
         cyl_walls = [wid for wid in walls if graph.faces[wid].surface_type == SurfaceType.CYLINDER]
-        is_slot = bool(cyl_walls) and width > 1.0 and any(
-            abs((graph.faces[wid].radius or 0.0) * 2.0 - width) <= max(0.8, 0.2 * width)
-            for wid in cyl_walls
+        is_slot = (
+            bool(cyl_walls)
+            and width > 1.0
+            and any(
+                abs((graph.faces[wid].radius or 0.0) * 2.0 - width) <= max(0.8, 0.2 * width)
+                for wid in cyl_walls
+            )
         )
         if is_slot:
             ftype = FeatureType.SLOT
@@ -474,9 +477,7 @@ def recognize_rules(
         if len(set(smooth_neighbors(graph, f.id))) < cfg.smooth_edge_min:
             continue
         radius = (
-            f.radius
-            if f.surface_type != SurfaceType.TORUS
-            else (f.secondary_radius or f.radius)
+            f.radius if f.surface_type != SurfaceType.TORUS else (f.secondary_radius or f.radius)
         )
         if radius is None or radius < 0.2:
             continue
@@ -521,14 +522,14 @@ def recognize_rules(
                 f.bbox_max.z - f.bbox_min.z,
             )
         )
-        width, mid_dim, long_dim = extents
-        if width <= 0.05 or width > 0.2 * long_dim:
+        width, _mid_dim, long_dim = extents
+        if width <= 0.05 or width > 0.3 * long_dim:
             continue
         if f.area > 0.02 * total_area:
             continue
         if max(abs(f.normal.x), abs(f.normal.y), abs(f.normal.z)) > 0.95:
             continue
-        nbs = neighbor_ids(graph, f.id)
+        neighbor_ids(graph, f.id)
         edge_map = {
             tuple(sorted((e.face_a, e.face_b))): e
             for e in graph.edges
@@ -546,11 +547,7 @@ def recognize_rules(
             nb = e.face_b if e.face_a == f.id else e.face_a
             g = graph.faces[nb]
             if g.normal is not None:
-                angles.append(
-                    math.degrees(
-                        math.acos(max(-1.0, min(1.0, f.normal.dot(g.normal))))
-                    )
-                )
+                angles.append(math.degrees(math.acos(max(-1.0, min(1.0, f.normal.dot(g.normal))))))
         angle = sum(angles) / len(angles) if angles else 45.0
         claimed.add(f.id)
         features.append(

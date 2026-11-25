@@ -1,0 +1,32 @@
+{
+ "health_ok": true,
+ "submit_seconds": 0.198,
+ "job_seconds": 2.04,
+ "status": "succeeded",
+ "error": null,
+ "mode": "hybrid",
+ "job_timings": {
+  "load_ms": 20.747049000419793,
+  "total_ms": 1131.6725619999488,
+  "recognition_ms": 5.298898000546615
+ },
+ "provenance": {
+  "script": "scripts/docker_smoke_test.py",
+  "command": "scripts/docker_smoke_test.py --out results/docker_service_test_rq.json",
+  "base_url": "http://127.0.0.1:8000",
+  "part": "samples/sample_09_bracket_mixed.step",
+  "generated_utc": "2026-11-24T21:12:21Z"
+ },
+ "n_features": 8,
+ "features": [
+  "chamfer",
+  "chamfer",
+  "chamfer",
+  "chamfer",
+  "pocket",
+  "through_hole",
+  "through_hole",
+  "through_hole"
+ ],
+ "similar_top1": "boss_plate_00006"
+}

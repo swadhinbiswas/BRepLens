@@ -59,6 +59,43 @@ MFCAD_TO_BREPLENS: dict[str, FeatureType] = {
     "stock": FeatureType.UNKNOWN,
 }
 
+# Coarse classes used to compare rule/GNN face labels fairly (MFCAD does not
+# distinguish rectangular/triangular/6-sided variants in the rule vocabulary).
+MFCAD_MACRO_CLASSES: tuple[str, ...] = (
+    "stock",
+    "slot",
+    "passage",
+    "step",
+    "pocket",
+    "chamfer",
+    "hole",
+    "fillet",
+)
+MFCAD_MACRO: dict[str, str] = {
+    "rectangular_through_slot": "slot",
+    "triangular_through_slot": "slot",
+    "rectangular_blind_slot": "slot",
+    "rectangular_passage": "passage",
+    "triangular_passage": "passage",
+    "6sides_passage": "passage",
+    "rectangular_through_step": "step",
+    "2sides_through_step": "step",
+    "slanted_through_step": "step",
+    "rectangular_blind_step": "step",
+    "triangular_blind_step": "step",
+    "rectangular_pocket": "pocket",
+    "triangular_pocket": "pocket",
+    "6sides_pocket": "pocket",
+    "chamfer": "chamfer",
+    "stock": "stock",
+}
+
+
+def macro_family(labels: list[int]) -> str:
+    """Coarse composition label used for retrieval evaluation only."""
+    macros = sorted({MFCAD_MACRO[MFCAD_CLASSES[i]] for i in labels if 0 <= i < STOCK_ID})
+    return "+".join(macros) if macros else "stock"
+
 
 def load_face_truth(step_path: str | Path) -> list[int]:
     """Load the per-face label ids stored next to a STEP file."""
@@ -97,9 +134,12 @@ def truth_record(step_path: str | Path, labels_by_face: list[int], split: str) -
 __all__ = [
     "MFCAD_CLASSES",
     "MFCAD_CLASS_TO_ID",
+    "MFCAD_MACRO",
+    "MFCAD_MACRO_CLASSES",
     "MFCAD_TO_BREPLENS",
     "STOCK_ID",
     "family_from_labels",
     "load_face_truth",
+    "macro_family",
     "truth_record",
 ]

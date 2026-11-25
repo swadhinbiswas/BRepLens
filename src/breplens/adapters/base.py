@@ -53,9 +53,7 @@ class CadAdapter(ABC):
         """Read a part and return its Attributed Adjacency Graph."""
 
     @abstractmethod
-    def tessellate(
-        self, path: str | Path, *, deflection: float = 0.2
-    ) -> MeshData:
+    def tessellate(self, path: str | Path, *, deflection: float = 0.2) -> MeshData:
         """Tessellate the first solid in *path* for visualization."""
 
     def write_features(self, path: str | Path, features: FeatureSet) -> str:

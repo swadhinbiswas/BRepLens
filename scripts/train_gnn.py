@@ -18,12 +18,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import torch  # noqa: E402
+import torch
 
-from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES  # noqa: E402
-from breplens.ml.mfcad import MFCAD_CLASSES  # noqa: E402
-from breplens.ml.model import GNNConfig, save_checkpoint  # noqa: E402
-from breplens.ml.train import load_dataset, train_model  # noqa: E402
+from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES
+from breplens.ml.mfcad import MFCAD_CLASSES
+from breplens.ml.model import GNNConfig, save_checkpoint
+from breplens.ml.train import load_dataset, train_model
 
 
 def _model_size_mb(path: Path) -> float:
@@ -47,13 +47,13 @@ def main() -> int:
     if args.dataset == "synthetic":
         data_dir = Path(args.data or ROOT / "data" / "synthetic")
         class_names = list(SYNTHETIC_CLASSES)
-        class_ids = dict(CLASS_TO_ID)
+        dict(CLASS_TO_ID)
         out = Path(args.out or ROOT / "results" / "gnn_eval.json")
         model_out = Path(args.model_out or ROOT / "models" / "gnn_synthetic.pt")
     else:
         data_dir = Path(args.data or ROOT / "data" / "mfcad")
         class_names = list(MFCAD_CLASSES)
-        class_ids = {n: i for i, n in enumerate(class_names)}
+        {n: i for i, n in enumerate(class_names)}
         out = Path(args.out or ROOT / "results" / "mfcad_gnn_eval.json")
         model_out = Path(args.model_out or ROOT / "models" / "gnn_mfcad.pt")
 

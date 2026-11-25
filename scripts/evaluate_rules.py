@@ -12,19 +12,18 @@ import json
 import platform
 import sys
 import time
-from collections import Counter
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES  # noqa: E402
-from breplens.ml.evaluation import (  # noqa: E402
+from breplens.geometry.synthetic import CLASS_TO_ID, SYNTHETIC_CLASSES
+from breplens.ml.evaluation import (
     dataset_summary,
     evaluate_feature_sets,
 )
-from breplens.recognition.rules import recognize_rules  # noqa: E402
-from breplens.schema import PartGraph  # noqa: E402
+from breplens.recognition.rules import recognize_rules
+from breplens.schema import PartGraph
 
 
 def main() -> int:
@@ -37,9 +36,7 @@ def main() -> int:
     data = Path(args.data)
     manifest = json.loads((data / "manifest.json").read_text())
     names = [
-        p["name"]
-        for p in manifest["parts"]
-        if args.split == "all" or p["split"] == args.split
+        p["name"] for p in manifest["parts"] if args.split == "all" or p["split"] == args.split
     ]
     split_by_name = {p["name"]: p["split"] for p in manifest["parts"]}
     records = []

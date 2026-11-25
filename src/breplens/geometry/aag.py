@@ -22,7 +22,7 @@ SURFACE_TYPES: tuple[str, ...] = tuple(t.value for t in SurfaceType)
 CONVEXITIES: tuple[str, ...] = tuple(c.value for c in EdgeConvexity)
 
 # Node features: one-hot surface (7) + log area + normal (3) + axis (3) +
-# log radius + log bbox diagonal + centroid offset (3) + is_outer.
+# log radius + log bbox diagonal + centroid offset (3).
 FEATURE_NAMES: tuple[str, ...] = (
     *(f"surface_{t}" for t in SURFACE_TYPES),
     "log_area",
@@ -37,7 +37,6 @@ FEATURE_NAMES: tuple[str, ...] = (
     "centroid_dx",
     "centroid_dy",
     "centroid_dz",
-    "is_outer",
 )
 
 # Edge features: one-hot convexity (4) + log length + normalized dihedral (2).
@@ -80,7 +79,6 @@ def node_features(graph: PartGraph) -> np.ndarray:
             (f.centroid.y - center.y) / diag,
             (f.centroid.z - center.z) / diag,
         ]
-        row[base + 12] = 1.0 if f.is_outer else 0.0
         rows.append(row)
     return np.asarray(rows, dtype=np.float32)
 
@@ -171,7 +169,8 @@ def graph_feature_vector(graph: PartGraph) -> np.ndarray:
     x = node_features(graph)
     if x.size == 0:
         return np.zeros(2 * len(FEATURE_NAMES), dtype=np.float32)
-    return np.concatenate([x.mean(axis=0), x.max(axis=0)]).astype(np.float32)
+    out = np.concatenate([x.mean(axis=0), x.max(axis=0)]).astype(np.float32)
+    return np.asarray(out, dtype=np.float32)
 
 
 __all__ = [

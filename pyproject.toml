@@ -27,13 +27,14 @@ service = [
   "fastapi>=0.110,<1",
   "uvicorn>=0.29,<1",
   "python-multipart>=0.0.9",
-  "redis>=5.0,<7",
+  "redis>=5.0,<9",
+  "sqlalchemy>=2.0,<3",
   "rq>=1.16,<3",
 ]
 app = [
   "streamlit>=1.36,<2",
-  "plotly>=5.20,<7",
-  "trimesh>=4.0,<5",
+  "plotly>=5.20,<8",
+  "trimesh>=4.0,<6",
 ]
 dev = [
   "cadquery>=2.4,<3",
@@ -62,6 +63,7 @@ select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 ignore = ["E501", "B008"]
 
 [tool.ruff.lint.per-file-ignores]
+"src/breplens/geometry/synthetic.py" = ["E741"]
 "tests/*" = ["B011"]
 "scripts/*" = ["E402"]
 
@@ -78,7 +80,7 @@ ignore_missing_imports = true
 exclude = ["src/breplens/adapters/nx\\.py", "src/breplens/adapters/nx_writeback\\.py"]
 
 [[tool.mypy.overrides]]
-module = ["OCP.*", "cadquery.*", "nxopen.*", "torch_geometric.*", "torch.*"]
+module = ["OCP.*", "cadquery.*", "torch_geometric.*", "torch.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

@@ -37,6 +37,6 @@ Reason: mission fallback requires documenting an unavailable dataset and using a
 
 ## D008 — GNN
 Edge-aware message passing (`edge_gnn`: MLP on [h_src,h_dst,edge_attr], GRU update, residual+LayerNorm) with a GCN baseline; hidden 64, 3 layers, 15% dropout, class-weighted CE, early stopping on val macro-F1.
-Measured: synthetic face acc 1.000 (edge_gnn) vs 0.967 (GCN); MFCAD face acc 0.9992 vs 0.871. Edge-aware checkpoint 0.47 MB, CPU 0.37–0.47 ms/graph.
+Measured (after feature cleanup): synthetic face acc 1.000 for both; MFCAD face acc 0.9986 (edge_gnn) vs 0.9381 (GCN). Both saturate synthetic, so the smaller GCN (18.6k params, 0.08 MB) is the demo checkpoint; edge_gnn (120k params, 0.47 MB) is the MFCAD external model. CPU inference is sub-millisecond per graph for both.
 Options: GCN, GAT, GraphSAGE, AAGNet-scale model; BRepNet rejected (license/complexity).
 Reason: best accuracy per parameter on this hardware and small enough for free hosting.

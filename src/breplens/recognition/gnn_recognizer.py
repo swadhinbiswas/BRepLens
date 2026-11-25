@@ -15,27 +15,24 @@ from __future__ import annotations
 import math
 import time
 from collections import deque
-from typing import Any, Sequence
+from collections.abc import Sequence
+from typing import Any
 
 import numpy as np
 
 from breplens.recognition.params import (
     RuleConfig,
     axis_interval,
-    concave_neighbors,
     face_center,
     footprint_dims,
     line_distance,
     neighbor_ids,
     opening_level,
     parallel,
-    radial_extent,
-    smooth_neighbors,
     summarize_part,
 )
 from breplens.recognition.rules import recognize_rules
 from breplens.schema import (
-    EdgeConvexity,
     Feature,
     FeatureParams,
     FeatureSet,
@@ -43,7 +40,6 @@ from breplens.schema import (
     PartGraph,
     SurfaceType,
     TimingBreakdown,
-    Vec3,
 )
 
 _HOLE_TYPES = {
@@ -121,7 +117,9 @@ def _measure_hole(
         return None
     segs.sort(key=lambda s: s["radius"], reverse=True)
     outer = segs[0]
-    cone = next((graph.faces[f] for f in comp if graph.faces[f].surface_type == SurfaceType.CONE), None)
+    cone = next(
+        (graph.faces[f] for f in comp if graph.faces[f].surface_type == SurfaceType.CONE), None
+    )
     confidence = float(probs[comp, class_id].mean())
     face_ids = list(comp)
     t_open = outer["t1"]
@@ -263,7 +261,9 @@ def _measure_fillet(
         f = graph.faces[fid]
         if f.surface_type not in (SurfaceType.CYLINDER, SurfaceType.TORUS, SurfaceType.SPHERE):
             continue
-        radius = f.radius if f.surface_type != SurfaceType.TORUS else (f.secondary_radius or f.radius)
+        radius = (
+            f.radius if f.surface_type != SurfaceType.TORUS else (f.secondary_radius or f.radius)
+        )
         if radius is None:
             continue
         if f.axis_direction is not None and f.axis_origin is not None:
@@ -293,20 +293,22 @@ def _measure_chamfer(
         f = graph.faces[fid]
         if f.surface_type != SurfaceType.PLANE or f.normal is None:
             continue
-        dims = sorted((f.bbox_max.x - f.bbox_min.x, f.bbox_max.y - f.bbox_min.y, f.bbox_max.z - f.bbox_min.z))
+        dims = sorted(
+            (f.bbox_max.x - f.bbox_min.x, f.bbox_max.y - f.bbox_min.y, f.bbox_max.z - f.bbox_min.z)
+        )
         angles = []
         for nb in neighbor_ids(graph, fid):
             g = graph.faces[nb]
             if g.normal is not None:
-                angles.append(
-                    math.degrees(math.acos(max(-1.0, min(1.0, f.normal.dot(g.normal)))))
-                )
+                angles.append(math.degrees(math.acos(max(-1.0, min(1.0, f.normal.dot(g.normal))))))
         return Feature(
             id="",
             type=FeatureType.CHAMFER,
             confidence=float(probs[comp, class_id].mean()),
             face_ids=[fid],
-            params=FeatureParams(chamfer_width=dims[0], angle_deg=sum(angles) / len(angles) if angles else 45.0),
+            params=FeatureParams(
+                chamfer_width=dims[0], angle_deg=sum(angles) / len(angles) if angles else 45.0
+            ),
             position=f.centroid,
             source="gnn",
         )
@@ -405,9 +407,10 @@ def _same_feature(a: Feature, b: Feature) -> bool:
         return False
     if a.position is not None and b.position is not None:
         if a.type in _HOLE_TYPES and a.axis is not None and b.axis is not None:
-            if parallel(a.axis, b.axis, 0.99) and line_distance(
-                a.position, a.axis, b.position
-            ) <= 2.0:
+            if (
+                parallel(a.axis, b.axis, 0.99)
+                and line_distance(a.position, a.axis, b.position) <= 2.0
+            ):
                 da, db = a.params.diameter, b.params.diameter
                 if da is None or db is None or abs(da - db) <= max(1.0, 0.2 * max(da, db)):
                     return True
@@ -448,7 +451,9 @@ def recognize_hybrid(
         if any(_same_feature(existing, feat) for existing in features):
             continue
         cid = class_id.get(feat.type.value)
-        conf = float(probs[list(faces), cid].mean()) if cid is not None and faces else feat.confidence
+        conf = (
+            float(probs[list(faces), cid].mean()) if cid is not None and faces else feat.confidence
+        )
         if conf < gnn_min_confidence:
             continue
         feat.confidence = round(0.5 * conf + 0.5 * 0.85, 4)
@@ -470,7 +475,9 @@ def recognize_hybrid(
         feat.id = f"{feat.type.value}_{i}"
     elapsed = (time.perf_counter() - t0) * 1000.0
     if added == 0:
-        warnings.append("hybrid added no new GNN instances; rule features fully cover GNN components")
+        warnings.append(
+            "hybrid added no new GNN instances; rule features fully cover GNN components"
+        )
     return FeatureSet(
         part=graph.metadata.name,
         mode="hybrid",

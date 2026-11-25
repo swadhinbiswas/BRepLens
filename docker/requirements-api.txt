@@ -1,0 +1,14 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.11.0+cpu
+torch-geometric==2.8.1
+cadquery-ocp==7.9.3.1.1
+numpy==2.2.6
+networkx==3.6.1
+pydantic==2.14.4
+pydantic-settings==2.13.0
+fastapi==0.165.0
+uvicorn==0.54.0
+python-multipart==0.0.34
+sqlalchemy==2.1.9
+rq==3.0.0
+redis==8.2.0

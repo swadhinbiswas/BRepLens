@@ -18,7 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from breplens.ml.mfcad import (  # noqa: E402
+from breplens.ml.mfcad import (
     MFCAD_CLASSES,
     load_face_truth,
     truth_record,
@@ -36,7 +36,7 @@ def _split(name: str) -> str:
 
 def _job(args: tuple[str, str]) -> dict:
     step_path, out_dir = args
-    from breplens.adapters.occ import OccAdapter, CadLoadError
+    from breplens.adapters.occ import OccAdapter
 
     src = Path(step_path)
     out = Path(out_dir)
@@ -72,14 +72,16 @@ def _job(args: tuple[str, str]) -> dict:
         graph.metadata.generator = "MFCAD"
         graph.metadata.family = truth["family"]
         graph.metadata.n_features = sum(
-            1 for i, lid in enumerate(labels_by_face) if lid != 15 and (i == 0 or labels_by_face[i - 1] != lid)
+            1
+            for i, lid in enumerate(labels_by_face)
+            if lid != 15 and (i == 0 or labels_by_face[i - 1] != lid)
         )
         graph_path.parent.mkdir(parents=True, exist_ok=True)
         truth_path.parent.mkdir(parents=True, exist_ok=True)
         graph_path.write_text(graph.model_dump_json(indent=1))
         truth_path.write_text(json.dumps(truth, indent=1))
         return {"ok": True, "name": name, "split": split, "n_faces": len(graph.faces)}
-    except Exception as exc:  # noqa: BLE001 - conversion failures are data, not bugs
+    except Exception as exc:
         return {"ok": False, "name": name, "error": f"{type(exc).__name__}: {exc}"}
 
 
@@ -136,7 +138,20 @@ def main() -> int:
         "failures": failures[:50],
     }
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1))
-    print(json.dumps({k: manifest[k] for k in ("n_selected", "n_converted", "n_failed", "split_counts", "conversion_wall_seconds")}))
+    print(
+        json.dumps(
+            {
+                k: manifest[k]
+                for k in (
+                    "n_selected",
+                    "n_converted",
+                    "n_failed",
+                    "split_counts",
+                    "conversion_wall_seconds",
+                )
+            }
+        )
+    )
     return 0
 
 

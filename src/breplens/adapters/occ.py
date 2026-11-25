@@ -28,6 +28,7 @@ from __future__ import annotations
 import math
 import time
 from pathlib import Path
+from typing import Any
 
 from OCP.Bnd import Bnd_Box
 from OCP.BRep import BRep_Tool
@@ -36,8 +37,8 @@ from OCP.BRepBndLib import BRepBndLib
 from OCP.BRepGProp import BRepGProp
 from OCP.BRepMesh import BRepMesh_IncrementalMesh
 from OCP.GeomAbs import (
-    GeomAbs_BSplineSurface,
     GeomAbs_BezierSurface,
+    GeomAbs_BSplineSurface,
     GeomAbs_Circle,
     GeomAbs_Cone,
     GeomAbs_Cylinder,
@@ -51,20 +52,19 @@ from OCP.GeomAbs import (
 )
 from OCP.GeomAPI import GeomAPI_ProjectPointOnSurf
 from OCP.GeomLProp import GeomLProp_SLProps
+from OCP.gp import gp_Dir, gp_Pnt
 from OCP.GProp import GProp_GProps
 from OCP.IFSelect import IFSelect_RetDone
 from OCP.Interface import Interface_Static
 from OCP.STEPControl import STEPControl_Reader
-from OCP.StepShape import StepShape_AdvancedFace
-from OCP.TopAbs import TopAbs_EDGE, TopAbs_FACE, TopAbs_REVERSED, TopAbs_SOLID
+from OCP.TopAbs import TopAbs_EDGE, TopAbs_FACE, TopAbs_REVERSED
 from OCP.TopExp import TopExp, TopExp_Explorer
 from OCP.TopLoc import TopLoc_Location
+from OCP.TopoDS import TopoDS, TopoDS_Shape
 from OCP.TopTools import (
     TopTools_IndexedDataMapOfShapeListOfShape,
     TopTools_IndexedMapOfShape,
 )
-from OCP.TopoDS import TopoDS, TopoDS_Shape
-from OCP.gp import gp_Dir, gp_Pnt, gp_Vec
 
 from breplens.adapters.base import CadAdapter, CadLoadError
 from breplens.schema import (
@@ -130,7 +130,7 @@ def _bbox_of(shape: TopoDS_Shape) -> tuple[Vec3, Vec3]:
     )
 
 
-def _face_normal_and_area(face: object) -> tuple[Vec3 | None, float, Vec3]:
+def _face_normal_and_area(face: Any) -> tuple[Vec3 | None, float, Vec3]:
     """Return (outward normal if analytic plane, area, centroid)."""
     props = GProp_GProps()
     BRepGProp.SurfaceProperties_s(face, props)
@@ -145,9 +145,7 @@ def _face_normal_and_area(face: object) -> tuple[Vec3 | None, float, Vec3]:
     return normal, float(props.Mass()), centroid
 
 
-def _surface_attributes(
-    face: object, surface_type: SurfaceType
-) -> dict[str, object]:
+def _surface_attributes(face: Any, surface_type: SurfaceType) -> dict[str, object]:
     """Extract axis/radius metadata for analytic surfaces."""
     attrs: dict[str, object] = {}
     adaptor = BRepAdaptor_Surface(face)
@@ -155,16 +153,12 @@ def _surface_attributes(
         if surface_type == SurfaceType.CYLINDER:
             cyl = adaptor.Cylinder()
             attrs["axis_origin"] = _v3(cyl.Axis().Location())
-            attrs["axis_direction"] = _canonical_axis(
-                _dir3(cyl.Axis().Direction())
-            )
+            attrs["axis_direction"] = _canonical_axis(_dir3(cyl.Axis().Direction()))
             attrs["radius"] = float(cyl.Radius())
         elif surface_type == SurfaceType.CONE:
             cone = adaptor.Cone()
             attrs["axis_origin"] = _v3(cone.Axis().Location())
-            attrs["axis_direction"] = _canonical_axis(
-                _dir3(cone.Axis().Direction())
-            )
+            attrs["axis_direction"] = _canonical_axis(_dir3(cone.Axis().Direction()))
             attrs["radius"] = float(cone.RefRadius())
             attrs["semi_angle_deg"] = math.degrees(float(cone.SemiAngle()))
         elif surface_type == SurfaceType.SPHERE:
@@ -174,9 +168,7 @@ def _surface_attributes(
         elif surface_type == SurfaceType.TORUS:
             tor = adaptor.Torus()
             attrs["axis_origin"] = _v3(tor.Axis().Location())
-            attrs["axis_direction"] = _canonical_axis(
-                _dir3(tor.Axis().Direction())
-            )
+            attrs["axis_direction"] = _canonical_axis(_dir3(tor.Axis().Direction()))
             attrs["radius"] = float(tor.MajorRadius())
             attrs["secondary_radius"] = float(tor.MinorRadius())
     except Exception:  # pragma: no cover - defensive against exotic geometry
@@ -195,9 +187,7 @@ def _project_uv(surface: object, point_local: gp_Pnt) -> tuple[float, float] | N
         return None
 
 
-def _normal_at(
-    face: object, point_global: Vec3, *, is_plane: bool
-) -> Vec3 | None:
+def _normal_at(face: Any, point_global: Vec3, *, is_plane: bool) -> Vec3 | None:
     """Outward unit normal of *face* at a point near the face."""
     try:
         if is_plane:
@@ -240,7 +230,7 @@ def _normal_at(
         return None
 
 
-def _cylinder_material_side(face: object, attrs: dict[str, object]) -> str | None:
+def _cylinder_material_side(face: Any, attrs: dict[str, object]) -> str | None:
     """Return 'outside' for a hole-like cylinder, 'inside' for a boss/fillet.
 
     A cylinder's outward normal points toward its axis when the material lies
@@ -251,7 +241,11 @@ def _cylinder_material_side(face: object, attrs: dict[str, object]) -> str | Non
     origin = attrs.get("axis_origin")
     direction = attrs.get("axis_direction")
     radius = attrs.get("radius")
-    if not isinstance(origin, Vec3) or not isinstance(direction, Vec3) or not isinstance(radius, float):
+    if (
+        not isinstance(origin, Vec3)
+        or not isinstance(direction, Vec3)
+        or not isinstance(radius, float)
+    ):
         return None
     c = Vec3(x=0.0, y=0.0, z=0.0)
     bmin, bmax = _bbox_of(face)
@@ -334,13 +328,14 @@ def _wire_edge_orientations(
 
 
 def _classify_convexity(
-    face_a: object,
-    face_b: object,
+    face_a: Any,
+    face_b: Any,
     samples: list[tuple[float, Vec3, Vec3]],
     *,
     face_a_plane: bool,
     face_b_plane: bool,
     face_a_reversed_in_wire: bool,
+    smooth_angle_deg: float = _SMOOTH_ANGLE_DEG,
 ) -> tuple[EdgeConvexity, float | None]:
     """Classify convexity from signed normals/tangent; see module docstring."""
     votes: list[int] = []
@@ -357,7 +352,7 @@ def _classify_convexity(
         if abs(signed) > _CONVEXITY_EPS:
             votes.append(1 if signed > 0 else -1)
     mean_angle = sum(angles) / len(angles) if angles else None
-    if mean_angle is not None and mean_angle < _SMOOTH_ANGLE_DEG:
+    if mean_angle is not None and mean_angle < smooth_angle_deg:
         return EdgeConvexity.SMOOTH, mean_angle
     if not votes:
         return EdgeConvexity.UNKNOWN, mean_angle
@@ -429,9 +424,7 @@ class OccAdapter(CadAdapter):
             reader = STEPControl_Reader()
             status = reader.ReadFile(str(p))
             if status != IFSelect_RetDone:
-                raise CadLoadError(
-                    f"OpenCascade could not read STEP file (status {status})"
-                )
+                raise CadLoadError(f"OpenCascade could not read STEP file (status {status})")
             reader.TransferRoots()
             shape = reader.OneShape()
         except CadLoadError:
@@ -449,7 +442,9 @@ class OccAdapter(CadAdapter):
             raise CadLoadError("STEP file contains no faces/solid bodies")
         return shape
 
-    def load_graph(self, path: str | Path, *, name: str | None = None, read_step_face_ids: bool = False) -> PartGraph:
+    def load_graph(
+        self, path: str | Path, *, name: str | None = None, read_step_face_ids: bool = False
+    ) -> PartGraph:
         t0 = time.perf_counter()
         shape = self._read_shape(path)
         face_map = TopTools_IndexedMapOfShape()
@@ -518,13 +513,18 @@ class OccAdapter(CadAdapter):
             if length < 1e-9:
                 continue
             reversed_in_a = edge_orient.get((a, eid), False)
+            # Straight edges have constant adjacent normals along their length;
+            # one interior sample is sufficient and avoids expensive surface
+            # projections. Curved edges keep three samples for robustness.
+            sampled = [samples[1]] if ctype == CurveType.LINE else samples
             convexity, angle = _classify_convexity(
                 face_topo[a],
                 face_topo[b],
-                samples,
+                sampled,
                 face_a_plane=face_is_plane[a],
                 face_b_plane=face_is_plane[b],
                 face_a_reversed_in_wire=reversed_in_a,
+                smooth_angle_deg=self.smooth_angle_deg,
             )
             edges.append(
                 EdgeRecord(
@@ -564,9 +564,7 @@ class OccAdapter(CadAdapter):
         return graph
 
     # ------------------------------------------------------------ tessellate
-    def tessellate(
-        self, path: str | Path, *, deflection: float = 0.2
-    ) -> MeshData:
+    def tessellate(self, path: str | Path, *, deflection: float = 0.2) -> MeshData:
         if not (0.001 <= deflection <= 5.0):
             raise CadLoadError("deflection must be between 0.001 and 5.0 mm")
         shape = self._read_shape(path)

@@ -13,9 +13,10 @@ from __future__ import annotations
 import json
 import math
 import random
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
-from typing import Any, Callable, Protocol
+from typing import Any, Protocol
 
 from breplens.schema import FeatureType, PartGraph, SurfaceType, Vec3
 
@@ -122,12 +123,7 @@ def _plate_blind(params: dict[str, Any]) -> Any:
     d, depth = params["hole_d"], params["depth"]
     cx, cy = params["hole_xy"]
     return (
-        _base_box(cq, l, w, h)
-        .faces(">Z")
-        .workplane()
-        .center(cx, cy)
-        .circle(d / 2)
-        .cutBlind(-depth)
+        _base_box(cq, l, w, h).faces(">Z").workplane().center(cx, cy).circle(d / 2).cutBlind(-depth)
     )
 
 
@@ -136,13 +132,7 @@ def _counterbore(params: dict[str, Any]) -> Any:
     l, w, h = params["length"], params["width"], params["height"]
     d, cd, cdepth = params["hole_d"], params["cbore_d"], params["cbore_depth"]
     cx, cy = params["hole_xy"]
-    return (
-        _base_box(cq, l, w, h)
-        .faces(">Z")
-        .workplane()
-        .center(cx, cy)
-        .cboreHole(d, cd, cdepth)
-    )
+    return _base_box(cq, l, w, h).faces(">Z").workplane().center(cx, cy).cboreHole(d, cd, cdepth)
 
 
 def _countersink(params: dict[str, Any]) -> Any:
@@ -150,13 +140,7 @@ def _countersink(params: dict[str, Any]) -> Any:
     l, w, h = params["length"], params["width"], params["height"]
     d, cd, angle = params["hole_d"], params["csk_d"], params["csk_angle"]
     cx, cy = params["hole_xy"]
-    return (
-        _base_box(cq, l, w, h)
-        .faces(">Z")
-        .workplane()
-        .center(cx, cy)
-        .cskHole(d, cd, angle)
-    )
+    return _base_box(cq, l, w, h).faces(">Z").workplane().center(cx, cy).cskHole(d, cd, angle)
 
 
 def _pocket(params: dict[str, Any]) -> Any:
@@ -165,12 +149,7 @@ def _pocket(params: dict[str, Any]) -> Any:
     pl, pw, depth = params["pocket_l"], params["pocket_w"], params["depth"]
     cx, cy = params["pocket_xy"]
     return (
-        _base_box(cq, l, w, h)
-        .faces(">Z")
-        .workplane()
-        .center(cx, cy)
-        .rect(pl, pw)
-        .cutBlind(-depth)
+        _base_box(cq, l, w, h).faces(">Z").workplane().center(cx, cy).rect(pl, pw).cutBlind(-depth)
     )
 
 
@@ -206,13 +185,7 @@ def _boss_plate(params: dict[str, Any]) -> Any:
     l, w, h = params["length"], params["width"], params["height"]
     d, bh = params["boss_d"], params["boss_h"]
     cx, cy = params["boss_xy"]
-    boss = (
-        cq.Workplane("XY")
-        .workplane(offset=h)
-        .center(cx, cy)
-        .circle(d / 2)
-        .extrude(bh)
-    )
+    boss = cq.Workplane("XY").workplane(offset=h).center(cx, cy).circle(d / 2).extrude(bh)
     return _base_box(cq, l, w, h).union(boss)
 
 
@@ -245,13 +218,7 @@ def _bracket_mixed(params: dict[str, Any]) -> Any:
     top = part.faces(">Z").workplane()
     for d, pts in by_diameter.items():
         top = top.pushPoints(pts).hole(d)
-    part = (
-        top.faces(">Z")
-        .workplane()
-        .center(cx, cy)
-        .rect(pl, pw)
-        .cutBlind(-depth)
-    )
+    part = top.faces(">Z").workplane().center(cx, cy).rect(pl, pw).cutBlind(-depth)
     return part
 
 
@@ -657,15 +624,13 @@ def make_spec(family: str, rng: random.Random, index: int) -> PartSpec:
         )
         for i, (x, y, d) in enumerate(p["holes"]):
             hgid = f"through_hole_{i}"
-            inside_pocket = (
-                abs(x - cx) <= p["pocket_l"] / 2 and abs(y - cy) <= p["pocket_w"] / 2
-            )
+            inside_pocket = abs(x - cx) <= p["pocket_l"] / 2 and abs(y - cy) <= p["pocket_w"] / 2
             entry_z = h - p["depth"] if inside_pocket else h
             feats.append(
                 GTFeature(
                     hgid,
                     FeatureType.THROUGH_HOLE,
-                    {"diameter": d, "depth": h - entry_z, "is_through": True},
+                    {"diameter": d, "depth": entry_z, "is_through": True},
                     position=(x, y, entry_z),
                     axis=(0.0, 0.0, -1.0),
                 )
@@ -744,9 +709,7 @@ def assign_labels(graph: PartGraph, spec: PartSpec) -> PartGraph:
                             (face.axis_origin or Vec3()).as_tuple(),
                         )
                         <= max(hint.tol, 0.8)
-                        and abs(
-                            face.axis_direction.dot(Vec3.of(hint.axis_dir or (0.0, 0.0, 1.0)))
-                        )
+                        and abs(face.axis_direction.dot(Vec3.of(hint.axis_dir or (0.0, 0.0, 1.0))))
                         > 0.99
                     )
                     if ok and hint.semi_angle_deg is not None and face.semi_angle_deg is not None:
@@ -759,7 +722,10 @@ def assign_labels(graph: PartGraph, spec: PartSpec) -> PartGraph:
                         p = Vec3.of(hint.plane_point)
                         ok = abs((face.centroid - p).dot(n)) <= hint.tol
             elif hint.surface == "torus" and face.surface_type == SurfaceType.TORUS:
-                ok = hint.radius is None or abs((face.secondary_radius or 0.0) - hint.radius) <= hint.tol
+                ok = (
+                    hint.radius is None
+                    or abs((face.secondary_radius or 0.0) - hint.radius) <= hint.tol
+                )
             if ok:
                 matched.append(face.id)
                 face.label = hint.label.value
@@ -788,9 +754,13 @@ def assign_labels(graph: PartGraph, spec: PartSpec) -> PartGraph:
                     f = graph.faces[nb]
                     if f.centroid.z > zmax + 0.5:
                         continue
-                    if f.surface_type == SurfaceType.PLANE and f.normal is not None:
-                        if f.normal.z > 0.99 and abs(f.centroid.z - zmax) < 0.5:
-                            continue
+                    if (
+                        f.surface_type == SurfaceType.PLANE
+                        and f.normal is not None
+                        and f.normal.z > 0.99
+                        and abs(f.centroid.z - zmax) < 0.5
+                    ):
+                        continue
                     seen.add(nb)
                     q.append(nb)
                     face = graph.faces[nb]
@@ -882,15 +852,20 @@ def generate_dataset(
             manifest.append(truth)
     manifest.sort(key=lambda d: d["name"])
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1, default=str))
-    return {"families": list(FAMILIES), "per_family": per_family, "n_parts": len(manifest), "seed": seed}
+    return {
+        "families": list(FAMILIES),
+        "per_family": per_family,
+        "n_parts": len(manifest),
+        "seed": seed,
+    }
 
 
 __all__ = [
     "CLASS_TO_ID",
     "FAMILIES",
+    "SYNTHETIC_CLASSES",
     "GTFeature",
     "PartSpec",
-    "SYNTHETIC_CLASSES",
     "assign_labels",
     "build_part",
     "generate_dataset",

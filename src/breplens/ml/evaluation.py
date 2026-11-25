@@ -7,10 +7,10 @@ hybrid evaluation scripts so their numbers are directly comparable.
 
 from __future__ import annotations
 
-import math
 from collections import Counter, defaultdict
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
-from typing import Any, Iterable, Sequence
+from typing import Any
 
 import numpy as np
 
@@ -65,18 +65,17 @@ def _compatible(pred: Feature, truth: dict[str, Any], tol: float = 4.0) -> bool:
             if line_distance(pos_t, axis_t, pos_p) > 2.0:
                 return False
             dt = abs((pos_p - pos_t).dot(axis_t.normalized()))
-            if pred.type in (FeatureType.BLIND_HOLE, FeatureType.THROUGH_HOLE):
-                # openings should be at the same end; allow 3 mm measurement noise
-                if dt > 3.0:
-                    return False
-            return True
-        if pos_p.distance_to(pos_t) > tol:
-            return False
-    if pos_p is not None and pos_t is not None:
-        if pred.type in (FeatureType.FILLET, FeatureType.CHAMFER):
-            if pos_p.distance_to(pos_t) > 6.0:
-                return False
-    return True
+            # openings should be at the same end; allow 3 mm measurement noise
+            return not (
+                pred.type in (FeatureType.BLIND_HOLE, FeatureType.THROUGH_HOLE) and dt > 3.0
+            )
+        return pos_p.distance_to(pos_t) <= tol
+    return not (
+        pos_p is not None
+        and pos_t is not None
+        and pred.type in (FeatureType.FILLET, FeatureType.CHAMFER)
+        and pos_p.distance_to(pos_t) > 6.0
+    )
 
 
 def match_features(
@@ -198,14 +197,14 @@ def predicted_face_labels(
 
 def parameter_errors(
     matched: Sequence[tuple[Feature, dict[str, Any]]],
-) -> dict[str, dict[str, float]]:
+) -> dict[str, dict[str, dict[str, float | int]]]:
     """Absolute parameter errors for matched features, grouped by feature type."""
     errors: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
     for pred, truth in matched:
         p_params = pred.params.model_dump(exclude_none=True)
         t_params = truth.get("params", {})
         for key, pval in p_params.items():
-            if key == "extra" or not isinstance(pval, (int, float)):
+            if key == "extra" or isinstance(pval, bool) or not isinstance(pval, (int, float)):
                 continue
             tval = t_params.get(key)
             if tval is None or not isinstance(tval, (int, float)):
@@ -216,14 +215,14 @@ def parameter_errors(
             errors[pred.type.value][key].append(abs(float(pval) - float(tval)))
         # sorted footprint dimensions for recesses
         if pred.type.value in {"pocket", "slot", "step"}:
-            p_dims = sorted([pred.params.length, pred.params.width])
-            t_dims = sorted([t_params.get("length"), t_params.get("width")])
-            if all(v is not None for v in [*p_dims, *t_dims]):
+            p_vals = [v for v in (pred.params.length, pred.params.width) if v is not None]
+            t_vals = [t_params.get("length"), t_params.get("width")]
+            if len(p_vals) == 2 and all(isinstance(v, (int, float)) for v in t_vals):
+                p_dims = sorted(p_vals)
+                t_dims = sorted(float(v) for v in t_vals if isinstance(v, (int, float)))
                 for i, (pv, tv) in enumerate(zip(p_dims, t_dims, strict=True)):
-                    errors[pred.type.value][f"footprint_dim_{i}"].append(
-                        abs(float(pv) - float(tv))
-                    )
-    out: dict[str, dict[str, float]] = {}
+                    errors[pred.type.value][f"footprint_dim_{i}"].append(abs(pv - tv))
+    out: dict[str, dict[str, dict[str, float | int]]] = {}
     for ftype, keys in errors.items():
         out[ftype] = {}
         for key, vals in keys.items():
@@ -262,10 +261,10 @@ def evaluate_feature_sets(
     infer_ms: list[float] = []
     feature_confusions: Counter[str] = Counter()
 
-    for rec in records:
-        graph: PartGraph = rec["graph"]
-        truth = rec["truth"]
-        fs = rec["pred"]
+    for record in records:
+        graph: PartGraph = record["graph"]
+        truth = record["truth"]
+        fs = record["pred"]
         total_parts += 1
         if len(fs.features) == len(truth["features"]):
             # count as structurally exact only if every GT is matched one-to-one
@@ -315,13 +314,13 @@ def evaluate_feature_sets(
         tp = per_type_tp[name]
         fp = per_type_fp[name]
         fn = per_type_fn[name]
-        prec = _safe_div(tp, tp + fp)
-        rec = _safe_div(tp, tp + fn)
-        f1 = _safe_div(2 * prec * rec, prec + rec)
+        precision_v = _safe_div(tp, tp + fp)
+        recall_v = _safe_div(tp, tp + fn)
+        f1_v = _safe_div(2 * precision_v * recall_v, precision_v + recall_v)
         per_class[name] = {
-            "precision": round(prec, 4),
-            "recall": round(rec, 4),
-            "f1": round(f1, 4),
+            "precision": round(precision_v, 4),
+            "recall": round(recall_v, 4),
+            "f1": round(f1_v, 4),
             "tp": tp,
             "fp": fp,
             "fn": fn,
@@ -329,7 +328,7 @@ def evaluate_feature_sets(
             "pred_count": pred_counts[name],
         }
         if gt_counts[name] > 0 or pred_counts[name] > 0:
-            class_f1.append(f1)
+            class_f1.append(f1_v)
     total_tp = sum(per_type_tp.values())
     total_fp = sum(per_type_fp.values())
     total_fn = sum(per_type_fn.values())

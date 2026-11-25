@@ -7,3 +7,6 @@
 - 2026-11-24 21:20 — Phase 4a/4b: rules; synthetic 1650 parts; GNN baseline+edge-aware; MFCAD 3000 parts converted (MIT).
 - 2026-11-24 21:35 — Evaluations: rules synthetic F1 0.9968, GNN 1.0, hybrid 1.0 (recovers rule misses); MFCAD macro rules 0.218 / GNN 0.9993.
 - 2026-11-24 21:40 — Torch 2.11.0+cu128 verified on RTX 3060 Ti; checkpoint 0.47 MB; CPU 0.37 ms/graph.
+- 2026-11-24 21:15 — Phase 1-8 complete; Docker SQLite and RQ/Redis stacks smoke-tested; deploy benchmark recorded; reviewer round 1 rejected with concrete defects.
+- 2026-11-24 21:30 — Fixed all round-1 blockers (ruff, CLI, bracket GT depth, NX wording, zero-depth stub, is_outer/smooth threshold, generated docs); 80 tests pass, ruff/mypy clean, core coverage 82.2%.
+- 2026-11-24 21:35 — Round-2 audit requested.

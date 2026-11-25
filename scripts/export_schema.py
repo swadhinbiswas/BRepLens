@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from breplens.schema import FeatureSet, PartGraph, SCHEMA_VERSION  # noqa: E402
+from breplens.schema import SCHEMA_VERSION, FeatureSet, PartGraph
 
 
 def main() -> int:

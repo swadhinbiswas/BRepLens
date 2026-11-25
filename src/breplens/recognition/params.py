@@ -51,7 +51,7 @@ def line_distance(origin_a: Vec3, dir_a: Vec3, origin_b: Vec3) -> float:
 def axis_interval(face: FaceRecord) -> tuple[float, float]:
     """Project the face bbox onto its axis and return (min, max)."""
     if face.axis_direction is None or face.axis_origin is None:
-        c = face_center(face)
+        face_center(face)
         return (0.0, 0.0)
     d = face.axis_direction
     o = face.axis_origin
@@ -89,7 +89,7 @@ def radial_extent(face: FaceRecord) -> float:
     return best
 
 
-def adjacency(graph: PartGraph) -> dict[int, list[tuple[int, "int"]]]:
+def adjacency(graph: PartGraph) -> dict[int, list[tuple[int, int]]]:
     """Neighbour map with edge ids for fast traversal."""
     adj: dict[int, list[tuple[int, int]]] = {f.id: [] for f in graph.faces}
     for e in graph.edges:

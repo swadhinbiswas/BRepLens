@@ -21,14 +21,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-import numpy as np  # noqa: E402
-import torch  # noqa: E402
+import torch
 
-from breplens.ml.evaluation import per_class_metrics, predicted_face_labels  # noqa: E402
-from breplens.ml.inference import load_for_inference, predict_probs  # noqa: E402
-from breplens.ml.mfcad import MFCAD_CLASSES, STOCK_ID  # noqa: E402
-from breplens.recognition.rules import recognize_rules  # noqa: E402
-from breplens.schema import FeatureType, PartGraph  # noqa: E402
+from breplens.ml.evaluation import per_class_metrics, predicted_face_labels
+from breplens.ml.inference import load_for_inference, predict_probs
+from breplens.ml.mfcad import MFCAD_CLASSES
+from breplens.recognition.rules import recognize_rules
+from breplens.schema import FeatureType, PartGraph
 
 MACRO = ["stock", "slot", "passage", "step", "pocket", "chamfer", "hole", "fillet"]
 MACRO_ID = {m: i for i, m in enumerate(MACRO)}
@@ -87,7 +86,9 @@ def main() -> int:
         truths = truths[: args.limit]
     print(f"test parts: {len(truths)}")
 
-    model, class_names, meta = load_for_inference(args.model, device="cuda" if torch.cuda.is_available() else "cpu")
+    model, class_names, meta = load_for_inference(
+        args.model, device="cuda" if torch.cuda.is_available() else "cpu"
+    )
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"model: {meta.get('architecture')} classes={len(class_names)} device={device}")
     cls_to_macro = [MACRO_ID[MFCAD_MACRO[c]] for c in class_names]
@@ -102,7 +103,9 @@ def main() -> int:
     gnn_seconds = 0.0
     n_features = Counter()
     for i, truth in enumerate(truths, 1):
-        graph = PartGraph.model_validate_json((data / "graphs" / f"{truth['name']}.json").read_text())
+        graph = PartGraph.model_validate_json(
+            (data / "graphs" / f"{truth['name']}.json").read_text()
+        )
         gt_ids = [int(x) for x in truth["labels"]]
         y_true.extend(MACRO_ID[MFCAD_MACRO[MFCAD_CLASSES[x]]] for x in gt_ids)
 
@@ -140,7 +143,7 @@ def main() -> int:
         "hybrid_gnn_priority": per_class_metrics(y_true, y_hybrid_gnn, MACRO),
         "hybrid_vote": per_class_metrics(y_true, y_hybrid_vote, MACRO),
     }
-    for name, m in methods.items():
+    for _name, m in methods.items():
         m["n_faces"] = len(y_true)
     gnn_full = json.loads(Path(args.gnn_eval).read_text()) if Path(args.gnn_eval).exists() else {}
     payload = {
@@ -156,7 +159,10 @@ def main() -> int:
         },
         "methods": methods,
         "ranked_by_macro_f1": sorted(
-            ({"method": k, "macro_f1": v["macro_f1"], "accuracy": v["accuracy"]} for k, v in methods.items()),
+            (
+                {"method": k, "macro_f1": v["macro_f1"], "accuracy": v["accuracy"]}
+                for k, v in methods.items()
+            ),
             key=lambda x: x["macro_f1"],
             reverse=True,
         ),
@@ -168,8 +174,14 @@ def main() -> int:
             "gnn_ms_per_part": round(1000 * gnn_seconds / max(1, len(truths)), 3),
         },
         "gnn_full_16_class": {
-            "test_accuracy": gnn_full.get("runs", {}).get(gnn_full.get("selected_architecture", ""), {}).get("test", {}).get("accuracy"),
-            "test_macro_f1": gnn_full.get("runs", {}).get(gnn_full.get("selected_architecture", ""), {}).get("test", {}).get("macro_f1"),
+            "test_accuracy": gnn_full.get("runs", {})
+            .get(gnn_full.get("selected_architecture", ""), {})
+            .get("test", {})
+            .get("accuracy"),
+            "test_macro_f1": gnn_full.get("runs", {})
+            .get(gnn_full.get("selected_architecture", ""), {})
+            .get("test", {})
+            .get("macro_f1"),
             "selected_architecture": gnn_full.get("selected_architecture"),
         },
         "provenance": {
