@@ -33,8 +33,8 @@ training tooling.
    - Python version: **3.12** (verified) or **3.11**; `pyproject.toml` requires
      `>=3.11,<3.13`.
    - Secrets: none.
-5. Deploy. The first build installs CPU wheels; it is large (~2.4 GB environment)
-   and can take a few minutes.
+5. Deploy. The first build installs CPU wheels; it is large and can take a few minutes; the exact
+   environment size and install time are recorded in `results/deploy_benchmark.json`.
 6. Open the app and select a sample. The first recognition loads the GNN and
    takes longer; subsequent samples are cached.
 

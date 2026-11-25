@@ -14,13 +14,14 @@ Truthful bullets, each tied to a generated result file.
   accuracy on 448 held-out MFCAD parts.
 - Rule-based recognition reached 1.0000 feature F1 on
   the synthetic test set and exposed its limits on MFCAD
-  (0.2180 macro F1), while the hybrid recovered rule misses
-  on the synthetic set (1.0000 F1).
+  (0.2180 macro F1); the conservative hybrid preserved
+  all rule features and also reached 1.0000
+  synthetic feature F1, while on MFCAD only GNN-priority/vote matched the GNN.
 - Delivered a FastAPI + queued-worker service with SQLite default storage and an
   optional RQ/Redis mode, plus a Streamlit Community Cloud demo whose measured
-  cold start is 0.60 s, first-part time
-  1.53 s, peak RSS
-  854.4 MB, and inference-only install
+  cold start is 0.53 s, first-part time
+  1.32 s, peak RSS
+  854.8 MB, and inference-only install
   2413 MB.
 - Added a WL/geometry signature index with precision@1 of
   1.000 on synthetic

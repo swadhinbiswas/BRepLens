@@ -6,10 +6,10 @@ Honest scope of the v1.0.0 implementation. Numbers referenced here live in
 ## Recognition: rules
 
 - **Synthetic ceiling is not real-world accuracy.** Rules are designed against
-  the same 11 synthetic families used for evaluation and reach 1.0 feature F1
-  there. On MFCAD (external, macro classes) rules are far weaker; see
-  `results/mfcad_head_to_head.json`. Synthetic numbers must not be quoted as
-  general machining-feature accuracy.
+  the same 11 synthetic families used for evaluation and reach the metric
+  ceiling there (exact values in the generated tables). On MFCAD (external,
+  macro classes) rules are far weaker; see `results/mfcad_head_to_head.json`.
+  Synthetic numbers must not be quoted as general machining-feature accuracy.
 - Feature vocabulary is fixed. Polygonal **passages**, triangular/6-sided
   pockets, arbitrary slots and non-planar cavities are not recognized. MFCAD's
   passage classes are deliberately mapped to "unknown" and counted as misses.
@@ -76,9 +76,10 @@ Honest scope of the v1.0.0 implementation. Numbers referenced here live in
 
 ## Similarity
 
-- Signature retrieval is strong on synthetic families (precision@1 1.0) but weak
-  on MFCAD when relevance is the exact macro-composition string (precision@1
-  ~0.15); with Jaccard ≥ 0.5 family overlap it rises to ~0.75. MFCAD parts are
+- Signature retrieval is strong on synthetic families but weak on MFCAD when
+  relevance is the exact macro-composition string; with Jaccard ≥ 0.5 family
+  overlap it improves substantially. Exact numbers are in the generated tables
+  (`docs/RESULTS_TABLES.md`) and `results/similarity_eval.json`. MFCAD parts are
   visually similar stock blocks and the handcrafted signature has limited
   discriminative power there.
 - The index is brute-force cosine; it is exact but not intended for >100k parts

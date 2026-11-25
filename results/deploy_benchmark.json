@@ -9,78 +9,78 @@
  },
  "n_samples": 10,
  "apptest": {
-  "cold_start_seconds": 0.596,
-  "radio_rerun_seconds": 0.045,
-  "model_load_and_first_part_seconds": 1.529,
+  "cold_start_seconds": 0.529,
+  "radio_rerun_seconds": 0.052,
+  "model_load_and_first_part_seconds": 1.316,
   "e2e_samples": [
    {
     "sample": "sample_00_plate_holes.step",
-    "seconds": 0.017
+    "seconds": 0.019
    },
    {
     "sample": "sample_01_plate_blind.step",
-    "seconds": 0.042
+    "seconds": 0.037
    },
    {
     "sample": "sample_02_counterbore.step",
-    "seconds": 0.042
+    "seconds": 0.04
    },
    {
     "sample": "sample_03_countersink.step",
-    "seconds": 0.048
+    "seconds": 0.047
    },
    {
     "sample": "sample_04_pocket.step",
-    "seconds": 0.049
+    "seconds": 0.04
    },
    {
     "sample": "sample_05_slot.step",
-    "seconds": 0.05
-   },
-   {
-    "sample": "sample_06_stepped_block.step",
     "seconds": 0.043
    },
    {
+    "sample": "sample_06_stepped_block.step",
+    "seconds": 0.044
+   },
+   {
     "sample": "sample_07_boss_plate.step",
-    "seconds": 0.06
+    "seconds": 0.037
    },
    {
     "sample": "sample_08_fillet_block.step",
-    "seconds": 0.045
+    "seconds": 0.044
    },
    {
     "sample": "sample_09_bracket_mixed.step",
-    "seconds": 0.061
+    "seconds": 0.058
    }
   ],
-  "peak_rss_apptest_mb": 854.4
+  "peak_rss_apptest_mb": 854.8
  },
  "pipeline": {
   "model_load_seconds": 0.002,
   "latency": {
    "rules": {
-    "mean_ms": 0.16,
-    "median_ms": 0.13,
-    "p95_ms": 0.27,
+    "mean_ms": 0.17,
+    "median_ms": 0.14,
+    "p95_ms": 0.29,
     "n": 10
    },
    "gnn": {
-    "mean_ms": 1.07,
-    "median_ms": 1.03,
-    "p95_ms": 1.32,
+    "mean_ms": 1.24,
+    "median_ms": 1.17,
+    "p95_ms": 1.48,
     "n": 10
    },
    "hybrid": {
-    "mean_ms": 1.72,
-    "median_ms": 1.58,
-    "p95_ms": 2.57,
+    "mean_ms": 1.62,
+    "median_ms": 1.53,
+    "p95_ms": 2.03,
     "n": 10
    },
    "tessellate": {
-    "mean_ms": 7.26,
-    "median_ms": 6.16,
-    "p95_ms": 11.83,
+    "mean_ms": 7.07,
+    "median_ms": 6.02,
+    "p95_ms": 10.88,
     "n": 10
    }
   },
@@ -89,7 +89,7 @@
    "gnn": 23,
    "hybrid": 23
   },
-  "peak_rss_pipeline_mb": 856.3
+  "peak_rss_pipeline_mb": 856.6
  },
  "server": {
   "server_start_seconds": 0.41,
@@ -100,5 +100,11 @@
   "target_peak_mb": 1500,
   "streamlit_community_cloud_approx": "2 vCPU / 2.7 GB RAM"
  },
- "generated_utc": "2026-11-24T21:08:17Z"
+ "provenance": {
+  "script": "scripts/deploy_probe.py",
+  "command": "scripts/deploy_probe.py",
+  "venv": ".deploy-venv (Python 3.12.16)",
+  "generated_utc": "2026-11-24T21:14:24Z"
+ },
+ "generated_utc": "2026-11-24T21:14:24Z"
 }

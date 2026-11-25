@@ -202,6 +202,12 @@ def main() -> int:
             "target_peak_mb": 1500,
             "streamlit_community_cloud_approx": "2 vCPU / 2.7 GB RAM",
         },
+        "provenance": {
+            "script": "scripts/deploy_probe.py",
+            "command": " ".join(sys.argv),
+            "venv": ".deploy-venv (Python " + sys.version.split()[0] + ")",
+            "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        },
         "generated_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     out = ROOT / "results" / "deploy_benchmark.json"

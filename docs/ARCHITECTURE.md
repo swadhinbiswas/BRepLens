@@ -173,7 +173,8 @@ convexity, log length, sin/cos dihedral. An `EdgeAwareLayer` uses messages that 
 `GCNConv` network is the ablation/baseline. Both saturate the synthetic test set;
 the smaller GCN is retained for the demo while the edge-aware model is selected
 on MFCAD. Checkpoints are self-describing (config, class names, feature names,
-metadata) and small (0.08 MB GCN / 0.47 MB edge-aware).
+metadata); checkpoint sizes are recorded in `results/gnn_eval.json` and
+`results/mfcad_gnn_eval.json`.
 
 ## 7. Errors
 

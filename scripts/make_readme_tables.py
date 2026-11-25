@@ -316,8 +316,9 @@ Truthful bullets, each tied to a generated result file.
   accuracy on {mfcad.get("dataset", {}).get("n_test", "—")} held-out MFCAD parts.
 - Rule-based recognition reached {_f(rules.get("feature", {}).get("f1"), 4)} feature F1 on
   the synthetic test set and exposed its limits on MFCAD
-  ({_f(mrule.get("macro_f1"), 4)} macro F1), while the hybrid recovered rule misses
-  on the synthetic set ({_f(hybrid.get("feature", {}).get("f1"), 4)} F1).
+  ({_f(mrule.get("macro_f1"), 4)} macro F1); the conservative hybrid preserved
+  all rule features and also reached {_f(hybrid.get("feature", {}).get("f1"), 4)}
+  synthetic feature F1, while on MFCAD only GNN-priority/vote matched the GNN.
 - Delivered a FastAPI + queued-worker service with SQLite default storage and an
   optional RQ/Redis mode, plus a Streamlit Community Cloud demo whose measured
   cold start is {_f(at.get("cold_start_seconds"), 2)} s, first-part time
