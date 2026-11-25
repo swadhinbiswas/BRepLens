@@ -1,15 +1,15 @@
 {
  "passed": 92,
  "failed": 0,
- "wall_seconds": 7.39,
+ "wall_seconds": 7.7,
  "command": "pytest -o addopts='' -q",
  "python": "3.11.18",
  "pytest": "9.2.0",
  "exit_code": 0,
- "raw_tail": "92 passed, 1 warning in 6.06s",
+ "raw_tail": "92 passed, 1 warning in 6.39s",
  "provenance": {
   "script": "scripts/run_quality_gates.py",
   "command": "scripts/run_quality_gates.py",
-  "generated_utc": "2026-11-25T06:45:28Z"
+  "generated_utc": "2026-11-25T08:19:51Z"
  }
 }

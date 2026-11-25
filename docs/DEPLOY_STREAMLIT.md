@@ -36,7 +36,9 @@ https://github.com/swadhinbiswas/BRepLens
 3. Select repository `swadhinbiswas/BRepLens`, branch `main`, and main file
    `streamlit_app.py`.
 4. Open **Advanced settings**:
-   - Python version: **3.12** (verified with CPython 3.12.16).
+   - Python version: **3.12** (verified with CPython 3.12.16) or **3.14**
+     (verified with CPython 3.14.10 and wheels only). The requirements file is
+     compatible with both.
    - Secrets: none.
 5. Choose a subdomain, then click **Deploy**.
 6. Watch the build log. The first build installs the CPU wheels listed in
@@ -44,6 +46,11 @@ https://github.com/swadhinbiswas/BRepLens
    takes a few minutes; the exact timings are in `results/deploy_benchmark.json`.
 7. Open the app and load a sample. The first recognition loads the models, so it
    is slower than later requests.
+
+If an earlier build hangs while preparing NumPy metadata, it is using the old
+`numpy==2.2.6` pin on Python 3.14. Update to `numpy==2.3.5`, stop the old build,
+push, and reboot the app. NumPy 2.3.5 has CPython 3.14 wheels; no compiler is
+needed.
 
 After the first successful deploy, every push to `main` triggers a rebuild. Use
 the app menu to reboot, clear the cache, or view logs. The app has no database,
