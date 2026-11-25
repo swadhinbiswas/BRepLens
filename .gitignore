@@ -16,3 +16,4 @@ results/scratch/
 *.log
 .DS_Store
 data/service/
+.agent/*.pid

@@ -8,10 +8,10 @@
 - Similarity: synthetic P@1 1.000; MFCAD exact P@1 0.150, Jaccard≥0.5 P@1 0.746.
 - Phase 9 CNN: CNN test acc 0.8171 / macro F1 0.8119 vs graph family 1.0; 29k CNN params;
   6 views 96x96; render cache 1650 parts in 3.02 s.
-- Hosted: peak RSS 873.2 MB, cold start 1.825 s, first part 0.119 s, GNN 1.07 ms, hybrid 2.03 ms.
+- Hosted: peak RSS 878.1 MB, cold start 1.815 s, first part 0.148 s, GNN 1.17 ms, hybrid 1.70 ms.
 - Service: both SQLite and RQ/Redis Docker stacks smoke-tested end-to-end; 92 tests pass;
   coverage 71.79% full / 83.04% core; ruff + mypy clean.
-- Next action: none; v1.1.0 handoff.
+- Next action: none; v1.1.0 handoff. Streamlit UI redesigned (tabs, comparisons, filters, downloads, family caption).
 
 ## Environment (audited 2026-11-24)
 - OS: CachyOS Linux (Arch-based), kernel rolling
