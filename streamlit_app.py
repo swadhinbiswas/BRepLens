@@ -24,13 +24,20 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from breplens.adapters.base import CadLoadError  # noqa: E402
-from breplens.adapters.occ import OccAdapter  # noqa: E402
 from breplens.ml.family import FAMILY_NAMES, load_cnn  # noqa: E402
 from breplens.ml.views import render_views  # noqa: E402
 from breplens.recognition.gnn_recognizer import recognize_gnn, recognize_hybrid  # noqa: E402
 from breplens.recognition.rules import recognize_rules  # noqa: E402
 from breplens.schema import FeatureSet, MeshData, PartGraph  # noqa: E402
 from breplens.similarity.signature import SignatureIndex, part_signature  # noqa: E402
+
+try:
+    from breplens.adapters.occ import OccAdapter
+
+    CAD_IMPORT_ERROR: str | None = None
+except Exception as exc:
+    OccAdapter = None  # type: ignore[assignment,misc]
+    CAD_IMPORT_ERROR = f"{type(exc).__name__}: {exc}"
 
 MAX_UPLOAD_MB = 25
 MAX_FACES = 3000
@@ -90,6 +97,8 @@ def _safe(text: object) -> str:
 
 @st.cache_resource(show_spinner=False)
 def get_adapter() -> OccAdapter:
+    if OccAdapter is None:
+        raise RuntimeError(f"CAD kernel unavailable: {CAD_IMPORT_ERROR}")
     return OccAdapter()
 
 
@@ -676,6 +685,15 @@ def main() -> None:
     )
     _styles()
     _header()
+    if CAD_IMPORT_ERROR:
+        st.error("The CAD kernel could not load in this environment.")
+        st.code(CAD_IMPORT_ERROR)
+        st.info(
+            "Redeploy this app with Python 3.12. The project supports Python 3.11 "
+            "and 3.12. Streamlit cannot change Python in an existing app, so delete "
+            "the app and create it again with Python 3.12 selected in Advanced settings."
+        )
+        return
     choice, upload, mode, k, deflection, base_opacity, show_base = _sidebar()
     data, name = _resolve_input(choice, upload)
     if data is None:

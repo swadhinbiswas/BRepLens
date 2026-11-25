@@ -36,9 +36,9 @@ https://github.com/swadhinbiswas/BRepLens
 3. Select repository `swadhinbiswas/BRepLens`, branch `main`, and main file
    `streamlit_app.py`.
 4. Open **Advanced settings**:
-   - Python version: **3.12** (verified with CPython 3.12.16) or **3.14**
-     (verified with CPython 3.14.10 and wheels only). The requirements file is
-     compatible with both.
+   - Python version: **3.12** (verified with CPython 3.12.16). Do not select
+     3.14 for this app; OCP and the supported dependency set are verified on
+     3.11 and 3.12. `pyproject.toml` requires `>=3.11,<3.13`.
    - Secrets: none.
 5. Choose a subdomain, then click **Deploy**.
 6. Watch the build log. The first build installs the CPU wheels listed in
@@ -48,9 +48,9 @@ https://github.com/swadhinbiswas/BRepLens
    is slower than later requests.
 
 If an earlier build hangs while preparing NumPy metadata, it is using the old
-`numpy==2.2.6` pin on Python 3.14. Update to `numpy==2.3.5`, stop the old build,
-push, and reboot the app. NumPy 2.3.5 has CPython 3.14 wheels; no compiler is
-needed.
+`numpy==2.2.6` pin on an unsupported interpreter. The current repository uses
+`numpy==2.3.5`. If the app already exists, delete it and redeploy with Python 3.12;
+Streamlit does not allow changing Python in place.
 
 After the first successful deploy, every push to `main` triggers a rebuild. Use
 the app menu to reboot, clear the cache, or view logs. The app has no database,
@@ -113,6 +113,7 @@ file.
 | Symptom | Cause/fix |
 | --- | --- |
 | `ImportError: libGL.so.1` | `packages.txt` missing `libgl1` / `libglib2.0-0`; redeploy after adding them. |
+| OCP `ImportError` at `from OCP.OCP import *` | Usually a Python version mismatch. Delete the app and redeploy with Python 3.12. The app now prints the exact OCP error on the page. |
 | Model load warning, rules fallback | `models/gnn_synthetic.pt` missing or torch/PyG install failed; check the build log. |
 | `ModuleNotFoundError: breplens` | `streamlit_app.py` must remain at repo root (it inserts `src` on `sys.path`). |
 | App killed for memory | Check `results/deploy_benchmark.json`; reduce samples/limits or update the pinned wheels. |
