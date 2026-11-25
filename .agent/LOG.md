@@ -12,3 +12,4 @@
 - 2026-11-24 21:35 — Round-2 audit requested.
 - 2026-11-24 21:22 — Round-2 review found stale generated docs, a remaining NX wording regression, a false provenance claim, a rules latency timer bug (fillet t0 shadowing), and missing env_audit/hybrid_eval files.
 - 2026-11-24 21:30 — Fixed timer bug (rules latency now ~0.17 ms mean), GNN recess now returns None (tested), regenerated final docs, added env_audit.json/hybrid_eval.json/coverage_meta.json, regenerated datasets with full-run timings, synchronized state. 83 tests pass; ruff/mypy clean.
+- 2026-11-24 21:35 — Final independent gate APPROVED (.agent/REVIEW_FINAL.md); round-3's only note (overbroad SETUP provenance sentence) fixed. v1.0.0 prepared.

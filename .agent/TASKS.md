@@ -96,12 +96,14 @@ A phase is done only when (1) tests pass, (2) scripts produced real results file
 - [x] 10.1 README (overview, Mermaid, 3-command quickstart, generated results tables, limitations, structure, NX, repro, deploy)
 - [x] 10.2 docs/CV_SUMMARY.md (truthful measured bullets)
 - [x] 10.3 docs/LIMITATIONS.md, docs/LICENSES.md
-- [ ] 10.4 Full audit: tests, coverage, CI, results provenance, secrets, licenses
+- [x] 10.4 Full audit: tests, coverage, CI, results provenance, secrets, licenses
 - [x] 10.5 docs/FINAL_REPORT.md
-- [ ] 10.6 Tag v1.0.0
+- [x] 10.6 Tag v1.0.0
 
 
 ## Notes
 - Phase 9 (optional CNN): not implemented; documented as future work in LIMITATIONS/FINAL_REPORT.
 - Phase 10.4 full audit: reviewer round 2 pending.
 - Phase 10.6 tag: after round 2 approval.
+
+- Gate evidence: .agent/REVIEW_round1.md (rejected, fixed), REVIEW_round2.md (rejected, fixed), REVIEW_round3.md (doc claim found), REVIEW_FINAL.md (APPROVED).
